@@ -4,7 +4,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: 'Meijin.me | フルスタック従業員Meijinの自己紹介ページ',
+    title: 'Meijin.me | フルスタック従業員「名人」の自己紹介ページ',
     meta: [{
         charset: 'utf-8'
       },
@@ -15,7 +15,7 @@ module.exports = {
       {
         hid: 'description',
         name: 'description',
-        content: 'フルスタック従業員Meijinの自己紹介ページです'
+        content: 'フルスタック従業員「名人」の自己紹介ページです。これまでの経歴（高専→LIFULL→NoSchool CTO）、スキルセット（フロントエンドからバックエンド、インフラまで）、SNS/Blogの各種リンクを載せています。'
       }
     ],
     link: [{
