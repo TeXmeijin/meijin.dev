@@ -1,7 +1,18 @@
-<template>
-  <div>
-    <nuxt/>
-  </div>
+<template lang="pug">
+v-app
+  v-toolbar(app flat dark color="primary")
+    //- v-toolbar-side-icon
+    v-toolbar-title Meijin.me
+    v-spacer
+    v-toolbar-items.hidden-sm-and-down
+      v-btn(flat @click="$vuetify.goTo('.mod-about', 'duration')") About
+      v-btn(flat @click="$vuetify.goTo('.mod-skill', 'duration')") Skill
+      v-btn(flat @click="$vuetify.goTo('.mod-blog', 'duration')") SNS/Blog
+  v-content
+    v-container(fluid pa-0)
+      nuxt
+  v-footer(app).pa-2
+    v-flex(text-md-center).grey--text Copyright 2019 Meijin. All right reserved.
 </template>
 
 <style>
