@@ -9,7 +9,7 @@ v-app
       v-btn(flat @click="$vuetify.goTo('.mod-skill', 'duration')") Skill
       v-btn(flat @click="$vuetify.goTo('.mod-blog', 'duration')") SNS/Blog
   v-content
-    v-container(fluid pa-0)
+    v-container(fluid pa-0).primary.lighten-5
       nuxt
   v-footer(app).pa-2
     v-flex(text-md-center).grey--text Copyright 2019 Meijin. All right reserved.
