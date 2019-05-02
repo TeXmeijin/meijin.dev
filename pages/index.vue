@@ -8,7 +8,7 @@
         v-layout(row wrap)
           v-flex(sm5 xs12)
             v-img(
-              :src="require('@/assets/img/self.png')"
+              :src="require('@/assets/img/pinsya.png')"
               aspect-ratio="1"
             )
           v-flex(sm7 xs12)
@@ -17,17 +17,23 @@
                 v-flex(tag="h2").mb-1.display-2.font-weight-bold About
                 v-divider.mb-2
                 v-flex(tag="h1").headline.font-weight-bold
-                  a(href="https://twitter.com/meijin_garden").secondary--text @Meijin_garden
+                  a(href="https://twitter.com/meijin_garden" target="_blank" rel="nofollow").secondary--text @Meijin_garden
                 v-flex Web Engineer, Cheif Technology Officer
             v-card-text
               v-flex ビジネス×テクノロジー×クリエイティブの人材を目指すWebエンジニア。
               v-flex 趣味の将棋にちなんでニックネームは「名人」。
               v-flex 学生時代に将棋部の師範からもらったノートパソコンでプログラミングにのめり込む。
               v-flex 2016年に奈良高専を卒業後、株式会社LIFULLに入社。
-              v-flex 不動産情報サイトLIFULL HOME'Sの開発に関わりながら、IT×教育の事業をやってみたい想いから新規事業提案にも挑戦。
+              v-flex 不動産情報サイト
+                a(href="https://homes.co.jp" target="_blank" rel="nofollow") LIFULL HOME'S
+                | の開発に関わりながら、IT×教育の事業をやってみたい想いから新規事業提案にも挑戦。
               v-flex ビジネスモデルの考案が心底苦手なため6回連続で落選するも2017年12月には入賞を果たし、以後およそ1年間に渡って新規事業責任者を務める。
               v-flex 自身でプロトタイプとなるサービスをVue.js＋Firebaseで開発し、また法人営業や広報までこなしたことから、「フルスタック従業員」と呼ばれることも。
-              v-flex 2019年3月、半年以上副業をしていた教育スタートアップからCTO（最高技術責任者）にならないかとの誘いを受け、教育事業を1から育てるチャンスと直感し転職。現在は社長と2人でフルタイムで勤務し、副業エンジニア5人以上と勉強Q&AサイトNoSchoolの開発をしている。
+              v-flex 2019年3月、半年以上副業をしていた
+                a(href="https://corp.noschool.asia" target="_blank" rel="nofollow") 教育スタートアップ
+                | からCTO（最高技術責任者）にならないかとの誘いを受け、教育事業を1から育てるチャンスと直感し転職。現在は社長と2人でフルタイムで勤務し、副業エンジニア5人以上と勉強Q&Aサイト
+                a(href="https://noschool.asia" target="_blank" rel="nofollow") NoSchool
+                | の開発をしている。
       v-card(flat).mb-5.mod-skill
         v-layout(column)
           v-card-title(primary-title)
@@ -62,7 +68,7 @@
           v-container(grid-list-md)
             v-layout(row wrap)
               v-flex(xs12 md4).mb-2
-                v-card(href="https://twitter.com/meijin_garden" hover)
+                v-card(href="https://twitter.com/meijin_garden" hover target="_blank" rel="nofollow")
                   v-img(
                     :src="require('@/assets/img/blog/twitter.png')"
                     aspect-ratio="1.7"
@@ -71,7 +77,7 @@
                     v-flex(tag="h3" row).headline.font-weight-bold
                       v-flex.secondary--text twitter
               v-flex(xs12 md4).mb-2
-                v-card(href="https://qiita.com/mejileben" hover)
+                v-card(href="https://qiita.com/mejileben" hover target="_blank" rel="nofollow")
                   v-img(
                     :src="require('@/assets/img/blog/qiita.png')"
                     aspect-ratio="1.7"
@@ -80,7 +86,7 @@
                     v-flex(tag="h3" row).headline.font-weight-bold
                       v-flex.light-green--text Qiita
               v-flex(xs12 md4).mb-2
-                v-card(href="https://note.mu/meijin_garden" hover)
+                v-card(href="https://note.mu/meijin_garden" hover target="_blank" rel="nofollow")
                   v-img(
                     :src="require('@/assets/img/blog/note.png')"
                     aspect-ratio="1.7"
