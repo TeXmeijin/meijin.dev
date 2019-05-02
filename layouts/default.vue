@@ -11,7 +11,7 @@ v-app
   v-content
     v-container(fluid pa-0).primary.lighten-5
       nuxt
-  v-footer(app).pa-2
+  v-footer.pa-2
     v-flex(text-md-center).grey--text Copyright 2019 Meijin. All right reserved.
 </template>
 
