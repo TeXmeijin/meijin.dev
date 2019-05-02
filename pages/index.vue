@@ -3,15 +3,15 @@
     v-flex
       v-layout.mb-3.pa-3(column)
         v-flex(tag="h1") Meijin.me
-        v-flex フルスタック従業員「名人」の自己紹介ページ
+        v-flex ビジネス×テクノロジー×クリエイティブの人材を目指すWebエンジニア
       v-card(flat).mb-5.mod-about
         v-layout(row wrap)
-          v-flex(sm5 xs12)
+          v-flex(sm4 xs12)
             v-img(
               :src="require('@/assets/img/pinsya.png')"
               aspect-ratio="1"
             )
-          v-flex(sm7 xs12)
+          v-flex(sm8 xs12)
             v-card-title(primary-title)
               v-flex(row)
                 v-flex(tag="h2").mb-1.display-2.font-weight-bold About
@@ -21,7 +21,9 @@
                 v-flex Web Engineer, Cheif Technology Officer
             v-card-text
               v-flex ビジネス×テクノロジー×クリエイティブの人材を目指すWebエンジニア。
-              v-flex 趣味の将棋にちなんでニックネームは「名人」。
+              v-flex 趣味の将棋にちなんで
+                b 「名人」
+                | というニックネームで呼ばれている。
               v-flex 学生時代に将棋部の師範からもらったノートパソコンでプログラミングにのめり込む。
               v-flex 2016年に奈良高専を卒業後、株式会社LIFULLに入社。
               v-flex 不動産情報サイト

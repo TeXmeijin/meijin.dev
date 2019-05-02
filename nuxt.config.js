@@ -1,10 +1,15 @@
+const baseName = 'フルスタック従業員「名人」の自己紹介ページ'
+const baseDesc = 'フルスタック従業員「名人」の自己紹介ページです。これまでの経歴（高専→LIFULL→NoSchool CTO）、スキルセット（フロントエンドからバックエンド、インフラまで）、SNS/Blogの各種リンクを載せています。'
+const baseUrl = 'http://localhost:3000'
+const baseOgp = '/ogp.png'
+
 module.exports = {
   mode: 'spa',
   /*
    ** Headers of the page
    */
   head: {
-    title: 'Meijin.me | フルスタック従業員「名人」の自己紹介ページ',
+    title: `Meijin.me | ${baseName}`,
     meta: [{
         charset: 'utf-8'
       },
@@ -15,8 +20,41 @@ module.exports = {
       {
         hid: 'description',
         name: 'description',
-        content: 'フルスタック従業員「名人」の自己紹介ページです。これまでの経歴（高専→LIFULL→NoSchool CTO）、スキルセット（フロントエンドからバックエンド、インフラまで）、SNS/Blogの各種リンクを載せています。'
-      }
+        content: baseDesc
+      },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: baseName
+      }, {
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'artice'
+      }, {
+        hid: 'og:url',
+        property: 'og:url',
+        content: baseUrl
+      }, {
+        hid: 'og:title',
+        property: 'og:title',
+        content: baseName
+      }, {
+        hid: 'og:description',
+        property: 'og:description',
+        content: baseDesc
+      }, {
+        hid: 'og:image',
+        property: 'og:image',
+        content: baseOgp
+      },
+      {
+        name: 'twitter:card',
+        content: 'summary'
+      },
+      {
+        name: 'twitter:site',
+        content: '@Meijin_garden'
+      },
     ],
     link: [{
       rel: 'icon',
