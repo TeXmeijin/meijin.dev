@@ -1,9 +1,9 @@
 <template lang="pug">
   v-layout(column wrap)
     v-flex
-      v-layout.mb-3.pa-3(column)
+      v-layout.mb-2.pa-3(column)
         v-flex(tag="h1") Meijin.me
-        v-flex ビジネス×テクノロジー×クリエイティブの人材を目指すWebエンジニア
+        v-flex 自称名人の自己紹介ページ
       v-card(flat).mb-5.mod-about
         v-layout(row wrap)
           v-flex(sm4 xs12)
@@ -23,7 +23,7 @@
               v-flex ビジネス×テクノロジー×クリエイティブの人材を目指すWebエンジニア。
               v-flex 趣味の将棋にちなんで
                 b 「名人」
-                | というニックネームで呼ばれている。
+                | というニックネームで呼ばれており、むしろ本名が知られていない。
               v-flex 学生時代に将棋部の師範からもらったノートパソコンでプログラミングにのめり込む。
               v-flex 2016年に奈良高専を卒業後、株式会社LIFULLに入社。
               v-flex 不動産情報サイト
