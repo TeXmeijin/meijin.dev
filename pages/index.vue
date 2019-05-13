@@ -1,9 +1,9 @@
 <template lang="pug">
   v-layout(column wrap)
     v-flex
-      v-layout.mb-3.pa-3(column)
+      v-layout.mb-2.pa-3(column)
         v-flex(tag="h1") Meijin.me
-        v-flex ビジネス×テクノロジー×クリエイティブの人材を目指すWebエンジニア
+        v-flex 自称名人の自己紹介ページ
       v-card(flat).mb-5.mod-about
         v-layout(row wrap)
           v-flex(sm4 xs12)
@@ -23,17 +23,17 @@
               v-flex ビジネス×テクノロジー×クリエイティブの人材を目指すWebエンジニア。
               v-flex 趣味の将棋にちなんで
                 b 「名人」
-                | というニックネームで呼ばれている。
+                | というニックネームで呼ばれており、むしろ本名が知られていない。
               v-flex 学生時代に将棋部の師範からもらったノートパソコンでプログラミングにのめり込む。
               v-flex 2016年に奈良高専を卒業後、株式会社LIFULLに入社。
               v-flex 不動産情報サイト
                 a(href="https://homes.co.jp" target="_blank" rel="nofollow") LIFULL HOME'S
                 | の開発に関わりながら、IT×教育の事業をやってみたい想いから新規事業提案にも挑戦。
-              v-flex ビジネスモデルの考案が心底苦手なため6回連続で落選するも2017年12月には入賞を果たし、以後およそ1年間に渡って新規事業責任者を務める。
-              v-flex 自身でプロトタイプとなるサービスをVue.js＋Firebaseで開発し、また法人営業や広報までこなしたことから、「フルスタック従業員」と呼ばれることも。
+              v-flex 6回連続で落選するも2017年12月には初入賞を果たし、以後およそ1年間に渡って新規事業責任者を務める。
+              v-flex 自身でプロトタイプとなるサービスをVue.js＋Firebaseで開発し、また法人営業や広報までこなした姿勢から、社内で「挑戦MVP」「ガイドライン大賞」等で全社的な表彰を受ける。
               v-flex 2019年3月、半年以上副業をしていた
                 a(href="https://corp.noschool.asia" target="_blank" rel="nofollow") 教育スタートアップ
-                | からCTO（最高技術責任者）にならないかとの誘いを受け、教育事業を1から育てるチャンスと直感し転職。現在は社長と2人でフルタイムで勤務し、副業エンジニア5人以上と勉強Q&Aサイト
+                | からCTO（最高技術責任者）にならないかとの誘いを受け、教育事業を1から育てるチャンスと直感し転職。現在は社長と2人でフルタイムで勤務し、5人以上の副業エンジニアと勉強Q&Aサイト
                 a(href="https://noschool.asia" target="_blank" rel="nofollow") NoSchool
                 | の開発をしている。
       v-card(flat).mb-5.mod-skill
