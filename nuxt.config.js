@@ -66,20 +66,30 @@ module.exports = {
    ** Customize the progress bar color
    */
   loading: {
-    color: '#3B8070'
+    color: '#33b0dd'
   },
   modules: [
     '@nuxtjs/dotenv',
     '@nuxtjs/vuetify',
+    '@nuxtjs/style-resources'
   ],
   vuetify: {
     // Vuetify の設定はここに書く
     theme: {
-      primary: '#E0C032',
-      secondary: '#33b0dd',
-      accent: '#4633dd',
-      error: '#dd4133'
+      themes: {
+        light: {
+          primary: '#E0C032',
+          secondary: '#33b0dd',
+          accent: '#4633dd',
+          error: '#dd4133'
+        }
+      }
     }
+  },
+  styleResources: {
+    scss: [
+      '~/assets/css/main.scss',
+    ]
   },
   /*
    ** Build configuration
