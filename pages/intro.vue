@@ -83,7 +83,7 @@ export default {
   width: 100%;
   padding-top: 25px;
   padding-left: 25px;
-  background-image: url('~assets/img/background/dot.png');
+  background-image: url('~assets/img/background/dot_green.png');
   background-repeat: repeat;
   background-size: 50px 50px;
 
