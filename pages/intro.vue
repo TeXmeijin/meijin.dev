@@ -6,30 +6,37 @@
       @after-enter="afterHeadingEnter"
     )
       span(v-if="state === 0").label Portfolio
-    transition(
-      name="heading"
-      @after-enter="afterHeadingEnter"
-    )
-      span(v-if="state >= 1" :class="{isHide: atLeft}").label
-        transition(
-          name="first"
-        ).char M
-        transition(
-          name="second"
-        ).char  E
-        transition(
-          name="third"
-        ).char  I
-        transition(
-          name="fourth"
-        ).char  J
-        transition(
-          name="fifth"
-        ).char  I
-        transition(
-          name="sixth"
-          @after-enter="atLeft = false"
-        ).char N
+    //- transition(
+    //-   name="heading"
+    //-   @after-enter="afterHeadingEnter"
+    //- )
+    .label
+      transition(
+        name="first"
+        @after-enter="afterHeadingEnter"
+      )
+        span(v-if="state >= 1" :class="{isHide: atLeft}").char M
+      transition(
+        name="second"
+      ).char
+        span(v-if="state >= 1" :class="{isHide: atLeft}").char E
+      transition(
+        name="third"
+      ).char
+        span(v-if="state >= 1" :class="{isHide: atLeft}").char I
+      transition(
+        name="fourth"
+      ).char
+        span(v-if="state >= 1" :class="{isHide: atLeft}").char J
+      transition(
+        name="fifth"
+      ).char
+        span(v-if="state >= 1" :class="{isHide: atLeft}").char I
+      transition(
+        name="sixth"
+        @after-enter="atLeft = false"
+      ).char
+        span(v-if="state >= 1" :class="{isHide: atLeft}").char N
     transition(name="description")
       span(v-if="state >= 2").subLabel
         span.description
@@ -59,7 +66,7 @@ export default {
   data() {
     return {
       state: 0,
-      atLeft: true,
+      atLeft: false,
     }
   },
 }
@@ -101,17 +108,17 @@ export default {
 .fourth-enter,
 .fifth-enter,
 .sixth-enter {
-  transform: translateX(1200%)
+  opacity: 0;
+  transform: translateX(1000%);
 }
 
-.first-enter-to,
-.second-enter-to,
-.third-enter-to,
-.fourth-enter-to,
-.fifth-enter-to,
-.sixth-enter-to {
+.first-leave-to,
+.second-leave-to,
+.third-leave-to,
+.fourth-leave-to,
+.fifth-leave-to,
+.sixth-leave-to {
   transform: translateX(0%);
-  opacity: 1;
 }
 
 .first-enter-active {
@@ -134,7 +141,7 @@ export default {
 }
 
 .isHide {
-  // display: none;
+  display: none;
 }
 
 .topPanel {
