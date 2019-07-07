@@ -1,19 +1,35 @@
 <template lang="pug">
 .topPanel
   h1.heading
-    transition(name="portfolio")
+    transition(
+      name="portfolio"
+      @after-enter="afterHeadingEnter"
+    )
       span(v-if="state === 0").label Portfolio
     transition(
       name="heading"
       @after-enter="afterHeadingEnter"
     )
-      span(v-if="state >= 1").label
-        span.char.first M
-        span.char.second E
-        span.char.third I
-        span.char.fourth J
-        span.char.fifth I
-        span.char.sixth N
+      span(v-if="state >= 1" :class="{isHide: atLeft}").label
+        transition(
+          name="first"
+        ).char M
+        transition(
+          name="second"
+        ).char  E
+        transition(
+          name="third"
+        ).char  I
+        transition(
+          name="fourth"
+        ).char  J
+        transition(
+          name="fifth"
+        ).char  I
+        transition(
+          name="sixth"
+          @after-enter="atLeft = false"
+        ).char N
     transition(name="description")
       span(v-if="state >= 2").subLabel
         span.description
@@ -42,7 +58,8 @@ export default {
   },
   data() {
     return {
-      state: 0
+      state: 0,
+      atLeft: true,
     }
   },
 }
@@ -72,10 +89,52 @@ export default {
   opacity: 0;
 }
 .description-enter-active {
-  transition: 0.5s;
+  transition: 2.5s ease-in-out;
 }
 .description-enter-to {
   opacity: 1;
+}
+
+.first-enter,
+.second-enter,
+.third-enter,
+.fourth-enter,
+.fifth-enter,
+.sixth-enter {
+  transform: translateX(1200%)
+}
+
+.first-enter-to,
+.second-enter-to,
+.third-enter-to,
+.fourth-enter-to,
+.fifth-enter-to,
+.sixth-enter-to {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.first-enter-active {
+  transition: 1.5s ease-in-out;
+}
+.second-enter-active {
+  transition: 1.5s ease-in-out 0.2s;
+}
+.third-enter-active {
+  transition: 1.5s ease-in-out 0.4s;
+}
+.fourth-enter-active {
+  transition: 1.5s ease-in-out 0.6s;
+}
+.fifth-enter-active {
+  transition: 1.5s ease-in-out 0.8s;
+}
+.sixth-enter-active {
+  transition: 1.5s ease-in-out 1.0s;
+}
+
+.isHide {
+  // display: none;
 }
 
 .topPanel {
@@ -119,25 +178,6 @@ export default {
       justify-content: center;
       height: 50px;
       min-width: 50px;
-    }
-
-    .first {
-      animation: heading 1.5s ease-in-out;
-    }
-    .second {
-      animation: heading 1.5s ease-in-out 0.2s;
-    }
-    .third {
-      animation: heading 1.5s ease-in-out 0.4s;
-    }
-    .fourth {
-      animation: heading 1.5s ease-in-out 0.6s;
-    }
-    .fifth {
-      animation: heading 1.5s ease-in-out 0.8s;
-    }
-    .sixth {
-      animation: heading 1.5s ease-in-out 1.0s;
     }
   }
 
