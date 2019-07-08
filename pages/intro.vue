@@ -75,15 +75,23 @@
               .desc 株式会社NoSchoolのCTOに転職
             h2.profile__description__heading SNS/Blog
             a(href="https://qiita.com/mejileben" rel="nofollow" target="_blank").card
-              .card__title
+              .card__title.qiita
                 h3.card__title__text Qiita
               ul.card__contents
                 li.card__contents__link
                   a(class="link" href="https://qiita.com/mejileben/items/f68a50ec9164b261b9cd" rel="nofollow" target="_blank") 【実録】WordPressサイトをAWS+Laravel+Nuxtにフルリプレイスした話（技術選定編）
                 li.card__contents__link
                   a(class="link" href="https://qiita.com/mejileben/items/69e5facdb60781927929" rel="nofollow" target="_blank") 【JavaScript】アロー関数式を学ぶついでにthisも復習する話
+            a(href="https://note.mu/meijin_garden" rel="nofollow" target="_blank").card
+              .card__title.note
+                h3.card__title__text note
+              ul.card__contents
+                li.card__contents__link
+                  a(class="link" href="https://qiita.com/mejileben/items/f68a50ec9164b261b9cd" rel="nofollow" target="_blank") 【実録】WordPressサイトをAWS+Laravel+Nuxtにフルリプレイスした話（技術選定編）
+                li.card__contents__link
+                  a(class="link" href="https://qiita.com/mejileben/items/69e5facdb60781927929" rel="nofollow" target="_blank") 【JavaScript】アロー関数式を学ぶついでにthisも復習する話
             a(href="https://twitter.com/meijin_garden" rel="nofollow" target="_blank").card
-              .card__title
+              .card__title.twitter
                 h3.card__title__text Twitter
             h2.profile__description__heading スキル
             .flex
@@ -310,24 +318,37 @@ $halfSize: calc(#{$baseSize} / 2);
       .card {
         display: flex;
         flex-direction: column;
+        margin-bottom: $halfSize;
         text-decoration: none;
         border-radius: 10px;
         box-shadow: 0 2px 4px 0 $grey-light2;
         background: $white;
+        color: $primary;
 
         &__title {
           width: 100%;
           height: 200px;
-          background-image: url("~assets/img/blog/qiita.png");
           background-size: contain;
           background-position: center;
           background-repeat: no-repeat;
           position: relative;
 
+          &.qiita {
+            background-image: url("~assets/img/blog/qiita.png");
+          }
+
+          &.twitter {
+            background-image: url("~assets/img/blog/twitter.png");
+          }
+
+          &.note {
+            background-image: url("~assets/img/blog/note.png");
+          }
+
           &__text {
             position: absolute;
             right: $halfSize;
-            bottom: $halfSize;
+            bottom: 0;
             font-size: 2rem;
             font-weight: bold;
           }
@@ -340,6 +361,7 @@ $halfSize: calc(#{$baseSize} / 2);
             line-height: 1.6rem;
             .link {
               text-decoration: none;
+              color: $primary;
             }
 
             &:not(:first-child) {
