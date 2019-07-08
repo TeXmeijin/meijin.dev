@@ -1,7 +1,7 @@
-const baseName = 'フルスタック従業員「名人」の自己紹介ページ';
+const baseName = "Meijin's Portfolio";
 const baseDesc =
   'フルスタック従業員「名人」の自己紹介ページです。これまでの経歴（高専→LIFULL→NoSchool CTO）、スキルセット（フロントエンドからバックエンド、インフラまで）、SNS/Blogの各種リンクを載せています。';
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'https://meijin.me';
 const baseOgp = '/ogp.png';
 
 module.exports = {
@@ -11,8 +11,7 @@ module.exports = {
    */
   head: {
     title: `Meijin.me | ${baseName}`,
-    meta: [
-      {
+    meta: [{
         charset: 'utf-8',
       },
       {
@@ -63,13 +62,11 @@ module.exports = {
         content: '@Meijin_garden',
       },
     ],
-    link: [
-      {
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico',
-      },
-    ],
+    link: [{
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico',
+    }, ],
   },
   /*
    ** Customize the progress bar color
@@ -77,20 +74,7 @@ module.exports = {
   loading: {
     color: '#33b0dd',
   },
-  modules: ['@nuxtjs/dotenv', '@nuxtjs/vuetify', '@nuxtjs/style-resources'],
-  vuetify: {
-    // Vuetify の設定はここに書く
-    theme: {
-      themes: {
-        light: {
-          primary: '#E0C032',
-          secondary: '#33b0dd',
-          accent: '#4633dd',
-          error: '#dd4133',
-        },
-      },
-    },
-  },
+  modules: ['@nuxtjs/dotenv', '@nuxtjs/style-resources'],
   styleResources: {
     scss: ['~/assets/css/main.scss'],
   },
@@ -101,7 +85,10 @@ module.exports = {
     /*
      ** Run ESLint on save
      */
-    extend(config, { isDev, isClient }) {
+    extend(config, {
+      isDev,
+      isClient
+    }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',

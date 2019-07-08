@@ -1,160 +1,396 @@
 <template lang="pug">
-  v-layout(column wrap)
-    v-flex
-      v-layout.mb-2.pa-3(column)
-        v-flex(tag="h1") Meijin.me
-        v-flex 自称名人の自己紹介ページ
-      v-card(flat).mb-5.mod-about
-        v-layout(row wrap)
-          v-flex(sm4 xs12)
-            v-img(
-              :src="require('@/assets/img/pinsya.png')"
-              aspect-ratio="1"
-            )
-          v-flex(sm8 xs12)
-            v-card-title(primary-title)
-              v-flex(row)
-                v-flex(tag="h2").mb-1.display-2.font-weight-bold About
-                v-divider.mb-2
-                v-flex(tag="h1").headline.font-weight-bold
-                  a(href="https://twitter.com/meijin_garden" target="_blank" rel="nofollow").secondary--text @Meijin_garden
-                v-flex Web Engineer, Cheif Technology Officer
-            v-card-text
-              v-flex ビジネス×テクノロジー×クリエイティブの人材を目指すWebエンジニア。
-              v-flex 趣味の将棋にちなんで
-                b 「名人」
-                | というニックネームで呼ばれており、むしろ本名が知られていない。
-              v-flex 学生時代に将棋部の師範からもらったノートパソコンでプログラミングにのめり込む。
-              v-flex 2016年に奈良高専を卒業後、株式会社LIFULLに入社。
-              v-flex 不動産情報サイト
-                a(href="https://homes.co.jp" target="_blank" rel="nofollow") LIFULL HOME'S
-                | の開発に関わりながら、IT×教育の事業をやってみたい想いから新規事業提案にも挑戦。
-              v-flex 6回連続で落選するも2017年12月には初入賞を果たし、以後およそ1年間に渡って新規事業責任者を務める。
-              v-flex 自身でプロトタイプとなるサービスをVue.js＋Firebaseで開発し、また法人営業や広報までこなした姿勢から、社内で「挑戦MVP」「ガイドライン大賞」等で全社的な表彰を受ける。
-              v-flex 2019年3月、半年以上副業をしていた
-                a(href="https://corp.noschool.asia" target="_blank" rel="nofollow") 教育スタートアップ
-                | からCTO（最高技術責任者）にならないかとの誘いを受け、教育事業を1から育てるチャンスと直感し転職。現在は社長と2人でフルタイムで勤務し、5人以上の副業エンジニアと勉強Q&Aサイト
-                a(href="https://noschool.asia" target="_blank" rel="nofollow") NoSchool
-                | の開発をしている。
-      v-card(flat).mb-5.mod-skill
-        v-layout(column)
-          v-card-title(primary-title)
-            v-flex(column)
-              v-flex(tag="h2").mb-1.display-2.font-weight-bold Skill Set
-              v-divider.mb-2
-          v-container(grid-list-xl)
-            v-layout(row wrap)
-              v-flex(
-                v-for="n in 9"
-                :key="n"
-                xs4
-                align-self-center
-              )
-                v-tooltip(v-model="skills[n].tooltip" top)
-                  span {{ skills[n].detail }}
-                  template(v-slot:activator="{ on }")
-                    v-card(flat v-on="on" hover)
-                      v-img(
-                        :src="require('@/assets/img/skill/' + skills[n].name + '.png')"
-                        lazy-src
-                        contain
-                        transition
-                        @click="skills[n].tooltip = !skills[n].tooltip"
-                      ).mb-3.mx-2
-      v-card(flat).mb-5.pb-5.mod-blog
-        v-layout(column)
-          v-card-title(primary-title)
-            v-flex(column)
-              v-flex(tag="h2").mb-1.display-2.font-weight-bold SNS/Blog
-              v-divider.mb-2
-          v-container(grid-list-md)
-            v-layout(row wrap)
-              v-flex(xs12 md4).mb-2
-                v-card(href="https://twitter.com/meijin_garden" hover target="_blank" rel="nofollow")
-                  v-img(
-                    :src="require('@/assets/img/blog/twitter.png')"
-                    aspect-ratio="1.7"
-                  )
-                  v-card-title
-                    v-flex(tag="h3" row).headline.font-weight-bold
-                      v-flex.secondary--text twitter
-              v-flex(xs12 md4).mb-2
-                v-card(href="https://qiita.com/mejileben" hover target="_blank" rel="nofollow")
-                  v-img(
-                    :src="require('@/assets/img/blog/qiita.png')"
-                    aspect-ratio="1.7"
-                  )
-                  v-card-title
-                    v-flex(tag="h3" row).headline.font-weight-bold
-                      v-flex.light-green--text Qiita
-              v-flex(xs12 md4).mb-2
-                v-card(href="https://note.mu/meijin_garden" hover target="_blank" rel="nofollow")
-                  v-img(
-                    :src="require('@/assets/img/blog/note.png')"
-                    aspect-ratio="1.7"
-                  )
-                  v-card-title
-                    v-flex(tag="h3" row).headline.font-weight-bold
-                      v-flex.green--text note
+.wrapper
+  .main
+    h1.heading
+      transition(
+        name="portfolio"
+        @after-enter="onEntered"
+      )
+        span(v-if="state === 0").heading__label Portfolio
+      .heading__label
+        transition(
+          name="first"
+          @after-enter="onEntered"
+        )
+          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char M
+        transition(
+          name="second"
+        ).char
+          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char E
+        transition(
+          name="third"
+        ).char
+          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char I
+        transition(
+          name="fourth"
+        ).char
+          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char J
+        transition(
+          name="fifth"
+        ).char
+          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char I
+        transition(
+          name="sixth"
+          @after-enter="atLeft = false"
+        ).char
+          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char N
+      transition(
+        name="description"
+      )
+        p(v-if="state >= 2").heading__subLabel
+          span.heading__subLabel__description
+            .text anegement
+          span.heading__subLabel__description
+            .text ngineering
+          span.heading__subLabel__description
+            .text magination
+          span.heading__subLabel__description
+            .text avaScript
+          span.heading__subLabel__description
+            .text nsomnia
+          span.heading__subLabel__description
+            .text uxt.js
+    transition(
+      name="body"
+    )
+      div(v-if="state >= 2").body
+        .profile
+          .profile__image
+            .profile__image__body(ref="profileImageBody" :style="{height: profileImageBodyHeight}")
+          .profile__heading
+            h1.profile__heading__name Meijin
+              span.small (Yusuke Saito)
+          .profile__description
+            p 好奇心と行動力でゴリ押しするWebエンジニア。
+            p 趣味の将棋にちなんでニックネームが「名人」。
+            h2.profile__description__heading Career
+            .flex
+              .subheading 2011/04
+              .desc 奈良高専情報工学科に入学
+            .flex
+              .subheading 2016/04
+              .desc 株式会社LIFULL(当時NEXT)に入社
+            .flex
+              .subheading 2019/03
+              .desc 株式会社NoSchoolのCTOに転職
+            h2.profile__description__heading SNS/Blog
+            ul.cardList
+              li.card
+                a(href="https://qiita.com/mejileben" rel="nofollow" target="_blank").card__title.qiita
+                  h3.card__title__text Qiita
+                ul.card__contents
+                  li.card__contents__link
+                    a(class="link" href="https://qiita.com/mejileben/items/f68a50ec9164b261b9cd" rel="nofollow" target="_blank") 【実録】WordPressサイトをAWS+Laravel+Nuxtにフルリプレイスした話（技術選定編）
+                  li.card__contents__link
+                    a(class="link" href="https://qiita.com/mejileben/items/69e5facdb60781927929" rel="nofollow" target="_blank") 【JavaScript】アロー関数式を学ぶついでにthisも復習する話
+              li.card
+                a(href="https://note.mu/meijin_garden" rel="nofollow" target="_blank").card__title.note
+                  h3.card__title__text note
+                ul.card__contents
+                  li.card__contents__link
+                    a(class="link" href="https://note.mu/meijin_garden/n/n71029117558e" rel="nofollow" target="_blank") 家にPCもネットもスマホも無かった中学3年生が、高専に入学し5年後Webエンジニアになった話
+                  li.card__contents__link
+                    a(class="link" href="https://note.mu/meijin_garden/n/n2d60b28569a8" rel="nofollow" target="_blank") 株式会社LIFULLを退職し、教育スタートアップのCTOとして転職します
+              li.card
+                a(href="https://twitter.com/meijin_garden" rel="nofollow" target="_blank").card__title.twitter
+                  h3.card__title__text Twitter
+            h2.profile__description__heading Technical Skill
+            .flex
+              .subheading Nuxt.js
+              .desc 自社サイトのフロントエンド構築をNuxtを用いスクラッチで開発した経験があるため、GAの埋め込みやSSRはもちろん、ページネーションやパンくずリスト等もNuxt上でコンポーネントとして開発することが可能です。UIフレームワークはVuetifyの経験があります。
+            .flex
+              .subheading Pug/Scss
+              .desc HTMLおよびCSSを記述する際にはPugおよびSCSSの利用を得意としています。Vuetify等利用時はSCSSはほぼ利用しませんが、そうでないケースにおいては基幹コンポーネントの作成から粒度別にSCSSでコンポーネントにスタイルを当てていくような設計もある程度可能です。
+            .flex
+              .subheading Laravel
+              .desc Controller/Repository/Modelの切り分けやAPI Resoruce、Form Request等を用いた仕組みを0から設計し構築することができます。OSSなので実際のソースを読みながらカスタマイズしたClassを拡張して利用するといった柔軟な対応もできます。
+            .flex
+              .subheading AWS
+              .desc CloudFront, S3, ALB, ASG, EC2, IAM, CodeDeploy, CodePipeline、Parameter Store、Lambdaなどを利用したベーシックなインフラ構築ができます。一方でコンテナ技術を活用したECSやFargateの実運用経験はまだありません。
+            .flex
+              .subheading Firebase
+              .desc RTDB、Firestore、FCM、Auth、Hostingの利用経験がWebアプリにしてあります。ネイティブアプリでの利用についてはFCMのサーバーサイドの構築経験のみでほかはありません。AWSと合わせ適材適所でFirebaseを使うべきところを選定することが可能かと思います。
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      skills: [
-        {},
-        {
-          name: 'nuxt',
-          tooltip: false,
-          detail: 'Vueのおかげで前職の新規事業開発時に自前でプロトタイピングできました。Nuxtで大規模開発も怖くない！（きっと）',
-        },
-        {
-          name: 'sass',
-          tooltip: false,
-          detail: '当初はただの変数が使えるCSSくらいに思っていた件については本当に申し訳なく思っております',
-        },
-        {
-          name: 'pug',
-          tooltip: false,
-          detail: '閉じタグ書かなくていいのホント楽。楽すぎてコンポーネントの切り分けサボっちゃいそう',
-        },
-        {
-          name: 'ruby',
-          tooltip: false,
-          detail: '配列周りの関数が豊富で楽しいのと、設計思想が言語全体で統一されてるのが好き。RSpecも好き',
-        },
-        {
-          name: 'laravel',
-          tooltip: false,
-          detail: 'PHPはプログラミング言語として認めていないけどLaravelの優秀さは認めてやろうじゃないか',
-        },
-        {
-          name: 'mysql',
-          tooltip: false,
-          detail: 'インデックス貼るときの内部的なツリー構造の持ち方とかまでドキュメントに書いてあって丁寧でよき',
-        },
-        {
-          name: 'nginx',
-          tooltip: false,
-          detail: 'なんだかんだいってNginxは良いサーバーですわ。リバースプロキシとしても使いやすいし',
-        },
-        {
-          name: 'firebase',
-          tooltip: false,
-          detail: 'Vue.js＋Firebaseのサイト構築ほんと楽よね。RTDBの設計は難しすぎて草生えたけど',
-        },
-        {
-          name: 'aws',
-          tooltip: false,
-          detail: 'コンソールのデザインいつになったら良くなるの。EC2/RDS/S3/ALB/CloudFront/CodeDeploy/WAF/IAMあたり使えます',
-        },
-      ],
+  mounted() {
+    this.state = 1;
+  },
+  methods: {
+    onEntered() {
+      this.state = 2;
+      this.$nextTick().then(_ => {
+        this.profileImageBodyHeight =
+          (this.$refs.profileImageBody.clientWidth * 219) / 500 + "px";
+      });
     }
   },
-}
+  data() {
+    return {
+      state: 0,
+      atLeft: false,
+      profileImageBodyHeight: "0px"
+    };
+  }
+};
 </script>
 
 
 <style lang="scss" scoped>
+.portfolio-leave-active {
+  transition: 1.5s ease-in-out;
+}
+.portfolio-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.heading-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.heading-enter-active {
+  transition: 1.5s ease-in-out;
+}
+.heading-leave-to {
+  opacity: 1;
+  transform: translateX(-100%);
+}
+.description-enter {
+  opacity: 0;
+}
+.description-enter-active {
+  transition: 2.5s ease-in-out;
+}
+.description-enter-to {
+  opacity: 1;
+}
+.body-enter {
+  opacity: 0;
+}
+.body-enter-active {
+  transition: 0.5s ease-in-out;
+}
+.body-enter-to {
+  opacity: 1;
+  height: inherit;
+  width: inherit;
+}
+
+$sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
+
+@each $key in $sequenceAnimeKeys {
+  .#{$key}-enter {
+    opacity: 0;
+    transform: translateX(1000%);
+  }
+
+  .#{$key}-leave-to {
+    transform: translateX(0%);
+  }
+
+  .#{$key}-enter-active {
+    transition: 1.5s
+      ease-in-out
+      #{(index($sequenceAnimeKeys, $key) - 1) *
+      0.2}s;
+  }
+}
+
+$baseSize: 40px;
+$halfSize: calc(#{$baseSize} / 2);
+
+.wrapper {
+  min-height: 700px;
+  padding-top: $halfSize;
+  background-image: url("~assets/img/background/dot_green.png");
+  background-repeat: repeat;
+  background-size: calc(#{$baseSize} + 1px);
+
+  .main {
+    max-width: 900px;
+    @include mq {
+      margin: 0 auto 0 calc(#{$baseSize} * 4 + 4px);
+    }
+  }
+
+  .heading {
+    display: flex;
+    font-weight: bold;
+    font-size: $baseSize;
+    line-height: $baseSize;
+    position: relative;
+
+    &__label {
+      position: absolute;
+      left: $halfSize;
+      &__char {
+        display: flex;
+        justify-content: center;
+        height: $baseSize;
+        min-width: $baseSize;
+      }
+    }
+
+    &__subLabel {
+      position: absolute;
+      left: calc(#{$baseSize} + #{$halfSize});
+
+      &__description {
+        display: flex;
+        padding-bottom: 3px;
+        align-items: flex-end;
+        color: #999;
+        height: $baseSize;
+        font-size: calc(#{$baseSize} / 1.6);
+        line-height: calc(#{$baseSize} / 1.6);
+      }
+    }
+  }
+
+  .profile {
+    @include mq("sp") {
+      margin-top: calc(#{$baseSize} * 6);
+    }
+    padding: $halfSize;
+
+    &__image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: calc(#{$baseSize} * 4);
+      max-height: calc(#{$baseSize} * 6);
+      @include mq {
+        margin-left: calc(#{$baseSize} * 4);
+      }
+
+      &__body {
+        height: auto;
+        width: 100%;
+        max-width: 500px;
+        border-radius: 10px;
+        background-image: url("~assets/img/pinsya.png");
+        background-size: cover;
+        box-shadow: 0 2px 4px 0 $grey-light2;
+        margin-bottom: 4px;
+      }
+    }
+
+    &__heading {
+      margin-top: $halfSize;
+      &__name {
+        height: $baseSize;
+        line-height: $baseSize;
+        font-size: 1.8rem;
+
+        .small {
+          margin-left: 8px;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    &__description {
+      line-height: $baseSize;
+      font-size: calc(#{$halfSize} - 6px);
+
+      &__heading {
+        font-size: $halfSize;
+        color: $primary;
+        font-weight: bold;
+
+        margin-top: $baseSize;
+      }
+
+      .flex {
+        display: flex;
+        align-items: top;
+      }
+
+      .subheading {
+        min-width: 90px;
+        font-size: $halfSize;
+        font-weight: bold;
+        margin-right: $halfSize;
+      }
+
+      .desc {
+        margin-top: calc(#{$halfSize} / 2);
+        flex: 1;
+        line-height: $halfSize;
+      }
+
+      .cardList {
+        display: flex;
+        @include mq("sp") {
+          flex-direction: column;
+        }
+        @include mq {
+          flex-wrap: wrap;
+          justify-content: space-around;
+        }
+      }
+
+      .card {
+        display: flex;
+        @include mq {
+          width: 375px;
+        }
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: $halfSize;
+        text-decoration: none;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px 0 $grey-light2;
+        background: $white;
+        color: $primary;
+
+        &__title {
+          width: 100%;
+          height: 200px;
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+          position: relative;
+
+          &.qiita {
+            background-image: url("~assets/img/blog/qiita.png");
+          }
+
+          &.twitter {
+            background-image: url("~assets/img/blog/twitter.png");
+          }
+
+          &.note {
+            background-image: url("~assets/img/blog/note.png");
+          }
+
+          &__text {
+            position: absolute;
+            right: $halfSize;
+            bottom: 0;
+            font-size: $halfSize;
+            font-weight: bold;
+          }
+        }
+
+        &__contents {
+          padding: $halfSize;
+          &__link {
+            list-style: none;
+            line-height: 1.6rem;
+            .link {
+              text-decoration: none;
+              color: $primary;
+            }
+
+            &:not(:first-child) {
+              margin-top: $halfSize;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 </style>
