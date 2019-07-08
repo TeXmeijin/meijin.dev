@@ -1,7 +1,8 @@
-const baseName = 'フルスタック従業員「名人」の自己紹介ページ'
-const baseDesc = 'フルスタック従業員「名人」の自己紹介ページです。これまでの経歴（高専→LIFULL→NoSchool CTO）、スキルセット（フロントエンドからバックエンド、インフラまで）、SNS/Blogの各種リンクを載せています。'
-const baseUrl = 'http://localhost:3000'
-const baseOgp = '/ogp.png'
+const baseName = "Meijin's Portfolio";
+const baseDesc =
+  'フルスタック従業員「名人」の自己紹介ページです。これまでの経歴（高専→LIFULL→NoSchool CTO）、スキルセット（フロントエンドからバックエンド、インフラまで）、SNS/Blogの各種リンクを載せています。';
+const baseUrl = 'https://meijin.me';
+const baseOgp = '/ogp.png';
 
 module.exports = {
   mode: 'spa',
@@ -11,85 +12,71 @@ module.exports = {
   head: {
     title: `Meijin.me | ${baseName}`,
     meta: [{
-        charset: 'utf-8'
+        charset: 'utf-8',
       },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
+        content: 'width=device-width, initial-scale=1',
       },
       {
         hid: 'description',
         name: 'description',
-        content: baseDesc
+        content: baseDesc,
       },
       {
         hid: 'og:site_name',
         property: 'og:site_name',
-        content: baseName
-      }, {
+        content: baseName,
+      },
+      {
         hid: 'og:type',
         property: 'og:type',
-        content: 'artice'
-      }, {
+        content: 'artice',
+      },
+      {
         hid: 'og:url',
         property: 'og:url',
-        content: baseUrl
-      }, {
+        content: baseUrl,
+      },
+      {
         hid: 'og:title',
         property: 'og:title',
-        content: baseName
-      }, {
+        content: baseName,
+      },
+      {
         hid: 'og:description',
         property: 'og:description',
-        content: baseDesc
-      }, {
+        content: baseDesc,
+      },
+      {
         hid: 'og:image',
         property: 'og:image',
-        content: baseOgp
+        content: baseOgp,
       },
       {
         name: 'twitter:card',
-        content: 'summary'
+        content: 'summary',
       },
       {
         name: 'twitter:site',
-        content: '@Meijin_garden'
+        content: '@Meijin_garden',
       },
     ],
     link: [{
       rel: 'icon',
       type: 'image/x-icon',
-      href: '/favicon.ico'
-    }]
+      href: '/favicon.ico',
+    }, ],
   },
   /*
    ** Customize the progress bar color
    */
   loading: {
-    color: '#33b0dd'
+    color: '#33b0dd',
   },
-  modules: [
-    '@nuxtjs/dotenv',
-    '@nuxtjs/vuetify',
-    '@nuxtjs/style-resources'
-  ],
-  vuetify: {
-    // Vuetify の設定はここに書く
-    theme: {
-      themes: {
-        light: {
-          primary: '#E0C032',
-          secondary: '#33b0dd',
-          accent: '#4633dd',
-          error: '#dd4133'
-        }
-      }
-    }
-  },
+  modules: ['@nuxtjs/dotenv', '@nuxtjs/style-resources'],
   styleResources: {
-    scss: [
-      '~/assets/css/main.scss',
-    ]
+    scss: ['~/assets/css/main.scss'],
   },
   /*
    ** Build configuration
@@ -107,9 +94,9 @@ module.exports = {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
+          exclude: /(node_modules)/,
+        });
       }
-    }
-  }
-}
+    },
+  },
+};
