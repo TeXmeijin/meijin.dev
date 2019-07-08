@@ -220,6 +220,9 @@ $halfSize: calc(#{$baseSize} / 2);
     font-size: $baseSize;
     line-height: $baseSize;
     position: relative;
+    @include mq("sp") {
+      height: calc(#{$baseSize} * 6);
+    }
 
     &__label {
       position: absolute;
@@ -249,9 +252,9 @@ $halfSize: calc(#{$baseSize} / 2);
   }
 
   .profile {
-    @include mq("sp") {
-      margin-top: calc(#{$baseSize} * 6);
-    }
+    // @include mq("sp") {
+    //   margin-top: calc(#{$baseSize} * 6);
+    // }
     padding: $halfSize;
 
     &__image {
