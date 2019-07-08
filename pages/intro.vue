@@ -73,6 +73,18 @@
             .flex
               .subheading 2019/03
               .desc 株式会社NoSchoolのCTOに転職
+            h2.profile__description__heading SNS/Blog
+            a(href="https://qiita.com/mejileben" rel="nofollow" target="_blank").card
+              .card__title
+                h3.card__title__text Qiita
+              ul.card__contents
+                li.card__contents__link
+                  a(class="link" href="https://qiita.com/mejileben/items/f68a50ec9164b261b9cd" rel="nofollow" target="_blank") 【実録】WordPressサイトをAWS+Laravel+Nuxtにフルリプレイスした話（技術選定編）
+                li.card__contents__link
+                  a(class="link" href="https://qiita.com/mejileben/items/69e5facdb60781927929" rel="nofollow" target="_blank") 【JavaScript】アロー関数式を学ぶついでにthisも復習する話
+            a(href="https://twitter.com/meijin_garden" rel="nofollow" target="_blank").card
+              .card__title
+                h3.card__title__text Twitter
             h2.profile__description__heading スキル
             .flex
               .subheading Nuxt.js
@@ -89,9 +101,6 @@
             .flex
               .subheading Firebase
               .desc RTDB、Firestore、FCM、Auth、Hostingの利用経験がWebアプリにしてあります。ネイティブアプリでの利用についてはFCMのサーバーサイドの構築経験のみでほかはありません。AWSと合わせ適材適所でFirebaseを使うべきところを選定することが可能かと思います。
-            .flex
-              .subheading
-              .desc
 </template>
 
 <script>
@@ -276,6 +285,8 @@ $halfSize: calc(#{$baseSize} / 2);
         font-size: $halfSize;
         color: $primary;
         font-weight: bold;
+
+        margin-top: $baseSize;
       }
 
       .flex {
@@ -294,6 +305,48 @@ $halfSize: calc(#{$baseSize} / 2);
         margin-top: calc(#{$halfSize} / 2);
         flex: 1;
         line-height: $halfSize;
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px 0 $grey-light2;
+        background: $white;
+
+        &__title {
+          width: 100%;
+          height: 200px;
+          background-image: url("~assets/img/blog/qiita.png");
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+          position: relative;
+
+          &__text {
+            position: absolute;
+            right: $halfSize;
+            bottom: $halfSize;
+            font-size: 2rem;
+            font-weight: bold;
+          }
+        }
+
+        &__contents {
+          padding: $halfSize;
+          &__link {
+            list-style: none;
+            line-height: 1.6rem;
+            .link {
+              text-decoration: none;
+            }
+
+            &:not(:first-child) {
+              margin-top: $halfSize;
+            }
+          }
+        }
       }
     }
   }
