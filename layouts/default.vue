@@ -6,7 +6,9 @@
   nuxt
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import "@/assets/css/base/reset.scss";
+
 .header {
   display: flex;
   height: 50px;
