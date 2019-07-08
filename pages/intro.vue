@@ -1,52 +1,97 @@
 <template lang="pug">
-.main
-  h1.heading
-    transition(
-      name="portfolio"
-      @after-enter="afterHeadingEnter"
-    )
-      span(v-if="state === 0").heading__label Portfolio
-    .heading__label
+.wrapper
+  .main
+    h1.heading
       transition(
-        name="first"
-        @after-enter="afterHeadingEnter"
+        name="portfolio"
+        @after-enter="onEntered"
       )
-        span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char M
+        span(v-if="state === 0").heading__label Portfolio
+      .heading__label
+        transition(
+          name="first"
+          @after-enter="onEntered"
+        )
+          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char M
+        transition(
+          name="second"
+        ).char
+          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char E
+        transition(
+          name="third"
+        ).char
+          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char I
+        transition(
+          name="fourth"
+        ).char
+          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char J
+        transition(
+          name="fifth"
+        ).char
+          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char I
+        transition(
+          name="sixth"
+          @after-enter="atLeft = false"
+        ).char
+          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char N
       transition(
-        name="second"
-      ).char
-        span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char E
-      transition(
-        name="third"
-      ).char
-        span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char I
-      transition(
-        name="fourth"
-      ).char
-        span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char J
-      transition(
-        name="fifth"
-      ).char
-        span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char I
-      transition(
-        name="sixth"
-        @after-enter="atLeft = false"
-      ).char
-        span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char N
-    transition(name="description")
-      span(v-if="state >= 2").heading__subLabel
-        span.heading__subLabel__description
-          .text anegement
-        span.heading__subLabel__description
-          .text ngineering
-        span.heading__subLabel__description
-          .text magination
-        span.heading__subLabel__description
-          .text avaScript
-        span.heading__subLabel__description
-          .text nsomnia
-        span.heading__subLabel__description
-          .text uxt.js
+        name="description"
+      )
+        p(v-if="state >= 2").heading__subLabel
+          span.heading__subLabel__description
+            .text anegement
+          span.heading__subLabel__description
+            .text ngineering
+          span.heading__subLabel__description
+            .text magination
+          span.heading__subLabel__description
+            .text avaScript
+          span.heading__subLabel__description
+            .text nsomnia
+          span.heading__subLabel__description
+            .text uxt.js
+    transition(
+      name="body"
+    )
+      div(v-if="state >= 2").body
+        .profile
+          .profile__image
+            .profile__image__body(ref="profileImageBody" :style="{height: profileImageBodyHeight}")
+          .profile__heading
+            h1.profile__heading__name Meijin
+              span.small (Yusuke Saito)
+          .profile__description
+            p 好奇心と行動力でゴリ押しするWebエンジニア。
+            p 趣味の将棋にちなんでニックネームが「名人」。
+            h2.profile__description__heading 略歴
+            .flex
+              .subheading 2011/04
+              .desc 奈良高専情報工学科に入学
+            .flex
+              .subheading 2016/04
+              .desc 株式会社LIFULL(当時NEXT)に入社
+            .flex
+              .subheading 2019/03
+              .desc 株式会社NoSchoolのCTOに転職
+            h2.profile__description__heading スキル
+            .flex
+              .subheading Nuxt.js
+              .desc 自社サイトのフロントエンド構築をNuxtを用いスクラッチで開発した経験があるため、GAの埋め込みやSSRはもちろん、ページネーションやパンくずリスト等もNuxt上でコンポーネントとして開発することが可能です。UIフレームワークはVuetifyの経験があります。
+            .flex
+              .subheading Pug/Scss
+              .desc HTMLおよびCSSを記述する際にはPugおよびSCSSの利用を得意としています。Vuetify等利用時はSCSSはほぼ利用しませんが、そうでないケースにおいては基幹コンポーネントの作成から粒度別にSCSSでコンポーネントにスタイルを当てていくような設計もある程度可能です。
+            .flex
+              .subheading Laravel
+              .desc Controller/Repository/Modelの切り分けやAPI Resoruce、Form Request等を用いた仕組みを0から設計し構築することができます。OSSなので実際のソースを読みながらカスタマイズしたClassを拡張して利用するといった柔軟な対応もできます。
+            .flex
+              .subheading AWS
+              .desc CloudFront, S3, ALB, ASG, EC2, IAM, CodeDeploy, CodePipeline、Parameter Store、Lambdaなどを利用したベーシックなインフラ構築ができます。一方でコンテナ技術を活用したECSやFargateの実運用経験はまだありません。
+            .flex
+              .subheading Firebase
+              .desc RTDB、Firestore、FCM、Auth、Hostingの利用経験がWebアプリにしてあります。ネイティブアプリでの利用についてはFCMのサーバーサイドの構築経験のみでほかはありません。AWSと合わせ適材適所でFirebaseを使うべきところを選定することが可能かと思います。
+            .flex
+              .subheading
+              .desc
 </template>
 
 <script>
@@ -56,14 +101,19 @@ export default {
     this.state = 1;
   },
   methods: {
-    afterHeadingEnter() {
+    onEntered() {
       this.state = 2;
+      this.$nextTick().then(_ => {
+        this.profileImageBodyHeight =
+          (this.$refs.profileImageBody.clientWidth * 219) / 500 + "px";
+      });
     }
   },
   data() {
     return {
       state: 0,
-      atLeft: false
+      atLeft: false,
+      profileImageBodyHeight: "0px"
     };
   }
 };
@@ -98,6 +148,17 @@ export default {
 .description-enter-to {
   opacity: 1;
 }
+.body-enter {
+  opacity: 0;
+}
+.body-enter-active {
+  transition: 0.5s ease-in-out;
+}
+.body-enter-to {
+  opacity: 1;
+  height: inherit;
+  width: inherit;
+}
 
 $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
 
@@ -119,45 +180,120 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
   }
 }
 
-.main {
+$baseSize: 40px;
+$halfSize: calc(#{$baseSize} / 2);
+
+.wrapper {
   min-height: 700px;
-  width: 100%;
-  padding-top: 25px;
-  padding-left: 25px;
+  padding-top: $halfSize;
   background-image: url("~assets/img/background/dot_green.png");
   background-repeat: repeat;
-  background-size: 50px 50px;
+  background-size: calc(#{$baseSize} + 1px);
+
+  .main {
+    max-width: 900px;
+    @include mq {
+      margin: 0 auto 0 calc(#{$baseSize} * 4 + 4px);
+    }
+  }
 
   .heading {
     display: flex;
     font-weight: bold;
-    font-size: 3.2rem;
-    line-height: 3.2rem;
+    font-size: $baseSize;
+    line-height: $baseSize;
     position: relative;
 
     &__label {
       position: absolute;
-      left: 0;
+      left: $halfSize;
       &__char {
         display: flex;
         justify-content: center;
-        height: 50px;
-        min-width: 50px;
+        height: $baseSize;
+        min-width: $baseSize;
       }
     }
 
     &__subLabel {
       position: absolute;
-      left: 50px;
+      left: calc(#{$baseSize} + #{$halfSize});
 
       &__description {
         display: flex;
-        padding-bottom: 2px;
+        padding-bottom: 3px;
         align-items: flex-end;
         color: #999;
-        height: 50px;
-        font-size: 2rem;
-        line-height: 2rem;
+        height: $baseSize;
+        font-size: calc(#{$baseSize} / 1.6);
+        line-height: calc(#{$baseSize} / 1.6);
+      }
+    }
+  }
+
+  .profile {
+    margin-top: calc(#{$baseSize} * 6);
+    padding: $halfSize;
+
+    &__image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: calc(#{$baseSize} * 4);
+      max-height: calc(#{$baseSize} * 6);
+
+      &__body {
+        height: auto;
+        width: 100%;
+        max-width: 500px;
+        border-radius: 10px;
+        background-image: url("~assets/img/pinsya.png");
+        background-size: cover;
+        box-shadow: 0 2px 4px 0 $grey-light2;
+        margin-bottom: 4px;
+      }
+    }
+
+    &__heading {
+      margin-top: $halfSize;
+      &__name {
+        height: $baseSize;
+        line-height: $baseSize;
+        font-size: 1.8rem;
+
+        .small {
+          margin-left: 8px;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    &__description {
+      line-height: $baseSize;
+      font-size: calc(#{$halfSize} - 6px);
+
+      &__heading {
+        font-size: $halfSize;
+        color: $primary;
+        font-weight: bold;
+      }
+
+      .flex {
+        display: flex;
+        align-items: top;
+      }
+
+      .subheading {
+        min-width: 90px;
+        font-size: $halfSize;
+        font-weight: bold;
+        margin-right: $halfSize;
+      }
+
+      .desc {
+        margin-top: calc(#{$halfSize} / 2);
+        flex: 1;
+        line-height: $halfSize;
       }
     }
   }

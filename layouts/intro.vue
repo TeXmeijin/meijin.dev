@@ -10,7 +10,7 @@
 .header {
   display: flex;
   height: 50px;
-  padding: 0 27px;
+  padding: 0 23px;
   background: $primary;
   border-bottom: 1px solid $primary;
   &__title {
