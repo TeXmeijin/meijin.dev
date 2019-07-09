@@ -43,13 +43,13 @@
           span.heading__subLabel__description
             .text ngineering
           span.heading__subLabel__description
-            .text magination
+            .text maginative
           span.heading__subLabel__description
             .text avaScript
           span.heading__subLabel__description
-            .text nsomnia
+            .text nquisitive
           span.heading__subLabel__description
-            .text uxt.js
+            .text ovel
     transition(
       name="body"
     )
@@ -169,7 +169,7 @@ export default {
   opacity: 0;
 }
 .body-enter-active {
-  transition: 0.5s ease-in-out;
+  transition: 1s ease-in-out;
 }
 .body-enter-to {
   opacity: 1;
