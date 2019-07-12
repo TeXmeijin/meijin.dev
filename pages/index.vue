@@ -98,18 +98,14 @@
             ul.skill
               template(v-for="(skill, key) in skills")
                 li.skill__item
-                  button(@click="skill.background = true").skill__item__name {{ skill.heading }}
-                  transition(
-                    name="modal-background"
-                    @enter="skill.modal = true"
-                  )
-                    .skill__item__desc(@click.self="onClickedBackground(key)" v-if="skill.background")
+                  button(@click="onClickedSkillButton(key)").skill__item__name
+                      span {{ skill.heading }}
+                      span(:class="{opened: skills[key].modal}").chevron
                   transition(
                     name="modal"
                     @after-enter="skill.text = true"
-                    @after-leave="skill.background = false"
                   )
-                    .modal(v-if="skill.modal")
+                    .skill__item__modal(v-if="skill.modal")
                       transition(
                         name="modal-text"
                         @after-leave="skill.modal = false"
@@ -130,9 +126,12 @@ export default {
           (this.$refs.profileImageBody.clientWidth * 219) / 500 + "px";
       });
     },
-    onClickedBackground(key) {
+    onClickedSkillButton(key) {
+      if (!this.skills[key].modal) {
+        this.skills[key].modal = true;
+        return;
+      }
       this.skills[key].text = false;
-      this.skills = Object.assign({}, this.skills);
     }
   },
   data() {
@@ -239,17 +238,9 @@ $text--large: 1.8rem;
 .modal-background-enter-to {
   opacity: 1;
 }
-.modal-background-enter-active,
-.modal-background-leave-active,
 .modal-enter-active,
 .modal-leave-active {
   transition: 0.3s;
-}
-.modal-background-leave {
-  opacity: 1;
-}
-.modal-background-leave-to {
-  opacity: 0;
 }
 .modal-enter {
   height: 0;
@@ -484,6 +475,7 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
 
         &__item {
           display: flex;
+          flex-direction: column;
           flex: 1;
           list-style: none;
 
@@ -493,43 +485,49 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
           }
 
           &__name {
+            position: relative;
             flex: 1;
             border: 1px solid $primary;
             padding: $quarterSize $halfSize;
-            background: transparent;
             font-size: $text--large;
             font-weight: bold;
             color: $primary;
+            background: $white;
+
+            .chevron {
+              position: absolute;
+              width: 15px;
+              display: flex;
+              right: $halfSize;
+              top: 15px;
+              height: 15px;
+              border-bottom: 2px solid $primary;
+              border-left: 2px solid $primary;
+              transform: rotate(-45deg);
+              transition: 0.3s;
+
+              &.opened {
+                top: 22px;
+                transform: rotate(-225deg);
+              }
+            }
           }
 
-          &__desc {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-        }
-        .modal {
-          position: absolute;
-          width: 335px;
-          border: 1px solid $primary;
-          background: $white;
-          box-sizing: border-box;
+          &__modal {
+            width: 335px;
+            border: 1px solid $primary;
+            box-sizing: border-box;
 
-          transform: translateY(54px);
+            transform: translateY(0);
 
-          @include mq {
-            transform: translateX(calc(410px - 167px)) translateY(-141px);
-          }
+            @include mq {
+              transform: translateX(calc(410px - 167px)) translateY(-141px);
+            }
 
-          .text {
-            color: $body;
-            margin: $halfSize;
+            .text {
+              color: $body;
+              margin: $halfSize;
+            }
           }
         }
       }
