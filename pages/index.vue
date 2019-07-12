@@ -142,9 +142,9 @@ export default {
       skills: {
         nuxt: {
           heading: "Nuxt.js",
-          background: false,
-          modal: false,
-          text: false,
+          background: true,
+          modal: true,
+          text: true,
           sentence:
             "自社サイトのフロントエンド構築をNuxtを用いスクラッチで開発した経験があるため、GAの埋め込みやSSRはもちろん、ページネーションやパンくずリスト等もNuxt上でコンポーネントとして開発することが可能です。UIフレームワークはVuetifyの経験があります。"
         },
@@ -339,12 +339,13 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
       min-height: calc(#{$baseSize} * 4);
       max-height: calc(#{$baseSize} * 6);
       @include mq {
-        margin-left: calc(#{$baseSize} * 4);
+        margin-left: calc(#{$baseSize} * 5);
       }
 
       &__body {
         height: auto;
         width: 100%;
+        flex: 1;
         max-width: 500px;
         border-radius: 10px;
         background-image: url("~assets/img/pinsya.png");
@@ -361,6 +362,11 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
         line-height: $baseSize;
         font-size: $text--large;
 
+        @include mq {
+          margin-top: $baseSize;
+          font-size: $baseSize;
+        }
+
         .small {
           margin-left: 8px;
           font-size: 1.2rem;
@@ -371,6 +377,11 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
     &__description {
       line-height: $baseSize;
       font-size: $descSize;
+
+      @include mq {
+        margin-top: calc(#{$halfSize} + 12px);
+        font-size: $halfSize;
+      }
 
       &__heading {
         font-size: $text--large;
@@ -389,6 +400,10 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
         font-size: $halfSize;
         font-weight: bold;
         margin-right: $halfSize;
+
+        @include mq {
+          font-size: $text--large;
+        }
       }
 
       .desc {
@@ -403,16 +418,21 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
           flex-direction: column;
         }
         @include mq {
-          flex-wrap: wrap;
-          justify-content: space-around;
+          overflow-x: scroll;
         }
         .card {
           display: flex;
+          overflow: hidden;
           @include mq {
-            width: 375px;
+            width: 400px;
+            &:not(:last-child) {
+              margin-right: $halfSize;
+            }
+          }
+          @include mq("sp") {
+            justify-content: center;
           }
           flex-direction: column;
-          justify-content: center;
           margin-bottom: $halfSize;
           text-decoration: none;
           border-radius: 10px;
@@ -423,7 +443,7 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
           &__title {
             width: 100%;
             height: 200px;
-            background-size: contain;
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
@@ -455,6 +475,8 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
             &__link {
               list-style: none;
               line-height: 1.6rem;
+              font-size: $descSize;
+
               .link {
                 text-decoration: none;
                 color: $primary;
@@ -470,8 +492,15 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
 
       .skill {
         display: flex;
-        flex-direction: column;
         margin-top: $halfSize;
+
+        @include mq("sp") {
+          flex-direction: column;
+        }
+
+        @include mq {
+          overflow-x: scroll;
+        }
 
         &__item {
           display: flex;
@@ -481,7 +510,7 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
 
           @include mq {
             width: 50%;
-            padding: $halfSize;
+            padding: $halfSize 0;
           }
 
           &__name {
@@ -493,22 +522,23 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
             font-weight: bold;
             color: $primary;
             background: $white;
+            width: 335px;
 
             .chevron {
               position: absolute;
               width: 15px;
               display: flex;
               right: $halfSize;
-              top: 15px;
+              top: 22px;
               height: 15px;
               border-bottom: 2px solid $primary;
               border-left: 2px solid $primary;
-              transform: rotate(-45deg);
+              transform: rotate(-225deg);
               transition: 0.3s;
 
               &.opened {
-                top: 22px;
-                transform: rotate(-225deg);
+                top: 15px;
+                transform: rotate(-45deg);
               }
             }
           }
@@ -517,16 +547,12 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
             width: 335px;
             border: 1px solid $primary;
             box-sizing: border-box;
-
             transform: translateY(0);
-
-            @include mq {
-              transform: translateX(calc(410px - 167px)) translateY(-141px);
-            }
 
             .text {
               color: $body;
               margin: $halfSize;
+              font-size: $descSize;
             }
           }
         }
