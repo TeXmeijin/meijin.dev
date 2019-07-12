@@ -95,21 +95,22 @@
                 a(href="https://twitter.com/meijin_garden" rel="nofollow" target="_blank").card__title.twitter
                   h3.card__title__text Twitter
             h2.profile__description__heading Technical Skill
-            .flex
-              .subheading Nuxt.js
-              .desc 自社サイトのフロントエンド構築をNuxtを用いスクラッチで開発した経験があるため、GAの埋め込みやSSRはもちろん、ページネーションやパンくずリスト等もNuxt上でコンポーネントとして開発することが可能です。UIフレームワークはVuetifyの経験があります。
-            .flex
-              .subheading Pug/Scss
-              .desc HTMLおよびCSSを記述する際にはPugおよびSCSSの利用を得意としています。Vuetify等利用時はSCSSはほぼ利用しませんが、そうでないケースにおいては基幹コンポーネントの作成から粒度別にSCSSでコンポーネントにスタイルを当てていくような設計もある程度可能です。
-            .flex
-              .subheading Laravel
-              .desc Controller/Repository/Modelの切り分けやAPI Resoruce、Form Request等を用いた仕組みを0から設計し構築することができます。OSSなので実際のソースを読みながらカスタマイズしたClassを拡張して利用するといった柔軟な対応もできます。
-            .flex
-              .subheading AWS
-              .desc CloudFront, S3, ALB, ASG, EC2, IAM, CodeDeploy, CodePipeline、Parameter Store、Lambdaなどを利用したベーシックなインフラ構築ができます。一方でコンテナ技術を活用したECSやFargateの実運用経験はまだありません。
-            .flex
-              .subheading Firebase
-              .desc RTDB、Firestore、FCM、Auth、Hostingの利用経験がWebアプリにしてあります。ネイティブアプリでの利用についてはFCMのサーバーサイドの構築経験のみでほかはありません。AWSと合わせ適材適所でFirebaseを使うべきところを選定することが可能かと思います。
+            ul.skill
+              template(v-for="(skill, key) in skills")
+                li.skill__item
+                  button(@click="onClickedSkillButton(key)").skill__item__name
+                      span {{ skill.heading }}
+                      span(:class="{opened: skills[key].modal}").chevron
+                  transition(
+                    name="modal"
+                    @after-enter="skill.text = true"
+                  )
+                    .skill__item__modal(v-if="skill.modal")
+                      transition(
+                        name="modal-text"
+                        @after-leave="skill.modal = false"
+                      )
+                        .text(v-if="skill.text") {{ skill.sentence }}
 </template>
 
 <script>
@@ -124,13 +125,62 @@ export default {
         this.profileImageBodyHeight =
           (this.$refs.profileImageBody.clientWidth * 219) / 500 + "px";
       });
+    },
+    onClickedSkillButton(key) {
+      if (!this.skills[key].modal) {
+        this.skills[key].modal = true;
+        return;
+      }
+      this.skills[key].text = false;
     }
   },
   data() {
     return {
       state: 0,
       atLeft: false,
-      profileImageBodyHeight: "0px"
+      profileImageBodyHeight: "0px",
+      skills: {
+        nuxt: {
+          heading: "Nuxt.js",
+          background: false,
+          modal: false,
+          text: false,
+          sentence:
+            "自社サイトのフロントエンド構築をNuxtを用いスクラッチで開発した経験があるため、GAの埋め込みやSSRはもちろん、ページネーションやパンくずリスト等もNuxt上でコンポーネントとして開発することが可能です。UIフレームワークはVuetifyの経験があります。"
+        },
+        pug: {
+          heading: "Pug/Sass",
+          background: false,
+          modal: false,
+          text: false,
+          sentence:
+            "HTMLおよびCSSを記述する際にはPugおよびSCSSの利用を得意としています。Vuetify等利用時はSCSSはほぼ利用しませんが、そうでないケースにおいては基幹コンポーネントの作成から粒度別にSCSSでコンポーネントにスタイルを当てる設計もある程度可能です。"
+        },
+        laravel: {
+          heading: "Laravel",
+          background: false,
+          modal: false,
+          text: false,
+          sentence:
+            "Controller/Repository/Modelの切り分けやAPI Resoruce、Form Request等を用いた仕組みを0から設計し構築することができます。OSSなので実際のソースを読みながらカスタマイズしたClassを拡張して利用するといった柔軟な対応もできます。"
+        },
+        aws: {
+          heading: "AWS",
+          background: false,
+          modal: false,
+          text: false,
+          sentence:
+            "CloudFront, S3, ALB, ASG, EC2, IAM, CodeDeploy, CodePipeline、Parameter Store、Lambdaなどを利用したベーシックなインフラ構築ができます。一方でコンテナ技術を活用したECSやFargateの実運用経験はまだありません。"
+        },
+        firebase: {
+          heading: "Firebase",
+          background: false,
+          modal: false,
+          text: false,
+          sentence:
+            "RTDB、Firestore、FCM、Auth、Hostingの利用経験がWebアプリにしてあります。ネイティブアプリでの利用についてはFCMのサーバーサイドの構築経験のみでほかはありません。AWSと合わせ適材適所でFirebaseを使うべきところを選定することが可能かと思います。"
+        }
+      }
     };
   }
 };
@@ -138,6 +188,12 @@ export default {
 
 
 <style lang="scss" scoped>
+$baseSize: 40px;
+$halfSize: calc(#{$baseSize} / 2);
+$descSize: calc(#{$halfSize} - 6px);
+$quarterSize: calc(#{$baseSize} / 4);
+$text--large: 1.8rem;
+
 .portfolio-leave-active {
   transition: 1.5s ease-in-out;
 }
@@ -176,6 +232,31 @@ export default {
   height: inherit;
   width: inherit;
 }
+.modal-background-enter {
+  opacity: 0;
+}
+.modal-background-enter-to {
+  opacity: 1;
+}
+.modal-enter-active,
+.modal-leave-active {
+  transition: 0.3s;
+}
+.modal-enter {
+  height: 0;
+  transform: translateY(27px);
+}
+.modal-enter-to,
+.modal-leave {
+  height: 282px;
+  transform: translateY(54px);
+}
+.modal-leave-to {
+  height: 0;
+}
+.modal-text-leave-to {
+  height: 0;
+}
 
 $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
 
@@ -197,9 +278,6 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
   }
 }
 
-$baseSize: 40px;
-$halfSize: calc(#{$baseSize} / 2);
-
 .wrapper {
   min-height: 700px;
   padding-top: $halfSize;
@@ -210,7 +288,7 @@ $halfSize: calc(#{$baseSize} / 2);
   .main {
     max-width: 900px;
     @include mq {
-      margin: 0 auto 0 calc(#{$baseSize} * 4 + 4px);
+      margin: 0 auto;
     }
   }
 
@@ -252,9 +330,6 @@ $halfSize: calc(#{$baseSize} / 2);
   }
 
   .profile {
-    // @include mq("sp") {
-    //   margin-top: calc(#{$baseSize} * 6);
-    // }
     padding: $halfSize;
 
     &__image {
@@ -284,7 +359,7 @@ $halfSize: calc(#{$baseSize} / 2);
       &__name {
         height: $baseSize;
         line-height: $baseSize;
-        font-size: 1.8rem;
+        font-size: $text--large;
 
         .small {
           margin-left: 8px;
@@ -295,13 +370,12 @@ $halfSize: calc(#{$baseSize} / 2);
 
     &__description {
       line-height: $baseSize;
-      font-size: calc(#{$halfSize} - 6px);
+      font-size: $descSize;
 
       &__heading {
-        font-size: $halfSize;
+        font-size: $text--large;
         color: $primary;
         font-weight: bold;
-
         margin-top: $baseSize;
       }
 
@@ -332,63 +406,127 @@ $halfSize: calc(#{$baseSize} / 2);
           flex-wrap: wrap;
           justify-content: space-around;
         }
-      }
-
-      .card {
-        display: flex;
-        @include mq {
-          width: 375px;
-        }
-        flex-direction: column;
-        justify-content: center;
-        margin-bottom: $halfSize;
-        text-decoration: none;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px 0 $grey-light2;
-        background: $white;
-        color: $primary;
-
-        &__title {
-          width: 100%;
-          height: 200px;
-          background-size: contain;
-          background-position: center;
-          background-repeat: no-repeat;
-          position: relative;
-
-          &.qiita {
-            background-image: url("~assets/img/blog/qiita.png");
+        .card {
+          display: flex;
+          @include mq {
+            width: 375px;
           }
+          flex-direction: column;
+          justify-content: center;
+          margin-bottom: $halfSize;
+          text-decoration: none;
+          border-radius: 10px;
+          box-shadow: 0 2px 4px 0 $grey-light2;
+          background: $white;
+          color: $primary;
 
-          &.twitter {
-            background-image: url("~assets/img/blog/twitter.png");
-          }
+          &__title {
+            width: 100%;
+            height: 200px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
 
-          &.note {
-            background-image: url("~assets/img/blog/note.png");
-          }
-
-          &__text {
-            position: absolute;
-            right: $halfSize;
-            bottom: 0;
-            font-size: $halfSize;
-            font-weight: bold;
-          }
-        }
-
-        &__contents {
-          padding: $halfSize;
-          &__link {
-            list-style: none;
-            line-height: 1.6rem;
-            .link {
-              text-decoration: none;
-              color: $primary;
+            &.qiita {
+              background-image: url("~assets/img/blog/qiita.png");
             }
 
-            &:not(:first-child) {
-              margin-top: $halfSize;
+            &.twitter {
+              background-image: url("~assets/img/blog/twitter.png");
+            }
+
+            &.note {
+              background-image: url("~assets/img/blog/note.png");
+            }
+
+            &__text {
+              position: absolute;
+              right: $halfSize;
+              bottom: 0;
+              font-size: $text--large;
+              font-weight: bold;
+              color: $primary;
+            }
+          }
+
+          &__contents {
+            padding: $halfSize;
+            &__link {
+              list-style: none;
+              line-height: 1.6rem;
+              .link {
+                text-decoration: none;
+                color: $primary;
+              }
+
+              &:not(:first-child) {
+                margin-top: $halfSize;
+              }
+            }
+          }
+        }
+      }
+
+      .skill {
+        display: flex;
+        flex-direction: column;
+        margin-top: $halfSize;
+
+        &__item {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          list-style: none;
+
+          @include mq {
+            width: 50%;
+            padding: $halfSize;
+          }
+
+          &__name {
+            position: relative;
+            flex: 1;
+            border: 1px solid $primary;
+            padding: $quarterSize $halfSize;
+            font-size: $text--large;
+            font-weight: bold;
+            color: $primary;
+            background: $white;
+
+            .chevron {
+              position: absolute;
+              width: 15px;
+              display: flex;
+              right: $halfSize;
+              top: 15px;
+              height: 15px;
+              border-bottom: 2px solid $primary;
+              border-left: 2px solid $primary;
+              transform: rotate(-45deg);
+              transition: 0.3s;
+
+              &.opened {
+                top: 22px;
+                transform: rotate(-225deg);
+              }
+            }
+          }
+
+          &__modal {
+            width: 335px;
+            border: 1px solid $primary;
+            box-sizing: border-box;
+
+            transform: translateY(0);
+
+            @include mq {
+              transform: translateX(calc(410px - 167px)) translateY(-141px);
+            }
+
+            .text {
+              color: $body;
+              margin: $halfSize;
             }
           }
         }
