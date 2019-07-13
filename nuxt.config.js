@@ -74,7 +74,9 @@ module.exports = {
   loading: {
     color: '#33b0dd',
   },
-  modules: ['@nuxtjs/dotenv', '@nuxtjs/style-resources'],
+  modules: ['@nuxtjs/dotenv', '@nuxtjs/style-resources', ['@nuxtjs/google-analytics', {
+    id: 'UA-143780066-1'
+  }]],
   styleResources: {
     scss: ['~/assets/css/main.scss'],
   },
