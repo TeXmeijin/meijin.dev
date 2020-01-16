@@ -1,12 +1,12 @@
 <template lang="pug">
-.wrapper
+main.wrapper
   .main
-    h1.heading
+    section.heading
       transition(
         name="portfolio"
         @after-enter="onEntered"
       )
-        span(v-if="state === 0").heading__label Portfolio
+        h1(v-if="state === 0").heading__title Meijin's Profile
       .heading__label
         transition(
           name="first"
@@ -50,67 +50,72 @@
             .text nquisitive
           span.heading__subLabel__description
             .text ovel
+      transition(
+        name="profile"
+      )
+        section(v-if="state >= 2").profile
+          .profile__avatar(ref="profileImageBody")
+          .profile__contents
+            .profile__heading
+              h1.profile__heading__name Meijin
+                span.small (Yusuke Saito)
+            .profile__catchcopy
+              p 好奇心と発想力が取り柄のエンジニア
+              p 趣味の将棋にちなんでニックネームが「名人」
     transition(
       name="body"
     )
-      div(v-if="state >= 2").body
-        .profile
-          .profile__image
-            .profile__image__body(ref="profileImageBody" :style="{height: profileImageBodyHeight}")
-          .profile__heading
-            h1.profile__heading__name Meijin
-              span.small (Yusuke Saito)
-          .profile__description
-            p 好奇心と行動力でゴリ押しするWebエンジニア。
-            p 趣味の将棋にちなんでニックネームが「名人」。
-            h2.profile__description__heading Career
-            .flex
-              .subheading 2011/04
-              .desc 奈良高専情報工学科に入学
-            .flex
-              .subheading 2016/04
-              .desc 株式会社LIFULL(当時NEXT)に入社
-            .flex
-              .subheading 2019/03
-              .desc 株式会社NoSchoolのCTOに転職
-            h2.profile__description__heading SNS/Blog
-            ul.cardList
-              li.card
-                a(href="https://qiita.com/mejileben" rel="nofollow" target="_blank").card__title.qiita
-                  h3.card__title__text Qiita
-                ul.card__contents
-                  li.card__contents__link
-                    a(class="link" href="https://qiita.com/mejileben/items/f68a50ec9164b261b9cd" rel="nofollow" target="_blank") 【実録】WordPressサイトをAWS+Laravel+Nuxtにフルリプレイスした話（技術選定編）
-                  li.card__contents__link
-                    a(class="link" href="https://qiita.com/mejileben/items/69e5facdb60781927929" rel="nofollow" target="_blank") 【JavaScript】アロー関数式を学ぶついでにthisも復習する話
-              li.card
-                a(href="https://note.mu/meijin_garden" rel="nofollow" target="_blank").card__title.note
-                  h3.card__title__text note
-                ul.card__contents
-                  li.card__contents__link
-                    a(class="link" href="https://note.mu/meijin_garden/n/n71029117558e" rel="nofollow" target="_blank") 家にPCもネットもスマホも無かった中学3年生が、高専に入学し5年後Webエンジニアになった話
-                  li.card__contents__link
-                    a(class="link" href="https://note.mu/meijin_garden/n/n2d60b28569a8" rel="nofollow" target="_blank") 株式会社LIFULLを退職し、教育スタートアップのCTOとして転職します
-              li.card
-                a(href="https://twitter.com/meijin_garden" rel="nofollow" target="_blank").card__title.twitter
-                  h3.card__title__text Twitter
-            h2.profile__description__heading Technical Skill
-            ul.skill
-              template(v-for="(skill, key) in skills")
-                li.skill__item
-                  button(@click="onClickedSkillButton(key)").skill__item__name
-                      span {{ skill.heading }}
-                      span(:class="{opened: skills[key].modal}").chevron
-                  transition(
-                    name="modal"
-                    @after-enter="skill.text = true"
-                  )
-                    .skill__item__modal(v-if="skill.modal")
-                      transition(
-                        name="modal-text"
-                        @after-leave="skill.modal = false"
-                      )
-                        .text(v-if="skill.text") {{ skill.sentence }}
+      section(v-if="state >= 2").body
+        .body__description
+          h2.body__description__heading Career
+          .flex
+            .subheading 2011/04
+            .desc 奈良高専情報工学科に入学
+          .flex
+            .subheading 2016/04
+            .desc 株式会社LIFULL(当時NEXT)に入社
+          .flex
+            .subheading 2019/03
+            .desc 株式会社NoSchoolのCTOに転職
+          h2.body__description__heading SNS/Blog
+          ul.cardList
+            li.card
+              a(href="https://qiita.com/mejileben" rel="nofollow" target="_blank").card__title.qiita
+              ul.card__contents
+                h3.card__contents__text Qiita
+                li.card__contents__link
+                  a(class="link" href="https://qiita.com/mejileben/items/f68a50ec9164b261b9cd" rel="nofollow" target="_blank") 【実録】WordPressサイトをAWS+Laravel+Nuxtにフルリプレイスした話（技術選定編）
+                li.card__contents__link
+                  a(class="link" href="https://qiita.com/mejileben/items/69e5facdb60781927929" rel="nofollow" target="_blank") 【JavaScript】アロー関数式を学ぶついでにthisも復習する話
+            li.card
+              a(href="https://note.mu/meijin_garden" rel="nofollow" target="_blank").card__title.note
+              ul.card__contents
+                h3.card__contents__text note
+                li.card__contents__link
+                  a(class="link" href="https://note.mu/meijin_garden/n/n71029117558e" rel="nofollow" target="_blank") 家にPCもネットもスマホも無かった中学3年生が、高専に入学し5年後Webエンジニアになった話
+                li.card__contents__link
+                  a(class="link" href="https://note.mu/meijin_garden/n/n2d60b28569a8" rel="nofollow" target="_blank") 株式会社LIFULLを退職し、教育スタートアップのCTOとして転職します
+            li.card
+              a(href="https://twitter.com/meijin_garden" rel="nofollow" target="_blank").card__title.twitter
+              ul.card__contents
+                h3.card__contents__text Twitter
+          h2.body__description__heading Technical Skill
+          ul.skill
+            template(v-for="(skill, key) in skills")
+              li.skill__item
+                button(@click="onClickedSkillButton(key)").skill__item__name
+                    span {{ skill.heading }}
+                    span(:class="{opened: skills[key].modal}").chevron
+                transition(
+                  name="modal"
+                  @after-enter="skill.text = true"
+                )
+                  .skill__item__modal(v-if="skill.modal")
+                    transition(
+                      name="modal-text"
+                      @after-leave="skill.modal = false"
+                    )
+                      .text(v-if="skill.text") {{ skill.sentence }}
 </template>
 
 <script>
@@ -121,10 +126,6 @@ export default {
   methods: {
     onEntered() {
       this.state = 2;
-      this.$nextTick().then(_ => {
-        this.profileImageBodyHeight =
-          (this.$refs.profileImageBody.clientWidth * 219) / 500 + "px";
-      });
     },
     onClickedSkillButton(key) {
       if (!this.skills[key].modal) {
@@ -138,7 +139,6 @@ export default {
     return {
       state: 0,
       atLeft: false,
-      profileImageBodyHeight: "0px",
       skills: {
         nuxt: {
           heading: "Nuxt.js",
@@ -186,7 +186,6 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
 $baseSize: 40px;
 $halfSize: calc(#{$baseSize} / 2);
@@ -195,7 +194,7 @@ $quarterSize: calc(#{$baseSize} / 4);
 $text--large: 1.8rem;
 
 .portfolio-leave-active {
-  transition: 1.5s ease-in-out;
+  transition: 1.5s ease-in-out 0.5s;
 }
 .portfolio-leave-to {
   opacity: 0;
@@ -204,13 +203,24 @@ $text--large: 1.8rem;
 .heading-enter {
   opacity: 0;
   transform: translateX(100%);
+  will-change: opacity, transform;
 }
 .heading-enter-active {
-  transition: 1.5s ease-in-out;
+  transition: 1.5s ease-in-out 0.5s;
 }
 .heading-leave-to {
   opacity: 1;
   transform: translateX(-100%);
+}
+.profile-enter {
+  opacity: 0;
+  will-change: opacity;
+}
+.profile-enter-active {
+  transition: 1s ease-in-out 0.5s;
+}
+.profile-leave-to {
+  opacity: 1;
 }
 .description-enter {
   opacity: 0;
@@ -264,6 +274,7 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
   .#{$key}-enter {
     opacity: 0;
     transform: translateX(1000%);
+    will-change: opacity, transform;
   }
 
   .#{$key}-leave-to {
@@ -280,10 +291,10 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
 
 .wrapper {
   min-height: 700px;
-  padding-top: $halfSize;
-  background-image: url("~assets/img/background/dot_green.png");
+  background-image: url("~assets/img/background/dot_double.png");
   background-repeat: repeat;
-  background-size: calc(#{$baseSize} + 1px);
+  background-size: calc(#{$baseSize} * 2);
+  padding-bottom: 12px;
 
   .main {
     max-width: 900px;
@@ -294,78 +305,109 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
 
   .heading {
     display: flex;
+    flex-wrap: wrap;
     font-weight: bold;
-    font-size: $baseSize;
-    line-height: $baseSize;
+    line-height: 1.5;
     position: relative;
+
+    @include mq {
+      font-size: $baseSize * 1.5;
+    }
     @include mq("sp") {
-      height: calc(#{$baseSize} * 6);
+      padding: 0 8px;
+      font-size: $baseSize;
+    }
+
+    &__title {
+      position: absolute;
+      left: 12px;
+      text-shadow: 1px 2px 2px $grey-light4;
     }
 
     &__label {
-      position: absolute;
-      left: $halfSize;
       &__char {
         display: flex;
         justify-content: center;
         height: $baseSize;
         min-width: $baseSize;
+        text-shadow: 2px 2px 2px $grey-light3;
+
+        @include mq {
+          font-size: $baseSize * 1.5;
+          height: calc(#{$baseSize} * 1.5);
+        }
       }
     }
 
     &__subLabel {
-      position: absolute;
-      left: calc(#{$baseSize} + #{$halfSize});
+      padding-top: 12px;
+      margin-left: 4px;
 
       &__description {
         display: flex;
         padding-bottom: 3px;
-        align-items: flex-end;
-        color: #999;
+        align-items: center;
+        color: $grey-light1;
         height: $baseSize;
         font-size: calc(#{$baseSize} / 1.6);
         line-height: calc(#{$baseSize} / 1.6);
+        @include mq {
+          height: $baseSize * 1.5 + 1px;
+          font-size: calc(#{$baseSize} / 1.6 * 1.5);
+          line-height: calc(#{$baseSize} / 1.6 * 1.5);
+        }
       }
     }
   }
 
   .profile {
-    padding: $halfSize;
+    padding: 12px;
 
-    &__image {
+    @include mq {
+      padding-top: 24px;
+      flex: 1;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      min-height: calc(#{$baseSize} * 4);
-      max-height: calc(#{$baseSize} * 6);
-      @include mq {
-        margin-left: calc(#{$baseSize} * 5);
-      }
+      justify-content: center;
+    }
 
-      &__body {
-        height: auto;
-        width: 100%;
-        flex: 1;
-        max-width: 500px;
-        border-radius: 10px;
-        background-image: url("~assets/img/pinsya.png");
-        background-size: cover;
-        box-shadow: 0 2px 4px 0 $grey-light2;
-        margin-bottom: 4px;
+    @include mq("sp") {
+      width: 100%;
+    }
+
+    &__avatar {
+      margin: 0 auto;
+      height: 240px;
+      width: 240px;
+      border-radius: 10px;
+      background-image: url("~assets/img/self.png");
+      background-size: cover;
+    }
+
+    &__contents {
+      @include mq {
+        padding: 24px 0 0;
+        display: flex;
+        align-items: center;
       }
     }
 
     &__heading {
-      margin-top: $halfSize;
+      @include mq {
+        flex: 1;
+        margin-right: 8px;
+        text-align: right;
+      }
+
+      @include mq("sp") {
+        text-align: center;
+      }
+
       &__name {
         height: $baseSize;
         line-height: $baseSize;
         font-size: $text--large;
-
-        @include mq {
-          margin-top: $baseSize;
-          font-size: $baseSize;
-        }
 
         .small {
           margin-left: 8px;
@@ -373,6 +415,19 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
         }
       }
     }
+
+    &__catchcopy {
+      @include mq {
+        flex: 1;
+      }
+      margin-top: 12px;
+      text-align: center;
+      font-size: 1rem;
+    }
+  }
+
+  .body {
+    padding: 0 12px;
 
     &__description {
       line-height: $baseSize;
@@ -385,6 +440,11 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
 
       &__heading {
         font-size: $text--large;
+        @include mq {
+          padding: 8px 0;
+          font-size: $baseSize;
+        }
+
         color: $primary;
         font-weight: bold;
         margin-top: $baseSize;
@@ -392,7 +452,7 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
 
       .flex {
         display: flex;
-        align-items: top;
+        align-items: center;
       }
 
       .subheading {
@@ -407,13 +467,18 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
       }
 
       .desc {
-        margin-top: calc(#{$halfSize} / 2);
         flex: 1;
         line-height: $halfSize;
+
+        @include mq {
+          padding: 12px 0;
+        }
       }
 
       .cardList {
         display: flex;
+        margin-top: 8px;
+
         @include mq("sp") {
           flex-direction: column;
         }
@@ -435,8 +500,8 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
           flex-direction: column;
           margin-bottom: $halfSize;
           text-decoration: none;
-          border-radius: 10px;
-          box-shadow: 0 2px 4px 0 $grey-light2;
+          border-radius: 4px;
+          box-shadow: 0 1px 2px 0 $grey-light2;
           background: $white;
           color: $primary;
 
@@ -459,19 +524,18 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
             &.note {
               background-image: url("~assets/img/blog/note.png");
             }
-
-            &__text {
-              position: absolute;
-              right: $halfSize;
-              bottom: 0;
-              font-size: $text--large;
-              font-weight: bold;
-              color: $primary;
-            }
           }
 
           &__contents {
             padding: $halfSize;
+
+            &__text {
+              left: $halfSize;
+              font-size: $text--large;
+              font-weight: bold;
+              color: $body;
+            }
+
             &__link {
               list-style: none;
               line-height: 1.6rem;
@@ -499,6 +563,8 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
         }
 
         @include mq {
+          width: 100vw;
+          margin: 0 calc((900px - 100vw) / 2);
           overflow-x: scroll;
         }
 
@@ -522,7 +588,10 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
             font-weight: bold;
             color: $primary;
             background: $white;
-            width: 335px;
+
+            @include mq {
+              width: 335px;
+            }
 
             .chevron {
               position: absolute;
@@ -544,7 +613,9 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
           }
 
           &__modal {
-            width: 335px;
+            @include mq {
+              width: 335px;
+            }
             border: 1px solid $primary;
             box-sizing: border-box;
             transform: translateY(0);
