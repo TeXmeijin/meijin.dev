@@ -1,5 +1,5 @@
 {
-  "name": "meijin.me",
+  "name": "meijin_dot_me",
   "version": "1.0.0",
   "description": "It's about the Meijin",
   "author": "Texmeijin <i8858garden@gmail.com>",
@@ -17,14 +17,14 @@
     "@nuxtjs/google-analytics": "^2.2.0",
     "@nuxtjs/style-resources": "^0.1.2",
     "node-sass": "^4.12.0",
-    "nuxt": "^2.10.2",
+    "nuxt": "^2.11.0",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.0.0",
     "sass-loader": "^7.1.0",
     "ts-node": "^8.1.0",
-    "vue-observe-visibility": "^0.4.4",
-    "vue-property-decorator": "^8.1.0"
+    "vue-property-decorator": "^8.1.0",
+    "vue-server-renderer": "^2.6.10"
   },
   "devDependencies": {
     "@nuxt/typescript": "^2.6.3",

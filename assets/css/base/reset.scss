@@ -115,7 +115,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: '';
+  content: "";
   content: none;
 }
 
@@ -172,8 +172,8 @@ select {
   vertical-align: middle;
 }
 
-html {
-  font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+body {
+  font-family: "Noto Sans JP", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -181,6 +181,10 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+
+button {
+  font-family: inherit;
 }
 
 *,
