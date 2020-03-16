@@ -170,22 +170,24 @@ export default Vue.extend({
 .--is-hidden {
   visibility: hidden;
   opacity: 0;
-  // display: none;
 }
 
 .main-area {
   background: $white;
+  overflow: hidden;
 }
 .catch-area {
   position: relative;
   height: 100vw;
+  max-height: 400px;
   width: 100vw;
   overflow: hidden;
 }
 .slide-back {
   height: 100vw;
+  max-height: 400px;
   width: 100vw;
-  background: $primary;
+  background: linear-gradient(lighten($primary, 20%), $primary);
 
   animation-name: catch-area;
   animation-duration: 0.6s;
@@ -213,6 +215,10 @@ export default Vue.extend({
   font-size: 6rem;
   color: $white;
   font-weight: bold;
+
+  @include mq {
+    left: 20%;
+  }
 
   &:after {
     content: '';
@@ -251,7 +257,51 @@ export default Vue.extend({
 
 .message-area {
   padding: 16px;
-  height: 236px;
+
+  @include mq('sp') {
+    height: 236px;
+  }
+
+  @include mq {
+    width: 60%;
+    margin: 0 auto;
+    padding-left: 18rem;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      height: 100vh;
+      border-left: 2px solid $grey-light4;
+      position: absolute;
+      top: 0;
+      left: calc(17rem + 0.5rem);
+      transform: rotate(30deg);
+      transform-origin: 0% 0%;
+
+      animation-name: message-area-after;
+      animation-duration: 1.2s;
+      animation-timing-function: ease-in-out;
+    }
+  }
+}
+
+@keyframes message-area-after {
+  0% {
+    height: 0;
+  }
+
+  70% {
+    height: 0;
+  }
+
+  80% {
+    height: calc(236px);
+  }
+
+  100% {
+    height: 100vh;
+  }
 }
 
 .message-char {
@@ -279,13 +329,20 @@ export default Vue.extend({
   overflow: hidden;
   margin-top: -16px;
   margin-bottom: -32px;
+
   padding: 40px 0;
   transition: 0.8s;
 
   &__container {
-    margin-top: -24px;
-    margin-bottom: -24px;
-    transform: rotate(5deg);
+    margin-top: -32px;
+    margin-bottom: -32px;
+
+    @include mq {
+      margin-top: -64px;
+      margin-bottom: -64px;
+    }
+
+    transform: rotate(3deg);
     box-sizing: border-box;
     background: $teal-7;
     padding: 40px 0;
@@ -295,13 +352,19 @@ export default Vue.extend({
 .profile-inner {
   overflow: hidden;
   margin-left: -25%;
-  transform: rotate(-5deg);
+  transform: rotate(-3deg);
   transition: opacity 0.8s;
   width: 150%;
 }
 
 .profile-data {
-  margin-top: 24px;
+  margin-top: 40px;
+
+  @include mq {
+    padding: 32px 0;
+    margin-top: 64px;
+  }
+
   width: 85vw;
 
   &__line {
@@ -313,7 +376,11 @@ export default Vue.extend({
   }
 
   &:last-child {
-    margin-bottom: 24px;
+    margin-bottom: 32px;
+
+    @include mq {
+      margin-bottom: 64px;
+    }
   }
 }
 
