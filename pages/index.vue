@@ -119,7 +119,7 @@ import Vue from 'vue'
 let timeoutID
 
 function delayedAlert (slowAlert) {
-  timeoutID = window.setTimeout(slowAlert, 30)
+  timeoutID = window.setTimeout(slowAlert, 40)
 }
 
 function clearAlert () {
