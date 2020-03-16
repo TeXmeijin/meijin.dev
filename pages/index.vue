@@ -372,10 +372,12 @@ export default Vue.extend({
 
 .personal-data {
   margin-top: 40px;
+  margin-left: 20%;
 
   width: 85vw;
 
   @include mq {
+    margin-left: 25%;
     padding: 32px 0 16px;
     margin-top: 56px;
     width: 80vw;
@@ -384,8 +386,6 @@ export default Vue.extend({
   &__line {
     display: flex;
   }
-
-  margin-left: calc(25%);
 
   &:last-child {
     margin-bottom: 32px;
