@@ -2,7 +2,7 @@
 main.main-area
   section.catch-area
     .slide-back
-    span.large-nick-name Meijin
+    h1.large-nick-name Meijin
   section.message-area
     template(v-for="(message, index) in catchMessages")
       span.message-char(
@@ -10,132 +10,55 @@ main.main-area
         :class="{ '--is-hidden': index >= catchCopyIndex }"
       )
   section(
-    v-if="showProfileArea"
+    :class="{ '--is-hidden': !showProfileArea }"
   ).profile-area
-    .profile-area__container
-      .profile-data
-        figure.profile-image
-          img(
-            :src="require('@/assets/img/self.png')"
-          ).profile-image__image
-        .profile-name
-          .profile-name__text Yusuke Saito
-  .main
-    section.heading
-      transition(
-        name="portfolio"
-        @after-enter="onEntered"
-      )
-        h1(v-if="state === 0").heading__title Meijin's Profile
-      .heading__label
-        transition(
-          name="first"
-          @after-enter="onEntered"
-        )
-          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char M
-        transition(
-          name="second"
-        ).char
-          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char E
-        transition(
-          name="third"
-        ).char
-          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char I
-        transition(
-          name="fourth"
-        ).char
-          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char J
-        transition(
-          name="fifth"
-        ).char
-          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char I
-        transition(
-          name="sixth"
-          @after-enter="atLeft = false"
-        ).char
-          span(v-if="state >= 1" :class="{isHide: atLeft}").heading__label__char N
-      transition(
-        name="description"
-      )
-        p(v-if="state >= 2").heading__subLabel
-          span.heading__subLabel__description
-            .text anegement
-          span.heading__subLabel__description
-            .text ngineering
-          span.heading__subLabel__description
-            .text maginative
-          span.heading__subLabel__description
-            .text avaScript
-          span.heading__subLabel__description
-            .text nquisitive
-          span.heading__subLabel__description
-            .text ovel
-      transition(
-        name="profile"
-      )
-        section(v-if="state >= 2").profile
-          .profile__avatar(ref="profileImageBody")
-          .profile__contents
-            .profile__heading
-              h1.profile__heading__name Meijin
-                span.small (Yusuke Saito)
-            .profile__catchcopy
-              p 好奇心と発想力が取り柄のエンジニア
-              p 趣味の将棋にちなんでニックネームが「名人」
-    transition(
-      name="body"
-    )
-      section(v-if="state >= 2").body
-        .body__description
-          h2.body__description__heading Career
-          .flex
-            .subheading 2011/04
-            .desc 奈良高専情報工学科に入学
-          .flex
-            .subheading 2016/04
-            .desc 株式会社LIFULL(当時NEXT)に入社
-          .flex
-            .subheading 2019/03
-            .desc 株式会社NoSchoolのCTOに転職
-          h2.body__description__heading SNS/Blog
-          ul.cardList
-            li.card
-              a(href="https://qiita.com/mejileben" rel="nofollow" target="_blank").card__title.qiita
-              ul.card__contents
-                h3.card__contents__text Qiita
-                li.card__contents__link
-                  a(class="link" href="https://qiita.com/mejileben/items/f68a50ec9164b261b9cd" rel="nofollow" target="_blank") 【実録】WordPressサイトをAWS+Laravel+Nuxtにフルリプレイスした話（技術選定編）
-                li.card__contents__link
-                  a(class="link" href="https://qiita.com/mejileben/items/69e5facdb60781927929" rel="nofollow" target="_blank") 【JavaScript】アロー関数式を学ぶついでにthisも復習する話
-            li.card
-              a(href="https://note.mu/meijin_garden" rel="nofollow" target="_blank").card__title.note
-              ul.card__contents
-                h3.card__contents__text note
-                li.card__contents__link
-                  a(class="link" href="https://note.mu/meijin_garden/n/n71029117558e" rel="nofollow" target="_blank") 家にPCもネットもスマホも無かった中学3年生が、高専に入学し5年後Webエンジニアになった話
-                li.card__contents__link
-                  a(class="link" href="https://note.mu/meijin_garden/n/n2d60b28569a8" rel="nofollow" target="_blank") 株式会社LIFULLを退職し、教育スタートアップのCTOとして転職します
-            li.card
-              a(href="https://twitter.com/meijin_garden" rel="nofollow" target="_blank").card__title.twitter
-              ul.card__contents
-                h3.card__contents__text Twitter
-          h2.body__description__heading Technical Skill
-          ul.skill
-            template(v-for="(skill, key) in skills")
-              li.skill__item
-                button(@click="onClickedSkillButton(key)").skill__item__name
-                    span {{ skill.heading }}
-                    span(:class="{opened: skills[key].modal}").chevron
-                transition(
-                  name="modal"
-                  @after-enter="skill.text = true"
-                )
-                  .skill__item__modal(v-if="skill.modal")
-                    transition(
-                      name="modal-text"
-                      @after-leave="skill.modal = false"
-                    )
-                      .text(v-if="skill.text") {{ skill.sentence }}
+    .profile-inner
+      .profile-area__container
+        .profile-data
+          .profile-data__line
+            figure.profile-image
+              img(
+                :src="require('@/assets/img/self.png')"
+              ).profile-image__image
+            .profile-info
+              h2.profile-info__head Yusuke Saito
+              p.profile-info__description ニックネームは”名人”
+              p.profile-info__description 奈良高専を卒業後、LIFULLにてWebサイト開発と新規事業立案に取り組む。2019年3月に教育ベンチャーNoSchoolに転職し、以後同社のCTOとしてWebサイト、iOSアプリの開発を統括。
+    .profile-blogs
+      .profile-blogs__container
+        h2.profile-blogs__head Related Pages
+        a(
+          href="https://twitter.com/meijin_garden"
+        ).profile-blog
+          figure.profile-blog__image
+            img(
+              :src="require('@/assets/img/blog/icon-twitter.png')"
+              alt="twitter"
+            ).profile-blog-icon
+        a(
+          href="https://github.com/texmeijin"
+        ).profile-blog
+          figure.profile-blog__image
+            img(
+              :src="require('@/assets/img/blog/icon-github.png')"
+              alt="github"
+            ).profile-blog-icon
+        a(
+          href="https://qiita.com/mejileben"
+        ).profile-blog
+          figure.profile-blog__image
+            img(
+              :src="require('@/assets/img/blog/icon-qiita.png')"
+              alt="qiita"
+            ).profile-blog-icon
+        a(
+          href="https://note.com/meijin_garden"
+        ).profile-blog
+          figure.profile-blog__image
+            img(
+              :src="require('@/assets/img/blog/icon-note.svg')"
+              alt="note"
+            ).profile-blog-icon
 </template>
 
 <script lang="ts">
@@ -144,7 +67,7 @@ import Vue from 'vue'
 let timeoutID
 
 function delayedAlert (slowAlert) {
-  timeoutID = window.setTimeout(slowAlert, 40)
+  timeoutID = window.setTimeout(slowAlert, 30)
 }
 
 function clearAlert () {
@@ -257,6 +180,7 @@ export default Vue.extend({
   position: relative;
   height: 100vw;
   width: 100vw;
+  overflow: hidden;
 }
 .slide-back {
   height: 100vw;
@@ -289,6 +213,40 @@ export default Vue.extend({
   font-size: 6rem;
   color: $white;
   font-weight: bold;
+
+  &:after {
+    content: '';
+    position: absolute;
+    height: 200vw;
+    border-left: 2px solid $white;
+    position: absolute;
+    bottom: -2rem;
+    right: 1.6rem;
+    transform: rotate(30deg);
+    transform-origin: 100% 100%;
+
+    animation-name: large-nick-name-after;
+    animation-duration: 1.2s;
+    animation-timing-function: ease-in-out;
+  }
+}
+
+@keyframes large-nick-name-after {
+  0% {
+    height: 0;
+  }
+
+  70% {
+    height: 0;
+  }
+
+  80% {
+    height: 40vw;
+  }
+
+  100% {
+    height: 200vw;
+  }
 }
 
 .message-area {
@@ -318,28 +276,45 @@ export default Vue.extend({
 }
 
 .profile-area {
-  padding: 40px 16px;
-  border-top: 1px solid $grey-light4;
+  overflow: hidden;
+  margin-top: -16px;
+  margin-bottom: -32px;
+  padding: 40px 0;
+  transition: 0.8s;
 
-  animation-name: profile-area;
-  animation-duration: 0.4s;
-  animation-timing-function: ease-in-out;
+  &__container {
+    margin-top: -24px;
+    margin-bottom: -24px;
+    transform: rotate(5deg);
+    box-sizing: border-box;
+    background: $teal-7;
+    padding: 40px 0;
+  }
 }
 
-@keyframes profile-area {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+.profile-inner {
+  overflow: hidden;
+  margin-left: -25%;
+  transform: rotate(-5deg);
+  transition: opacity 0.8s;
+  width: 150%;
 }
 
 .profile-data {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: 24px;
+  width: 85vw;
+
+  &__line {
+    display: flex;
+  }
+
+  &:nth-child(odd) {
+    margin-left: calc(25%);
+  }
+
+  &:last-child {
+    margin-bottom: 24px;
+  }
 }
 
 .profile-image {
@@ -353,13 +328,65 @@ export default Vue.extend({
   }
 }
 
-.profile-name {
+.profile-info {
   margin-left: 16px;
+  padding-top: calc(28px - 1.8rem / 2);
+  color: $white;
 
-  &__text {
+  &__head {
     font-weight: bold;
     font-size: 1.8rem;
   }
+
+  &__description {
+    margin-top: 16px;
+    color: $white;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+.profile-blogs {
+  margin-top: 48px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__head {
+    margin-top: 16px;
+    margin-bottom: 32px;
+    font-weight: bold;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+}
+
+.profile-blog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+
+  &__image {
+    height: 80px;
+    width: 155px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__name {
+    font-weight: bold;
+    margin-left: 8px;
+    font-size: 1.4rem;
+  }
+}
+
+.profile-blog-icon {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 // -----------

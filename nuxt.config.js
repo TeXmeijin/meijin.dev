@@ -68,12 +68,16 @@ module.exports = {
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/favicon.ico',
+        href: '/favicon_20200316.ico',
       },
       {
         rel: 'stylesheet',
         href:
           'https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap',
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Comfortaa&display=swap',
       },
     ],
   },
