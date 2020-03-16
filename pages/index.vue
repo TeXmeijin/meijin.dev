@@ -11,22 +11,22 @@ main.main-area
       )
   section(
     :class="{ '--is-hidden': !showProfileArea }"
-  ).profile-area
-    .profile-inner
-      .profile-area__container
-        .profile-data
-          .profile-data__line
-            figure.profile-image
+  ).personal-area
+    .personal-inner
+      .personal-area__container
+        .personal-data
+          .personal-data__line
+            figure.personal-image
               img(
                 :src="require('@/assets/img/self.png')"
-              ).profile-image__image
-            .profile-info
-              h2.profile-info__head Yusuke Saito
-              p.profile-info__description ニックネームは”名人”
-              p.profile-info__description 奈良高専を卒業後、LIFULLにてWebサイト開発と新規事業立案に取り組む。2019年3月に教育ベンチャーNoSchoolに転職し、以後同社のCTOとしてWebサイト、iOSアプリの開発を統括。
-    .profile-blogs
-      .profile-blogs__container
-        h2.profile-blogs__head Related Pages
+              ).personal-image__image
+            .personal-info
+              h2.personal-info__head Yusuke Saito
+              p.personal-info__description ニックネームは”名人”
+              p.personal-info__description 奈良高専を卒業後、LIFULLにてWebサイト開発と新規事業立案に取り組む。2019年3月に教育ベンチャーNoSchoolに転職し、以後同社のCTOとしてWebサイト、iOSアプリの開発を統括。
+    .personal-simple-area
+      .personal-simple-area__container
+        h2.personal-simple-area__head Related Pages
         a(
           href="https://twitter.com/meijin_garden"
         ).profile-blog
@@ -59,6 +59,58 @@ main.main-area
               :src="require('@/assets/img/blog/icon-note.svg')"
               alt="note"
             ).profile-blog-icon
+  section.personal-area
+    .personal-inner.personal-inner--skill
+      .personal-area__container.personal-area__container--skill
+        h2.personal-heading Technical Skill
+        .personal-data
+          .personal-data__line
+            figure.personal-image
+              img(
+                :src="require('@/assets/img/skill/aws.png')"
+              ).personal-image__image.personal-image__image--square
+            .personal-info
+              h2.personal-info__head Infra/Network
+              p.personal-info__description AWS/GCP両方の実務経験有り
+              p.personal-info__description AWSはEC2, CloudFront, S3, ALB, CodeDeploy, IAM等を用いて、Laravelアプリケーションの自動デプロイ環境を1人で構築した実績を持つ。GCPは人工知能系のAPIの利用・活用実績、またGAEへのNuxtアプリケーションの自動デプロイを構築した経験を保有。
+        .personal-data
+          .personal-data__line
+            figure.personal-image
+              img(
+                :src="require('@/assets/img/skill/nuxt.png')"
+              ).personal-image__image.personal-image__image--square
+            .personal-info
+              h2.personal-info__head Frontend
+              p.personal-info__description jQueryは実務経験が3年以上有り、空である程度のロジックを実装できる。また、必要に応じて処理をコンポーネント単位でClassに閉じ込める等の設計も経験があり、指導も可能。
+              p.personal-info__description Nuxtアプリケーションを自社サービスにゼロイチで導入した経験を有し、TypeScriptで型安全の恩恵を受けつつ保守性の高い開発ができる。素のJS自体の知識をある程度持っているので、独力でライブラリの選定、導入、問題解決がある程度可能。
+        .personal-data
+          .personal-data__line
+            figure.personal-image
+              img(
+                :src="require('@/assets/img/skill/laravel.png')"
+              ).personal-image__image.personal-image__image--square
+            .personal-info
+              h2.personal-info__head ServerSide
+              p.personal-info__description もっとも経験があるのはLaravel。株式会社NoSchoolにて、自社サイトをゼロイチでLaravelで構築した後、フロントエンドのNuxt移行に伴ってAPI開発に移行し、iOSアプリのリリースのために共通の認証基盤を作り上げた経験を有する。また、DDDの導入について、EntityやDTO、Repository、DI、テスト駆動開発などに挑戦している。
+              p.personal-info__description また、Ruby(Sinatra)の開発経験を3年有しており、Rspecを用いたテスト実装や、moduleを活用した開発経験がある。
+        .personal-data
+          .personal-data__line
+            figure.personal-image
+              img(
+                :src="require('@/assets/img/skill/mysql.png')"
+              ).personal-image__image.personal-image__image--square
+            .personal-info
+              h2.personal-info__head Middleware
+              p.personal-info__description SQLについてはMySQLに最も経験がある。実行計画を見た上でクエリチューニングを実施したりテーブルごとにインデックスを考慮すること、実行時にトランザクションを貼るなどの基本的な対応はできる。
+              p.personal-info__description WebサーバーはNginxもApacheも経験があるが、好んで利用するのはNginxである。
+  section.personal-area
+    .personal-simple-area
+      .personal-simple-area__container
+        h2.personal-simple-area__head Contact
+        p.personal-simple-area__message 技術向上や自社の事業（オンライン家庭教師）につながる情報交換やイベントのお誘いなど常に歓迎しています。
+        p.personal-simple-area__message.personal-simple-area__message--last ご連絡は
+          a(href="https://twitter.com/meijin_garden") Twitter
+          | までお願いします。
 </template>
 
 <script lang="ts">
@@ -77,53 +129,9 @@ function clearAlert () {
 export default Vue.extend({
   data: () => {
     return {
-      catchCopy: 'An Inquisitive Web-Application Engineer',
+      catchCopy: 'A Curious Web-Application Engineer',
       catchCopyIndex: 0,
       showProfileArea: false,
-      state: 0,
-      atLeft: false,
-      skills: {
-        nuxt: {
-          heading: 'Nuxt.js',
-          background: true,
-          modal: true,
-          text: true,
-          sentence:
-            '自社サイトのフロントエンド構築をNuxtを用いスクラッチで開発した経験があるため、GAの埋め込みやSSRはもちろん、ページネーションやパンくずリスト等もNuxt上でコンポーネントとして開発することが可能です。UIフレームワークはVuetifyの経験があります。',
-        },
-        pug: {
-          heading: 'Pug/Sass',
-          background: false,
-          modal: false,
-          text: false,
-          sentence:
-            'HTMLおよびCSSを記述する際にはPugおよびSCSSの利用を得意としています。Vuetify等利用時はSCSSはほぼ利用しませんが、そうでないケースにおいては基幹コンポーネントの作成から粒度別にSCSSでコンポーネントにスタイルを当てる設計もある程度可能です。',
-        },
-        laravel: {
-          heading: 'Laravel',
-          background: false,
-          modal: false,
-          text: false,
-          sentence:
-            'Controller/Repository/Modelの切り分けやAPI Resoruce、Form Request等を用いた仕組みを0から設計し構築することができます。OSSなので実際のソースを読みながらカスタマイズしたClassを拡張して利用するといった柔軟な対応もできます。',
-        },
-        aws: {
-          heading: 'AWS',
-          background: false,
-          modal: false,
-          text: false,
-          sentence:
-            'CloudFront, S3, ALB, ASG, EC2, IAM, CodeDeploy, CodePipeline、Parameter Store、Lambdaなどを利用したベーシックなインフラ構築ができます。一方でコンテナ技術を活用したECSやFargateの実運用経験はまだありません。',
-        },
-        firebase: {
-          heading: 'Firebase',
-          background: false,
-          modal: false,
-          text: false,
-          sentence:
-            'RTDB、Firestore、FCM、Auth、Hostingの利用経験がWebアプリにしてあります。ネイティブアプリでの利用についてはFCMのサーバーサイドの構築経験のみでほかはありません。AWSと合わせ適材適所でFirebaseを使うべきところを選定することが可能かと思います。',
-        },
-      },
     }
   },
   computed: {
@@ -137,21 +145,9 @@ export default Vue.extend({
     },
   },
   mounted () {
-    this.state = 1
-
     setTimeout(() => delayedAlert.call(this, this.slowAlert), 600)
   },
   methods: {
-    onEntered () {
-      this.state = 2
-    },
-    onClickedSkillButton (key) {
-      if (!this.skills[key].modal) {
-        this.skills[key].modal = true
-        return
-      }
-      this.skills[key].text = false
-    },
     slowAlert () {
       this.catchCopyIndex++
 
@@ -325,7 +321,7 @@ export default Vue.extend({
   }
 }
 
-.profile-area {
+.personal-area {
   overflow: hidden;
   margin-top: -16px;
   margin-bottom: -32px;
@@ -346,34 +342,50 @@ export default Vue.extend({
     box-sizing: border-box;
     background: $teal-7;
     padding: 40px 0;
+
+    &--skill {
+      background: linear-gradient($red-7, lighten($red-7, 10%));
+      transform: rotate(-3deg);
+    }
   }
 }
 
-.profile-inner {
+.personal-inner {
   overflow: hidden;
   margin-left: -25%;
   transform: rotate(-3deg);
   transition: opacity 0.8s;
   width: 150%;
+
+  &--skill {
+    transform: rotate(3deg);
+  }
 }
 
-.profile-data {
+.personal-heading {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 80px;
+  font-size: 1.8rem;
+  color: $white;
+}
+
+.personal-data {
   margin-top: 40px;
 
-  @include mq {
-    padding: 32px 0;
-    margin-top: 64px;
-  }
-
   width: 85vw;
+
+  @include mq {
+    padding: 32px 0 16px;
+    margin-top: 56px;
+    width: 80vw;
+  }
 
   &__line {
     display: flex;
   }
 
-  &:nth-child(odd) {
-    margin-left: calc(25%);
-  }
+  margin-left: calc(25%);
 
   &:last-child {
     margin-bottom: 32px;
@@ -384,7 +396,7 @@ export default Vue.extend({
   }
 }
 
-.profile-image {
+.personal-image {
   display: flex;
 
   &__image {
@@ -392,10 +404,14 @@ export default Vue.extend({
     height: 56px;
     border-radius: 50%;
     object-fit: cover;
+
+    &--square {
+      border-radius: 8px;
+    }
   }
 }
 
-.profile-info {
+.personal-info {
   margin-left: 16px;
   padding-top: calc(28px - 1.8rem / 2);
   color: $white;
@@ -413,7 +429,7 @@ export default Vue.extend({
   }
 }
 
-.profile-blogs {
+.personal-simple-area {
   margin-top: 48px;
 
   &__container {
@@ -427,6 +443,17 @@ export default Vue.extend({
     font-weight: bold;
     font-size: 1.8rem;
     text-align: center;
+  }
+
+  &__message {
+    padding: 0 16px;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+
+    &--last {
+      margin-bottom: 64px;
+    }
   }
 }
 
@@ -454,456 +481,5 @@ export default Vue.extend({
   max-width: 100%;
   height: auto;
   object-fit: contain;
-}
-
-// -----------
-
-.main {
-  margin-top: 1500px;
-}
-
-$baseSize: 40px;
-$halfSize: calc(#{$baseSize} / 2);
-$descSize: calc(#{$halfSize} - 6px);
-$quarterSize: calc(#{$baseSize} / 4);
-$text--large: 1.8rem;
-
-.portfolio-leave-active {
-  transition: 1.5s ease-in-out 0.5s;
-}
-.portfolio-leave-to {
-  opacity: 0;
-  transform: translateX(-100%);
-}
-.heading-enter {
-  opacity: 0;
-  transform: translateX(100%);
-  will-change: opacity, transform;
-}
-.heading-enter-active {
-  transition: 1.5s ease-in-out 0.5s;
-}
-.heading-leave-to {
-  opacity: 1;
-  transform: translateX(-100%);
-}
-.profile-enter {
-  opacity: 0;
-  will-change: opacity;
-}
-.profile-enter-active {
-  transition: 1s ease-in-out 0.5s;
-}
-.profile-leave-to {
-  opacity: 1;
-}
-.description-enter {
-  opacity: 0;
-}
-.description-enter-active {
-  transition: 2.5s ease-in-out;
-}
-.description-enter-to {
-  opacity: 1;
-}
-.body-enter {
-  opacity: 0;
-}
-.body-enter-active {
-  transition: 1s ease-in-out;
-}
-.body-enter-to {
-  opacity: 1;
-  height: inherit;
-  width: inherit;
-}
-.modal-background-enter {
-  opacity: 0;
-}
-.modal-background-enter-to {
-  opacity: 1;
-}
-.modal-enter-active,
-.modal-leave-active {
-  transition: 0.3s;
-}
-.modal-enter {
-  height: 0;
-  transform: translateY(27px);
-}
-.modal-enter-to,
-.modal-leave {
-  height: 282px;
-  transform: translateY(54px);
-}
-.modal-leave-to {
-  height: 0;
-}
-.modal-text-leave-to {
-  height: 0;
-}
-
-$sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
-
-@each $key in $sequenceAnimeKeys {
-  .#{$key}-enter {
-    opacity: 0;
-    transform: translateX(1000%);
-    will-change: opacity, transform;
-  }
-
-  .#{$key}-leave-to {
-    transform: translateX(0%);
-  }
-
-  .#{$key}-enter-active {
-    transition: 1.5s
-      ease-in-out
-      #{(index($sequenceAnimeKeys, $key) - 1) *
-      0.2}s;
-  }
-}
-
-.wrapper {
-  min-height: 700px;
-  background-image: url('~assets/img/background/dot_double.png');
-  background-repeat: repeat;
-  background-size: calc(#{$baseSize} * 2);
-  padding-bottom: 12px;
-
-  .main {
-    max-width: 900px;
-    @include mq {
-      margin: 0 auto;
-    }
-  }
-
-  .heading {
-    display: flex;
-    flex-wrap: wrap;
-    font-weight: bold;
-    line-height: 1.5;
-    position: relative;
-
-    @include mq {
-      font-size: $baseSize * 1.5;
-    }
-    @include mq('sp') {
-      padding: 0 8px;
-      font-size: $baseSize;
-    }
-
-    &__title {
-      position: absolute;
-      left: 12px;
-      text-shadow: 1px 2px 2px $grey-light4;
-    }
-
-    &__label {
-      &__char {
-        display: flex;
-        justify-content: center;
-        height: $baseSize;
-        min-width: $baseSize;
-        text-shadow: 2px 2px 2px $grey-light3;
-
-        @include mq {
-          font-size: $baseSize * 1.5;
-          height: calc(#{$baseSize} * 1.5);
-        }
-      }
-    }
-
-    &__subLabel {
-      padding-top: 12px;
-      margin-left: 4px;
-
-      &__description {
-        display: flex;
-        padding-bottom: 3px;
-        align-items: center;
-        color: $grey-light1;
-        height: $baseSize;
-        font-size: calc(#{$baseSize} / 1.6);
-        line-height: calc(#{$baseSize} / 1.6);
-        @include mq {
-          height: $baseSize * 1.5 + 1px;
-          font-size: calc(#{$baseSize} / 1.6 * 1.5);
-          line-height: calc(#{$baseSize} / 1.6 * 1.5);
-        }
-      }
-    }
-  }
-
-  .profile {
-    padding: 12px;
-
-    @include mq {
-      padding-top: 24px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    @include mq('sp') {
-      width: 100%;
-    }
-
-    &__avatar {
-      margin: 0 auto;
-      height: 240px;
-      width: 240px;
-      border-radius: 10px;
-      background-image: url('~assets/img/self.png');
-      background-size: cover;
-    }
-
-    &__contents {
-      @include mq {
-        padding: 24px 0 0;
-        display: flex;
-        align-items: center;
-      }
-    }
-
-    &__heading {
-      @include mq {
-        flex: 1;
-        margin-right: 8px;
-        text-align: right;
-      }
-
-      @include mq('sp') {
-        text-align: center;
-      }
-
-      &__name {
-        height: $baseSize;
-        line-height: $baseSize;
-        font-size: $text--large;
-
-        .small {
-          margin-left: 8px;
-          font-size: 1.2rem;
-        }
-      }
-    }
-
-    &__catchcopy {
-      @include mq {
-        flex: 1;
-      }
-      margin-top: 12px;
-      text-align: center;
-      font-size: 1rem;
-    }
-  }
-
-  .body {
-    padding: 0 12px;
-
-    &__description {
-      line-height: $baseSize;
-      font-size: $descSize;
-
-      @include mq {
-        margin-top: calc(#{$halfSize} + 12px);
-        font-size: $halfSize;
-      }
-
-      &__heading {
-        font-size: $text--large;
-        @include mq {
-          padding: 8px 0;
-          font-size: $baseSize;
-        }
-
-        color: $primary;
-        font-weight: bold;
-        margin-top: $baseSize;
-      }
-
-      .flex {
-        display: flex;
-        align-items: center;
-      }
-
-      .subheading {
-        min-width: 90px;
-        font-size: $halfSize;
-        font-weight: bold;
-        margin-right: $halfSize;
-
-        @include mq {
-          font-size: $text--large;
-        }
-      }
-
-      .desc {
-        flex: 1;
-        line-height: $halfSize;
-
-        @include mq {
-          padding: 12px 0;
-        }
-      }
-
-      .cardList {
-        display: flex;
-        margin-top: 8px;
-
-        @include mq('sp') {
-          flex-direction: column;
-        }
-        @include mq {
-          overflow-x: scroll;
-        }
-        .card {
-          display: flex;
-          overflow: hidden;
-          @include mq {
-            width: 400px;
-            &:not(:last-child) {
-              margin-right: $halfSize;
-            }
-          }
-          @include mq('sp') {
-            justify-content: center;
-          }
-          flex-direction: column;
-          margin-bottom: $halfSize;
-          text-decoration: none;
-          border-radius: 4px;
-          box-shadow: 0 1px 2px 0 $grey-light2;
-          background: $white;
-          color: $primary;
-
-          &__title {
-            width: 100%;
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-
-            &.qiita {
-              background-image: url('~assets/img/blog/qiita.png');
-            }
-
-            &.twitter {
-              background-image: url('~assets/img/blog/twitter.png');
-            }
-
-            &.note {
-              background-image: url('~assets/img/blog/note.png');
-            }
-          }
-
-          &__contents {
-            padding: $halfSize;
-
-            &__text {
-              left: $halfSize;
-              font-size: $text--large;
-              font-weight: bold;
-              color: $body;
-            }
-
-            &__link {
-              list-style: none;
-              line-height: 1.6rem;
-              font-size: $descSize;
-
-              .link {
-                text-decoration: none;
-                color: $primary;
-              }
-
-              &:not(:first-child) {
-                margin-top: $halfSize;
-              }
-            }
-          }
-        }
-      }
-
-      .skill {
-        display: flex;
-        margin-top: $halfSize;
-
-        @include mq('sp') {
-          flex-direction: column;
-        }
-
-        @include mq {
-          width: 100vw;
-          margin: 0 calc((900px - 100vw) / 2);
-          overflow-x: scroll;
-        }
-
-        &__item {
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-          list-style: none;
-
-          @include mq {
-            width: 50%;
-            padding: $halfSize 0;
-          }
-
-          &__name {
-            position: relative;
-            flex: 1;
-            border: 1px solid $primary;
-            padding: $quarterSize $halfSize;
-            font-size: $text--large;
-            font-weight: bold;
-            color: $primary;
-            background: $white;
-
-            @include mq {
-              width: 335px;
-            }
-
-            .chevron {
-              position: absolute;
-              width: 15px;
-              display: flex;
-              right: $halfSize;
-              top: 22px;
-              height: 15px;
-              border-bottom: 2px solid $primary;
-              border-left: 2px solid $primary;
-              transform: rotate(-225deg);
-              transition: 0.3s;
-
-              &.opened {
-                top: 15px;
-                transform: rotate(-45deg);
-              }
-            }
-          }
-
-          &__modal {
-            @include mq {
-              width: 335px;
-            }
-            border: 1px solid $primary;
-            box-sizing: border-box;
-            transform: translateY(0);
-
-            .text {
-              color: $body;
-              margin: $halfSize;
-              font-size: $descSize;
-            }
-          }
-        }
-      }
-    }
-  }
 }
 </style>

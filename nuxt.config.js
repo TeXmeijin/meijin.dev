@@ -1,12 +1,11 @@
 const baseName = "Meijin's Portfolio"
 const baseDesc =
-  'Webサイトを中心に、開発、デザイン、SEO施策などを仕事としている「名人」の自己紹介ページです。これまでの経歴（高専→LIFULL→NoSchool CTO）、スキルセット（Webフロントエンドからバックエンド、インフラまで）、SNS/Blogの各種リンクを載せています。'
+  'Webを中心にITに関わるものづくりを仕事としている名人（Yusuke Saito）のポートフォリオページ。略歴、Twitterやnote、GitHub等の関連ページを掲載。'
 const baseUrl = 'https://meijin.me'
 const baseOgp = '/ogp.png'
 
 module.exports = {
   mode: 'spa',
-  css: ['~/assets/css/main.scss'],
   /*
    ** Headers of the page
    */
@@ -88,7 +87,6 @@ module.exports = {
     color: '#33b0dd',
   },
   modules: [
-    '@nuxtjs/dotenv',
     '@nuxtjs/style-resources',
     [
       '@nuxtjs/google-analytics',
