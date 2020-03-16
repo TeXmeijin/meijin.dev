@@ -13,7 +13,7 @@ main.main-area
     :class="{ '--is-hidden': !showProfileArea }"
   ).personal-area
     .personal-inner
-      .personal-area__container
+      .personal-area__container.personal-area__container--src
         .personal-data
           .personal-data__line
             figure.personal-image
@@ -119,7 +119,7 @@ import Vue from 'vue'
 let timeoutID
 
 function delayedAlert (slowAlert) {
-  timeoutID = window.setTimeout(slowAlert, 40)
+  timeoutID = window.setTimeout(slowAlert, 60)
 }
 
 function clearAlert () {
@@ -169,7 +169,7 @@ export default Vue.extend({
 }
 
 .main-area {
-  background: $white;
+  background: $orange-0;
   overflow: hidden;
 }
 .catch-area {
@@ -183,7 +183,7 @@ export default Vue.extend({
   height: 100vw;
   max-height: 400px;
   width: 100vw;
-  background: linear-gradient(lighten($primary, 20%), $primary);
+  background: linear-gradient(to right, lighten($primary, 25%), $primary);
 
   animation-name: catch-area;
   animation-duration: 0.6s;
@@ -209,11 +209,16 @@ export default Vue.extend({
   bottom: 20px;
   left: 8px;
   font-size: 6rem;
-  color: $white;
+  color: $orange-0;
   font-weight: bold;
 
   @include mq('tb') {
     left: 20%;
+  }
+
+  @include mq {
+    font-size: 8rem;
+    left: 25%;
   }
 
   &:after {
@@ -224,6 +229,7 @@ export default Vue.extend({
     position: absolute;
     bottom: -2rem;
     right: 1.6rem;
+
     transform: rotate(30deg);
     transform-origin: 100% 100%;
 
@@ -252,32 +258,48 @@ export default Vue.extend({
 }
 
 .message-area {
+  position: relative;
   padding: 16px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    height: 150vh;
+    border-left: 2px solid $orange-1;
+    position: absolute;
+    top: 0;
+    transform: rotate(30deg);
+    transform-origin: 0% 0%;
+
+    animation-name: message-area-after;
+    animation-duration: 1.6s;
+    animation-timing-function: ease-in-out;
+  }
 
   @include mq('sp-only') {
     height: 236px;
+
+    &:before {
+      height: 100vh;
+      left: 18rem;
+    }
   }
 
   @include mq('tb') {
     width: 60%;
     margin: 0 auto;
     padding-left: 18rem;
-    position: relative;
 
     &:before {
-      content: '';
-      position: absolute;
-      height: 100vh;
-      border-left: 2px solid $grey-light4;
-      position: absolute;
-      top: 0;
       left: calc(17rem + 0.5rem);
-      transform: rotate(30deg);
-      transform-origin: 0% 0%;
+    }
+  }
 
-      animation-name: message-area-after;
-      animation-duration: 1.2s;
-      animation-timing-function: ease-in-out;
+  @include mq {
+    padding-left: 29rem;
+
+    &:before {
+      left: calc(28rem + 0.7rem);
     }
   }
 }
@@ -287,16 +309,16 @@ export default Vue.extend({
     height: 0;
   }
 
-  70% {
+  50% {
     height: 0;
   }
 
-  80% {
-    height: calc(236px);
+  60% {
+    height: 236px;
   }
 
   100% {
-    height: 100vh;
+    height: 150vh;
   }
 }
 
@@ -307,18 +329,8 @@ export default Vue.extend({
   font-weight: bold;
   letter-spacing: 1.5px;
 
-  transition: opacity 0.2s;
+  transition: opacity 0.1s;
   will-change: opacity;
-}
-
-@keyframes message-char {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
 }
 
 .personal-area {
@@ -326,7 +338,7 @@ export default Vue.extend({
   margin-top: -16px;
   margin-bottom: -32px;
 
-  padding: 40px 0;
+  padding: 48px 0;
   transition: 0.8s;
 
   &__container {
@@ -346,6 +358,13 @@ export default Vue.extend({
     &--skill {
       background: linear-gradient($red-7, lighten($red-7, 10%));
       transform: rotate(-3deg);
+    }
+
+    &--src {
+      background-image: url(~assets/img/background/background_source_green.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
     }
   }
 }
@@ -368,17 +387,21 @@ export default Vue.extend({
   margin-top: 80px;
   font-size: 1.8rem;
   color: $white;
+
+  @include mq {
+    font-size: 2.2rem;
+  }
 }
 
 .personal-data {
-  margin-top: 40px;
+  margin-top: 48px;
   margin-left: 20%;
 
   width: 85vw;
 
   @include mq {
     margin-left: 25%;
-    padding: 32px 0 16px;
+    padding: 80px 0 16px;
     margin-top: 56px;
     width: 80vw;
   }
@@ -408,6 +431,11 @@ export default Vue.extend({
     &--square {
       border-radius: 8px;
     }
+
+    @include mq {
+      width: 72px;
+      height: 72px;
+    }
   }
 }
 
@@ -416,9 +444,17 @@ export default Vue.extend({
   padding-top: calc(28px - 1.8rem / 2);
   color: $white;
 
+  @include mq {
+    padding-top: calc(36px - 2.4rem / 2);
+  }
+
   &__head {
     font-weight: bold;
     font-size: 1.8rem;
+
+    @include mq {
+      font-size: 2.4rem;
+    }
   }
 
   &__description {
@@ -426,6 +462,10 @@ export default Vue.extend({
     color: $white;
     font-size: 1rem;
     line-height: 1.5;
+
+    @include mq {
+      font-size: 1.2rem;
+    }
   }
 }
 
@@ -443,6 +483,10 @@ export default Vue.extend({
     font-weight: bold;
     font-size: 1.8rem;
     text-align: center;
+
+    @include mq {
+      font-size: 2.2rem;
+    }
   }
 
   &__message {
