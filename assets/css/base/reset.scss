@@ -86,6 +86,7 @@ video {
 
 body {
   line-height: 1;
+  font-size: 16px;
 }
 
 article,
@@ -125,6 +126,7 @@ a {
   font-size: 100%;
   vertical-align: baseline;
   background: transparent;
+  color: inherit;
 }
 
 /* change colours to suit your needs */
@@ -167,13 +169,17 @@ hr {
   padding: 0;
 }
 
+p {
+  line-height: 1.8;
+}
+
 input,
 select {
   vertical-align: middle;
 }
 
 body {
-  font-family: "Noto Sans JP", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Comfortaa", "Noto Sans JP", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -181,6 +187,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  margin: 0;
+  color: $body;
 }
 
 button {

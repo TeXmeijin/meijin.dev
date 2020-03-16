@@ -1,21 +1,29 @@
 module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    node: true
-  },
+  extends: ['@nuxtjs/eslint-config-typescript'],
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: '@typescript-eslint/parser',
   },
-  extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/essential'
-  ],
-  // required to lint *.vue files
-  plugins: [
-    'vue'
-  ],
-  // add your custom rules here
-  rules: {}
+  rules: {
+    indent: ['error', 2],
+    'no-console': 'off',
+    'comma-dangle': [
+      'error',
+      {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'never',
+        functions: 'never',
+      },
+    ],
+    camelcase: 'off',
+    // セミコロンを省略する
+    // @see https://qiita.com/mysticatea/items/9da94240f29ea516ae87
+    semi: ['error', 'never', { beforeStatementContinuationChars: 'never' }],
+    'semi-spacing': ['error', { after: true, before: false }],
+    'semi-style': ['error', 'first'],
+    'no-extra-semi': 'error',
+    'no-unexpected-multiline': 'error',
+    'no-unreachable': 'error',
+  },
 }
