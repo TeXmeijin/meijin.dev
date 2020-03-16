@@ -212,7 +212,7 @@ export default Vue.extend({
   color: $white;
   font-weight: bold;
 
-  @include mq {
+  @include mq('tb') {
     left: 20%;
   }
 
@@ -254,11 +254,11 @@ export default Vue.extend({
 .message-area {
   padding: 16px;
 
-  @include mq('sp') {
+  @include mq('sp-only') {
     height: 236px;
   }
 
-  @include mq {
+  @include mq('tb') {
     width: 60%;
     margin: 0 auto;
     padding-left: 18rem;
