@@ -29,6 +29,8 @@ main.main-area
         h2.personal-simple-area__head Related Pages
         a(
           href="https://twitter.com/meijin_garden"
+          target="_blank"
+          rel="nofollow"
         ).profile-blog
           figure.profile-blog__image
             img(
@@ -37,6 +39,8 @@ main.main-area
             ).profile-blog-icon
         a(
           href="https://github.com/texmeijin"
+          target="_blank"
+          rel="nofollow"
         ).profile-blog
           figure.profile-blog__image
             img(
@@ -45,6 +49,8 @@ main.main-area
             ).profile-blog-icon
         a(
           href="https://qiita.com/mejileben"
+          target="_blank"
+          rel="nofollow"
         ).profile-blog
           figure.profile-blog__image
             img(
@@ -53,6 +59,8 @@ main.main-area
             ).profile-blog-icon
         a(
           href="https://note.com/meijin_garden"
+          target="_blank"
+          rel="nofollow"
         ).profile-blog
           figure.profile-blog__image
             img(
@@ -260,16 +268,16 @@ export default Vue.extend({
 .message-area {
   position: relative;
   padding: 16px;
+  box-sizing: border-box;
 
   &:before {
     content: '';
     position: absolute;
     height: 150vh;
-    border-left: 2px solid $orange-1;
-    position: absolute;
+    border-right: 2px solid $orange-1;
     top: 0;
     transform: rotate(30deg);
-    transform-origin: 0% 0%;
+    transform-origin: 0 0;
 
     animation-name: message-area-after;
     animation-duration: 1.6s;
@@ -280,8 +288,9 @@ export default Vue.extend({
     height: 236px;
 
     &:before {
+      box-sizing: border-box;
       height: 100vh;
-      left: 18rem;
+      left: calc(18px * 16);
     }
   }
 
@@ -326,8 +335,8 @@ export default Vue.extend({
   font-size: 1.8rem;
   line-height: 1.8;
   font-weight: bold;
-  font-weight: bold;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
+  white-space: pre;
 
   transition: opacity 0.1s;
   will-change: opacity;
