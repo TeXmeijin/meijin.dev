@@ -7,13 +7,19 @@ main.main-area
     template(v-for="(message, index) in catchMessages")
       span.message-char(
         v-html="message"
-        :class="{ isHide: index >= catchCopyIndex }"
+        :class="{ '--is-hidden': index >= catchCopyIndex }"
       )
-  section.profile-area
+  section(
+    v-if="showProfileArea"
+  ).profile-area
     .profile-area__container
       .profile-data
         figure.profile-image
-          img.profile-image__image
+          img(
+            :src="require('@/assets/img/self.png')"
+          ).profile-image__image
+        .profile-name
+          .profile-name__text Yusuke Saito
   .main
     section.heading
       transition(
@@ -150,6 +156,7 @@ export default Vue.extend({
     return {
       catchCopy: 'An Inquisitive Web-Application Engineer',
       catchCopyIndex: 0,
+      showProfileArea: false,
       state: 0,
       atLeft: false,
       skills: {
@@ -227,6 +234,7 @@ export default Vue.extend({
 
       if (this.catchCopyIndex > this.catchCopy.length) {
         clearAlert()
+        this.showProfileArea = true
         return
       }
       delayedAlert(this.slowAlert)
@@ -236,6 +244,12 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.--is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  // display: none;
+}
+
 .main-area {
   background: $white;
 }
@@ -279,6 +293,7 @@ export default Vue.extend({
 
 .message-area {
   padding: 16px;
+  height: 236px;
 }
 
 .message-char {
@@ -288,9 +303,8 @@ export default Vue.extend({
   font-weight: bold;
   letter-spacing: 1.5px;
 
-  animation-name: message-char;
-  animation-duration: 0.2s;
-  animation-timing-function: ease-in-out;
+  transition: opacity 0.2s;
+  will-change: opacity;
 }
 
 @keyframes message-char {
@@ -300,6 +314,51 @@ export default Vue.extend({
 
   100% {
     opacity: 1;
+  }
+}
+
+.profile-area {
+  padding: 40px 16px;
+  border-top: 1px solid $grey-light4;
+
+  animation-name: profile-area;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes profile-area {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.profile-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-image {
+  display: flex;
+
+  &__image {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+.profile-name {
+  margin-left: 16px;
+
+  &__text {
+    font-weight: bold;
+    font-size: 1.8rem;
   }
 }
 
