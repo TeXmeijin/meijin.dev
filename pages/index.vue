@@ -1,5 +1,19 @@
 <template lang="pug">
-main.wrapper
+main.main-area
+  section.catch-area
+    .slide-back
+    span.large-nick-name Meijin
+  section.message-area
+    template(v-for="(message, index) in catchMessages")
+      span.message-char(
+        v-html="message"
+        :class="{ isHide: index >= catchCopyIndex }"
+      )
+  section.profile-area
+    .profile-area__container
+      .profile-data
+        figure.profile-image
+          img.profile-image__image
   .main
     section.heading
       transition(
@@ -118,75 +132,183 @@ main.wrapper
                       .text(v-if="skill.text") {{ skill.sentence }}
 </template>
 
-<script>
-export default {
-  mounted() {
-    this.state = 1;
-  },
-  methods: {
-    onEntered() {
-      this.state = 2;
-    },
-    onClickedSkillButton(key) {
-      if (!this.skills[key].modal) {
-        this.skills[key].modal = true;
-        return;
-      }
-      this.skills[key].text = false;
-    }
-  },
-  data() {
+<script lang="ts">
+import Vue from 'vue'
+
+let timeoutID
+
+function delayedAlert (slowAlert) {
+  timeoutID = window.setTimeout(slowAlert, 40)
+}
+
+function clearAlert () {
+  window.clearTimeout(timeoutID)
+}
+
+export default Vue.extend({
+  data: () => {
     return {
+      catchCopy: 'An Inquisitive Web-Application Engineer',
+      catchCopyIndex: 0,
       state: 0,
       atLeft: false,
       skills: {
         nuxt: {
-          heading: "Nuxt.js",
+          heading: 'Nuxt.js',
           background: true,
           modal: true,
           text: true,
           sentence:
-            "自社サイトのフロントエンド構築をNuxtを用いスクラッチで開発した経験があるため、GAの埋め込みやSSRはもちろん、ページネーションやパンくずリスト等もNuxt上でコンポーネントとして開発することが可能です。UIフレームワークはVuetifyの経験があります。"
+            '自社サイトのフロントエンド構築をNuxtを用いスクラッチで開発した経験があるため、GAの埋め込みやSSRはもちろん、ページネーションやパンくずリスト等もNuxt上でコンポーネントとして開発することが可能です。UIフレームワークはVuetifyの経験があります。',
         },
         pug: {
-          heading: "Pug/Sass",
+          heading: 'Pug/Sass',
           background: false,
           modal: false,
           text: false,
           sentence:
-            "HTMLおよびCSSを記述する際にはPugおよびSCSSの利用を得意としています。Vuetify等利用時はSCSSはほぼ利用しませんが、そうでないケースにおいては基幹コンポーネントの作成から粒度別にSCSSでコンポーネントにスタイルを当てる設計もある程度可能です。"
+            'HTMLおよびCSSを記述する際にはPugおよびSCSSの利用を得意としています。Vuetify等利用時はSCSSはほぼ利用しませんが、そうでないケースにおいては基幹コンポーネントの作成から粒度別にSCSSでコンポーネントにスタイルを当てる設計もある程度可能です。',
         },
         laravel: {
-          heading: "Laravel",
+          heading: 'Laravel',
           background: false,
           modal: false,
           text: false,
           sentence:
-            "Controller/Repository/Modelの切り分けやAPI Resoruce、Form Request等を用いた仕組みを0から設計し構築することができます。OSSなので実際のソースを読みながらカスタマイズしたClassを拡張して利用するといった柔軟な対応もできます。"
+            'Controller/Repository/Modelの切り分けやAPI Resoruce、Form Request等を用いた仕組みを0から設計し構築することができます。OSSなので実際のソースを読みながらカスタマイズしたClassを拡張して利用するといった柔軟な対応もできます。',
         },
         aws: {
-          heading: "AWS",
+          heading: 'AWS',
           background: false,
           modal: false,
           text: false,
           sentence:
-            "CloudFront, S3, ALB, ASG, EC2, IAM, CodeDeploy, CodePipeline、Parameter Store、Lambdaなどを利用したベーシックなインフラ構築ができます。一方でコンテナ技術を活用したECSやFargateの実運用経験はまだありません。"
+            'CloudFront, S3, ALB, ASG, EC2, IAM, CodeDeploy, CodePipeline、Parameter Store、Lambdaなどを利用したベーシックなインフラ構築ができます。一方でコンテナ技術を活用したECSやFargateの実運用経験はまだありません。',
         },
         firebase: {
-          heading: "Firebase",
+          heading: 'Firebase',
           background: false,
           modal: false,
           text: false,
           sentence:
-            "RTDB、Firestore、FCM、Auth、Hostingの利用経験がWebアプリにしてあります。ネイティブアプリでの利用についてはFCMのサーバーサイドの構築経験のみでほかはありません。AWSと合わせ適材適所でFirebaseを使うべきところを選定することが可能かと思います。"
+            'RTDB、Firestore、FCM、Auth、Hostingの利用経験がWebアプリにしてあります。ネイティブアプリでの利用についてはFCMのサーバーサイドの構築経験のみでほかはありません。AWSと合わせ適材適所でFirebaseを使うべきところを選定することが可能かと思います。',
+        },
+      },
+    }
+  },
+  computed: {
+    catchMessages (): string[] {
+      return Array.from(this.catchCopy).map((char) => {
+        if (char === ' ') {
+          return '<br>'
         }
+        return `<span>${char}</span>`
+      })
+    },
+  },
+  mounted () {
+    this.state = 1
+
+    setTimeout(() => delayedAlert.call(this, this.slowAlert), 600)
+  },
+  methods: {
+    onEntered () {
+      this.state = 2
+    },
+    onClickedSkillButton (key) {
+      if (!this.skills[key].modal) {
+        this.skills[key].modal = true
+        return
       }
-    };
-  }
-};
+      this.skills[key].text = false
+    },
+    slowAlert () {
+      this.catchCopyIndex++
+
+      if (this.catchCopyIndex > this.catchCopy.length) {
+        clearAlert()
+        return
+      }
+      delayedAlert(this.slowAlert)
+    },
+  },
+})
 </script>
 
 <style lang="scss" scoped>
+.main-area {
+  background: $white;
+}
+.catch-area {
+  position: relative;
+  height: 100vw;
+  width: 100vw;
+}
+.slide-back {
+  height: 100vw;
+  width: 100vw;
+  background: $primary;
+
+  animation-name: catch-area;
+  animation-duration: 0.6s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes catch-area {
+  0% {
+    transform: translateX(100vw);
+  }
+
+  40% {
+    transform: translateX(90vw);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.large-nick-name {
+  position: absolute;
+  bottom: 20px;
+  left: 8px;
+  font-size: 6rem;
+  color: $white;
+  font-weight: bold;
+}
+
+.message-area {
+  padding: 16px;
+}
+
+.message-char {
+  font-size: 1.8rem;
+  line-height: 1.8;
+  font-weight: bold;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+
+  animation-name: message-char;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes message-char {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+// -----------
+
+.main {
+  margin-top: 1500px;
+}
+
 $baseSize: 40px;
 $halfSize: calc(#{$baseSize} / 2);
 $descSize: calc(#{$halfSize} - 6px);
@@ -291,7 +413,7 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
 
 .wrapper {
   min-height: 700px;
-  background-image: url("~assets/img/background/dot_double.png");
+  background-image: url('~assets/img/background/dot_double.png');
   background-repeat: repeat;
   background-size: calc(#{$baseSize} * 2);
   padding-bottom: 12px;
@@ -313,7 +435,7 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
     @include mq {
       font-size: $baseSize * 1.5;
     }
-    @include mq("sp") {
+    @include mq('sp') {
       padding: 0 8px;
       font-size: $baseSize;
     }
@@ -372,7 +494,7 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
       justify-content: center;
     }
 
-    @include mq("sp") {
+    @include mq('sp') {
       width: 100%;
     }
 
@@ -381,7 +503,7 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
       height: 240px;
       width: 240px;
       border-radius: 10px;
-      background-image: url("~assets/img/self.png");
+      background-image: url('~assets/img/self.png');
       background-size: cover;
     }
 
@@ -400,7 +522,7 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
         text-align: right;
       }
 
-      @include mq("sp") {
+      @include mq('sp') {
         text-align: center;
       }
 
@@ -479,7 +601,7 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
         display: flex;
         margin-top: 8px;
 
-        @include mq("sp") {
+        @include mq('sp') {
           flex-direction: column;
         }
         @include mq {
@@ -494,7 +616,7 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
               margin-right: $halfSize;
             }
           }
-          @include mq("sp") {
+          @include mq('sp') {
             justify-content: center;
           }
           flex-direction: column;
@@ -514,15 +636,15 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
             position: relative;
 
             &.qiita {
-              background-image: url("~assets/img/blog/qiita.png");
+              background-image: url('~assets/img/blog/qiita.png');
             }
 
             &.twitter {
-              background-image: url("~assets/img/blog/twitter.png");
+              background-image: url('~assets/img/blog/twitter.png');
             }
 
             &.note {
-              background-image: url("~assets/img/blog/note.png");
+              background-image: url('~assets/img/blog/note.png');
             }
           }
 
@@ -558,7 +680,7 @@ $sequenceAnimeKeys: first, second, third, fourth, fifth, sixth;
         display: flex;
         margin-top: $halfSize;
 
-        @include mq("sp") {
+        @include mq('sp') {
           flex-direction: column;
         }
 

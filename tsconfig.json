@@ -8,12 +8,13 @@
       "esnext.asynciterable",
       "dom"
     ],
+    "noImplicitThis": true,
     "esModuleInterop": true,
+    "noImplicitAny": false,
     "experimentalDecorators": true,
     "allowJs": true,
     "sourceMap": true,
     "strict": true,
-    "noImplicitAny": false,
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
@@ -26,7 +27,13 @@
     },
     "types": [
       "@types/node",
-      "@nuxt/vue-app"
+      "@nuxtjs/axios",
+      "@nuxtjs/sentry",
+      "@nuxt/types",
+      "vuetify"
     ]
-  }
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }
