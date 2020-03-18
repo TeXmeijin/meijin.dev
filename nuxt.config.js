@@ -1,4 +1,4 @@
-const baseName = "Meijin's Portfolio"
+const baseName = "ITエンジニアを勤める名人のポートフォリオ"
 const baseDesc =
   'Webを中心にITに関わるものづくりを仕事としている名人（Yusuke Saito）のポートフォリオページ。略歴、Twitterやnote、GitHub等の関連ページを掲載。サーバーサイドやフロントエンド等の技術力の説明もあります。'
 const baseUrl = 'https://meijin.me'
@@ -76,6 +76,17 @@ module.exports = {
       },
       {
         rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Comfortaa&display=swap',
+      },
+      {
+        rel: 'preload',
+        as: 'style',
+        href:
+          'https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap',
+      },
+      {
+        rel: 'preload',
+        as: 'style',
         href: 'https://fonts.googleapis.com/css?family=Comfortaa&display=swap',
       },
     ],
