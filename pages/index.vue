@@ -69,7 +69,9 @@ main.main-area
               v-lazy="require('@/assets/img/blog/icon-note.svg')"
               alt="note"
             ).profile-blog-icon
-  section.personal-area
+  section(
+    :class="{ '--is-hidden': !showProfileArea }"
+  ).personal-area
     .personal-inner.personal-inner--skill
       .personal-area__container.personal-area__container--skill
         h2.personal-heading Technical Skill
@@ -77,7 +79,7 @@ main.main-area
           .personal-data__line
             figure.personal-image
               img(
-                v-lazy="require('@/assets/img/skill/aws.png')"
+                v-lazy="require('@/assets/img/skill/aws.svg')"
               ).personal-image__image.personal-image__image--square
             .personal-info
               h2.personal-info__head Infra/Network
@@ -113,7 +115,9 @@ main.main-area
               h2.personal-info__head Middleware
               p.personal-info__description SQLについてはMySQLに最も経験がある。実行計画を見た上でクエリチューニングを実施したりテーブルごとにインデックスを考慮すること、実行時にトランザクションを貼るなどの基本的な対応はできる。
               p.personal-info__description WebサーバーはNginxもApacheも経験があるが、好んで利用するのはNginxである。
-  section.personal-area
+  section(
+    :class="{ '--is-hidden': !showProfileArea }"
+  ).personal-area
     .personal-simple-area
       .personal-simple-area__container
         h2.personal-simple-area__head Contact
@@ -194,6 +198,7 @@ export default Vue.extend({
   max-height: 400px;
   width: 100vw;
   background: linear-gradient(to right, lighten($primary, 25%), $primary);
+  will-change: transform;
 
   animation-name: catch-area;
   animation-duration: 0.6s;
@@ -340,7 +345,7 @@ export default Vue.extend({
   letter-spacing: 1px;
   white-space: pre;
 
-  transition: opacity 0.1s;
+  transition: opacity 0.15s;
   will-change: opacity;
 }
 
