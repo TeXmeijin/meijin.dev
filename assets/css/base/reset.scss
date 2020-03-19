@@ -84,11 +84,6 @@ video {
   background: transparent;
 }
 
-body {
-  line-height: 1;
-  font-size: 16px;
-}
-
 article,
 aside,
 details,
@@ -107,17 +102,9 @@ nav ul li {
   list-style: none;
 }
 
-blockquote,
-q {
-  quotes: none;
-}
-
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
+ul {
+  padding-left: 0;
+  margin-left: 0;
 }
 
 a {
@@ -129,53 +116,8 @@ a {
   color: inherit;
 }
 
-/* change colours to suit your needs */
-ins {
-  background-color: #ff9;
-  color: #000;
-  text-decoration: none;
-}
-
-/* change colours to suit your needs */
-mark {
-  background-color: #ff9;
-  color: #000;
-  font-style: italic;
-  font-weight: bold;
-}
-
-del {
-  text-decoration: line-through;
-}
-
-abbr[title],
-dfn[title] {
-  border-bottom: 1px dotted;
-  cursor: help;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-/* change border colour to suit your needs */
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #cccccc;
-  margin: 1em 0;
-  padding: 0;
-}
-
 p {
   line-height: 1.8;
-}
-
-input,
-select {
-  vertical-align: middle;
 }
 
 body {
@@ -191,10 +133,8 @@ body {
   box-sizing: border-box;
   margin: 0;
   color: $body;
-}
-
-button {
-  font-family: inherit;
+    line-height: 1;
+  font-size: 16px;
 }
 
 *,

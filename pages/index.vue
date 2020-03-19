@@ -20,7 +20,7 @@ main.main-area
           .personal-data__line
             figure.personal-image
               img(
-                :src="require('@/assets/img/self.jpg')"
+                v-lazy="require('@/assets/img/self.jpg')"
               ).personal-image__image
             .personal-info
               h2.personal-info__head Yusuke Saito
@@ -36,7 +36,7 @@ main.main-area
         ).profile-blog
           figure.profile-blog__image
             img(
-              :src="require('@/assets/img/blog/icon-twitter.png')"
+              v-lazy="require('@/assets/img/blog/icon-twitter.png')"
               alt="twitter"
             ).profile-blog-icon
         a(
@@ -46,7 +46,7 @@ main.main-area
         ).profile-blog
           figure.profile-blog__image
             img(
-              :src="require('@/assets/img/blog/icon-github.png')"
+              v-lazy="require('@/assets/img/blog/icon-github.png')"
               alt="github"
             ).profile-blog-icon
         a(
@@ -56,7 +56,7 @@ main.main-area
         ).profile-blog
           figure.profile-blog__image
             img(
-              :src="require('@/assets/img/blog/icon-qiita.png')"
+              v-lazy="require('@/assets/img/blog/icon-qiita.png')"
               alt="qiita"
             ).profile-blog-icon
         a(
@@ -66,7 +66,7 @@ main.main-area
         ).profile-blog
           figure.profile-blog__image
             img(
-              :src="require('@/assets/img/blog/icon-note.svg')"
+              v-lazy="require('@/assets/img/blog/icon-note.svg')"
               alt="note"
             ).profile-blog-icon
   section.personal-area
@@ -77,7 +77,7 @@ main.main-area
           .personal-data__line
             figure.personal-image
               img(
-                :src="require('@/assets/img/skill/aws.png')"
+                v-lazy="require('@/assets/img/skill/aws.png')"
               ).personal-image__image.personal-image__image--square
             .personal-info
               h2.personal-info__head Infra/Network
@@ -87,7 +87,7 @@ main.main-area
           .personal-data__line
             figure.personal-image
               img(
-                :src="require('@/assets/img/skill/nuxt.png')"
+                v-lazy="require('@/assets/img/skill/nuxt.png')"
               ).personal-image__image.personal-image__image--square
             .personal-info
               h2.personal-info__head Frontend
@@ -97,7 +97,7 @@ main.main-area
           .personal-data__line
             figure.personal-image
               img(
-                :src="require('@/assets/img/skill/laravel.png')"
+                v-lazy="require('@/assets/img/skill/laravel.png')"
               ).personal-image__image.personal-image__image--square
             .personal-info
               h2.personal-info__head ServerSide
@@ -107,7 +107,7 @@ main.main-area
           .personal-data__line
             figure.personal-image
               img(
-                :src="require('@/assets/img/skill/mysql.png')"
+                v-lazy="require('@/assets/img/skill/mysql.png')"
               ).personal-image__image.personal-image__image--square
             .personal-info
               h2.personal-info__head Middleware
