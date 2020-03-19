@@ -13,7 +13,9 @@ main.main-area
     :class="{ '--is-hidden': !showProfileArea }"
   ).personal-area
     .personal-inner
-      .personal-area__container.personal-area__container--src
+      .personal-area__container.personal-area__container--src(
+        v-lazy:background-image.container="require('@/assets/img/background/background_source_green.png')"
+      )
         .personal-data
           .personal-data__line
             figure.personal-image
@@ -370,7 +372,6 @@ export default Vue.extend({
     }
 
     &--src {
-      background-image: url(~assets/img/background/background_source_green.png);
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center center;
