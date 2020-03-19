@@ -14,7 +14,7 @@ main.main-area
   ).personal-area
     .personal-inner
       .personal-area__container.personal-area__container--src(
-        v-lazy:background-image.container="require('@/assets/img/background/background_source_green.png')"
+        v-lazy:background-image.container="require('@/assets/img/background/background_source_green.svg')"
       )
         .personal-data
           .personal-data__line
