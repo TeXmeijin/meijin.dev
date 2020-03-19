@@ -71,6 +71,11 @@ module.exports = {
       },
       {
         rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap',
+      },
+      {
+        rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Comfortaa&display=swap',
       },
       {
