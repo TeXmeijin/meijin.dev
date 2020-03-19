@@ -20,7 +20,7 @@ main.main-area
           .personal-data__line
             figure.personal-image
               img(
-                :src="require('@/assets/img/self.png')"
+                :src="require('@/assets/img/self.jpg')"
               ).personal-image__image
             .personal-info
               h2.personal-info__head Yusuke Saito
