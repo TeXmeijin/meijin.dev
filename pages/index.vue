@@ -75,46 +75,18 @@ main.main-area
     .personal-inner.personal-inner--skill
       .personal-area__container.personal-area__container--skill
         h2.personal-heading Technical Skill
-        .personal-data
+        .personal-data(
+          v-for="skill in skills"
+          :key="skill.id"
+        )
           .personal-data__line
             figure.personal-image
               img(
-                v-lazy="require('@/assets/img/skill/aws.svg')"
+                v-lazy="skill.icon.url"
               ).personal-image__image.personal-image__image--square
             .personal-info
-              h2.personal-info__head Infra/Network
-              p.personal-info__description AWS/GCP両方の実務経験有り
-              p.personal-info__description AWSはEC2, CloudFront, S3, ALB, CodeDeploy, IAM等を用いて、Laravelアプリケーションの自動デプロイ環境を1人で構築した実績を持つ。GCPは人工知能系のAPIの利用・活用実績、またGAEへのNuxtアプリケーションの自動デプロイを構築した経験を保有。
-        .personal-data
-          .personal-data__line
-            figure.personal-image
-              img(
-                v-lazy="require('@/assets/img/skill/nuxt.png')"
-              ).personal-image__image.personal-image__image--square
-            .personal-info
-              h2.personal-info__head Frontend
-              p.personal-info__description jQueryは実務経験が3年以上有り、空である程度のロジックを実装できる。また、必要に応じて処理をコンポーネント単位でClassに閉じ込める等の設計も経験があり、指導も可能。
-              p.personal-info__description Nuxtアプリケーションを自社サービスにゼロイチで導入した経験を有し、TypeScriptで型安全の恩恵を受けつつ保守性の高い開発ができる。素のJS自体の知識をある程度持っているので、独力でライブラリの選定、導入、問題解決がある程度可能。
-        .personal-data
-          .personal-data__line
-            figure.personal-image
-              img(
-                v-lazy="require('@/assets/img/skill/laravel.png')"
-              ).personal-image__image.personal-image__image--square
-            .personal-info
-              h2.personal-info__head ServerSide
-              p.personal-info__description もっとも経験があるのはLaravel。株式会社NoSchoolにて、自社サイトをゼロイチでLaravelで構築した後、フロントエンドのNuxt移行に伴ってAPI開発に移行し、iOSアプリのリリースのために共通の認証基盤を作り上げた経験を有する。また、DDDの導入について、EntityやDTO、Repository、DI、テスト駆動開発などに挑戦している。
-              p.personal-info__description また、Ruby(Sinatra)の開発経験を3年有しており、Rspecを用いたテスト実装や、moduleを活用した開発経験がある。
-        .personal-data
-          .personal-data__line
-            figure.personal-image
-              img(
-                v-lazy="require('@/assets/img/skill/mysql.png')"
-              ).personal-image__image.personal-image__image--square
-            .personal-info
-              h2.personal-info__head Middleware
-              p.personal-info__description SQLについてはMySQLに最も経験がある。実行計画を見た上でクエリチューニングを実施したりテーブルごとにインデックスを考慮すること、実行時にトランザクションを貼るなどの基本的な対応はできる。
-              p.personal-info__description WebサーバーはNginxもApacheも経験があるが、好んで利用するのはNginxである。
+              h2.personal-info__head {{ skill.title }}
+              div(v-html="skill.body")
   section(
     :class="{ '--is-hidden': !showProfileArea }"
   ).personal-area
@@ -146,6 +118,14 @@ export default Vue.extend({
       catchCopy: 'A Curious Web-Application Engineer',
       catchCopyIndex: 0,
       showProfileArea: false,
+      skills: [] as {
+        id: string
+        icon: {
+          url: string
+        }
+        title: string
+        body: string
+      }[],
     }
   },
   computed: {
@@ -158,7 +138,17 @@ export default Vue.extend({
       })
     },
   },
-  mounted () {
+  async mounted () {
+    // 一度きりの利用なのでAPI-KEY含めベタ打ち。このKEYはGETのみの利用なので公開できる
+    const skillsResponse = await fetch(
+      'https://meijin-dot-me.microcms.io/api/v1/skills',
+      {
+        headers: {
+          'X-API-KEY': '31a6edf1-c4cd-48b3-a1c9-f5f01e80d42f',
+        },
+      }
+    )
+    this.skills = (await skillsResponse.json()).contents
     setTimeout(() => delayedAlert.call(this, this.slowAlert), 600)
   },
   methods: {
@@ -280,7 +270,7 @@ export default Vue.extend({
   &:before {
     content: '';
     position: absolute;
-    height: 150vh;
+    height: 200vh;
     border-right: 2px solid $orange-1;
     top: 0;
     transform: rotate(30deg);
@@ -472,8 +462,11 @@ export default Vue.extend({
     }
   }
 
-  &__description {
-    margin-top: 16px;
+  /**
+   * スキルはmicroCMSから取得しているコンテンツなのでv-htmlで表示する
+   */
+  & ::v-deep p {
+    margin-top: 24px;
     color: $white;
     font-size: 1rem;
     line-height: 1.5;
@@ -481,6 +474,12 @@ export default Vue.extend({
     @include mq {
       font-size: 1.2rem;
     }
+  }
+
+  & ::v-deep br {
+    content: '';
+    display: block;
+    margin-top: 16px;
   }
 }
 
