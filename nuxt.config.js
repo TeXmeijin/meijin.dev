@@ -5,7 +5,6 @@ const baseUrl = 'https://meijin.me'
 const baseOgp = '/ogp.jpg'
 
 module.exports = {
-  mode: 'spa',
   /*
    ** Headers of the page
    */
