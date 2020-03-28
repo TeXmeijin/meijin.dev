@@ -13,129 +13,133 @@
         3月に勉強したTech
       </span>
     </div>
-    <section class="learned-contents">
-      <div class="learned-contents-heading">
-        <h1 class="learned-contents-heading__text">
-          発信した記事
-        </h1>
-      </div>
-      <a
-        v-for="article in writtenArticles"
-        :href="article.url"
-        :key="article.id"
-        target="_blank"
-        rel="nofollow"
-        class="written-content"
-      >
-        <figure v-if="article.cover" class="content-cover">
-          <img
-            :src="article.cover"
-            :alt="article.title"
-            class="content-cover__image"
+    <div class="learned-contents-area">
+      <div class="learned-contents-area__container">
+        <section class="learned-contents">
+          <div class="learned-contents-heading">
+            <h1 class="learned-contents-heading__text">
+              発信した記事
+            </h1>
+          </div>
+          <a
+            v-for="article in writtenArticles"
+            :href="article.url"
+            :key="article.id"
+            target="_blank"
+            rel="nofollow"
+            class="written-content"
           >
-        </figure>
-        <div class="content-title">
-          {{ article.title }}
-        </div>
-        <div class="content-meta">
-          <div class="content-meta__container">
-            <div class="content-category">
-              <div class="content-category-item">
-                {{ article.category.name }}
+            <figure v-if="article.cover" class="content-cover">
+              <img
+                :src="article.cover"
+                :alt="article.title"
+                class="content-cover__image"
+              >
+            </figure>
+            <div class="content-title">
+              {{ article.title }}
+            </div>
+            <div class="content-meta">
+              <div class="content-meta__container">
+                <div class="content-category">
+                  <div class="content-category-item">
+                    {{ article.category.name }}
+                  </div>
+                </div>
+                <div class="date">
+                  <span class="date-text">
+                    {{ article.postDate }}
+                  </span>
+                </div>
               </div>
             </div>
-            <div class="date">
-              <span class="date-text">
-                {{ article.postDate }}
-              </span>
-            </div>
+          </a>
+        </section>
+        <section class="learned-contents">
+          <div class="learned-contents-heading">
+            <h1 class="learned-contents-heading__text">
+              読んだ記事
+            </h1>
           </div>
-        </div>
-      </a>
-    </section>
-    <section class="learned-contents">
-      <div class="learned-contents-heading">
-        <h1 class="learned-contents-heading__text">
-          読んだ記事
-        </h1>
-      </div>
-      <a
-        v-for="article in readArticles"
-        :href="article.url"
-        :key="article.id"
-        target="_blank"
-        rel="nofollow"
-        class="written-content"
-      >
-        <figure v-if="article.cover" class="content-cover">
-          <img
-            :src="article.cover"
-            :alt="article.title"
-            class="content-cover__image"
+          <a
+            v-for="article in readArticles"
+            :href="article.url"
+            :key="article.id"
+            target="_blank"
+            rel="nofollow"
+            class="written-content"
           >
-        </figure>
-        <div class="content-title">
-          {{ article.title }}
-        </div>
-        <div class="content-meta">
-          <div class="content-meta__container">
-            <div class="content-category">
-              <div class="content-category-item">
-                {{ article.category.name }}
+            <figure v-if="article.cover" class="content-cover">
+              <img
+                :src="article.cover"
+                :alt="article.title"
+                class="content-cover__image"
+              >
+            </figure>
+            <div class="content-title">
+              {{ article.title }}
+            </div>
+            <div class="content-meta">
+              <div class="content-meta__container">
+                <div class="content-category">
+                  <div class="content-category-item">
+                    {{ article.category.name }}
+                  </div>
+                </div>
+                <div class="date">
+                  <span class="date-text">
+                    {{ article.readDate }}
+                  </span>
+                </div>
               </div>
             </div>
-            <div class="date">
-              <span class="date-text">
-                {{ article.readDate }}
-              </span>
-            </div>
+          </a>
+        </section>
+        <section class="learned-contents">
+          <div class="learned-contents-heading">
+            <h1 class="learned-contents-heading__text">
+              読書
+            </h1>
           </div>
-        </div>
-      </a>
-    </section>
-    <section class="learned-contents">
-      <div class="learned-contents-heading">
-        <h1 class="learned-contents-heading__text">
-          読書
-        </h1>
-      </div>
-      <a
-        v-for="book in readBooks"
-        :href="book.url"
-        :key="book.id"
-        target="_blank"
-        rel="nofollow"
-        class="written-content"
-      >
-        <figure v-if="book.cover" class="content-cover">
-          <img
-            :src="book.cover"
-            :alt="book.title"
-            class="content-cover__image"
+          <a
+            v-for="book in readBooks"
+            :href="book.url"
+            :key="book.id"
+            target="_blank"
+            rel="nofollow"
+            class="written-content"
           >
-        </figure>
-        <div class="content-title">
-          {{ book.title }}
-        </div>
-        <div class="content-meta">
-          <div class="content-meta__container">
-            <div class="content-category">
-              <div class="content-category-item">
-                {{ book.category.name }}
+            <figure v-if="book.cover" class="content-cover">
+              <img
+                :src="book.cover"
+                :alt="book.title"
+                class="content-cover__image"
+              >
+            </figure>
+            <div class="content-title">
+              {{ book.title }}
+            </div>
+            <div class="content-meta">
+              <div class="content-meta__container">
+                <div class="content-category">
+                  <div class="content-category-item">
+                    {{ book.category.name }}
+                  </div>
+                </div>
+                <div class="percent">
+                  <span class="percent-label">
+                    今月の読書量/累計
+                  </span>
+                  <span class="percent-text">
+                    {{ book.percent }}%/{{ book.sumPercent }}%
+                  </span>
+                </div>
               </div>
             </div>
-            <div class="percent">
-              <span class="percent-label">
-                今月の読書量/累計
-              </span>
-              <span class="percent-text">
-                {{ book.percent }}%/{{ book.sumPercent }}%
-              </span>
-            </div>
-          </div>
-        </div>
-      </a>
-    </section>
+          </a>
+        </section>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -299,11 +303,10 @@ export default Vue.extend({
 
 .learned-contents-heading {
   padding: 24px 16px 0;
-  background: $red-7;
 
   &__text {
     letter-spacing: 1px;
-    color: $grey-light5;
+    color: $grey-light2;
     font-weight: bold;
     font-size: 2rem;
   }
@@ -368,5 +371,21 @@ export default Vue.extend({
 .percent-label {
   font-weight: bold;
   font-size: 0.8rem;
+}
+
+@include mq {
+  .learned-contents-area {
+    &__container {
+      display: flex;
+    }
+  }
+
+  .learned-contents {
+    width: calc(100% / 3);
+
+    & + & {
+      margin-left: 8px;
+    }
+  }
 }
 </style>
