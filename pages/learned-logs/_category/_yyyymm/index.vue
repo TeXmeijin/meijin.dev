@@ -35,9 +35,18 @@
         <div class="learned-area__container">
           <div class="category-titles">
             <div class="category-titles__container">
-              <div v-for="n in 4" :key="n" class="learned-title">
+              <div
+                v-for="title in [
+                  'Inputした記事/書籍',
+                  'Outputした記事/成果',
+                  '感想/学んだこと',
+                  '今後の勉強予定',
+                ]"
+                :key="title"
+                class="learned-title"
+              >
                 <span class="learned-title__text">
-                  Inputした記事/書籍
+                  {{ title }}
                 </span>
               </div>
             </div>
@@ -67,7 +76,7 @@
                       </div>
                       <div v-if="log.image_url" class="log-image">
                         <img
-                          :src="log.image_url"
+                          v-lazy="log.image_url"
                           :alt="log.page_title"
                           class="log-image__image"
                         >
@@ -111,6 +120,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { format } from 'date-fns'
 
 type LearnedLog = {
   id: string
@@ -121,7 +131,7 @@ type LearnedLog = {
   url?: string
   category: {
     slug: string
-    text: string
+    name: string
     description: string
   }
   body?: string
@@ -131,78 +141,39 @@ type LearnedLog = {
   image_url?: string
 }
 
+function formatDate (dateString: string) {
+  return format(new Date(dateString), 'yyyy/MM/dd')
+}
+
 export default Vue.extend({
-  data (): {
-    learnedLogs: {
+  async asyncData () {
+    const learnedLogResponse = await fetch(
+      'https://meijin-dot-me.microcms.io/api/v1/learned-log',
+      {
+        headers: {
+          'X-API-KEY': '31a6edf1-c4cd-48b3-a1c9-f5f01e80d42f',
+        },
+      }
+    )
+    const learnedLogs = (await learnedLogResponse.json()) as {
       contents: LearnedLog[]
     }
-    } {
+    for (const cont of learnedLogs.contents) {
+      if (!cont.url) {
+        continue
+      }
+      const contMeta = await fetch(
+        `https://noschool.asia/api/url-preview?url=${encodeURIComponent(
+          cont.url
+        )}`
+      )
+      const meta = await contMeta.json()
+      cont.page_title = meta.title
+      cont.image_url = meta.cover
+      cont.date = formatDate(cont.date)
+    }
     return {
-      learnedLogs: {
-        contents: [
-          {
-            id: 'hogehoge',
-            category: {
-              slug: 'javascript',
-              text: 'JavaScript',
-              description:
-                'ES6, TypeScript, Test, PWA, Performance, Vue/React/Angular, webpack...',
-            },
-            url: 'https://qiita.com/mejileben/private/11f206a51861bb404e1a',
-            presentation_type: 'Web記事',
-            image_url:
-              'https://qiita-user-contents.imgix.net/https%3A%2F%2Fcdn.qiita.com%2Fassets%2Fpublic%2Farticle-ogp-background-1150d8b18a7c15795b701a55ae908f94.png?ixlib=rb-1.2.2&w=1200&mark=https%3A%2F%2Fqiita-user-contents.imgix.net%2F~text%3Fixlib%3Drb-1.2.2%26w%3D840%26h%3D380%26txt%3D%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2580%258CAPI%2520%25E3%2581%25AE%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%25E3%2580%258D%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B9%25E3%2583%25A1%2528Nuxt%25C3%2597TS%25C3%2597aspida%2529%26txt-color%3D%2523333%26txt-font%3DAvenir-Black%26txt-size%3D54%26txt-clip%3Dellipsis%26txt-align%3Dcenter%252Cmiddle%26s%3Dc4709b96a54ccb06e3331a5181dfbb88&mark-align=center%2Cmiddle&blend=https%3A%2F%2Fqiita-user-contents.imgix.net%2F~text%3Fixlib%3Drb-1.2.2%26w%3D840%26h%3D500%26txt%3D%2540mejileben%26txt-color%3D%2523333%26txt-font%3DAvenir-Black%26txt-size%3D45%26txt-align%3Dright%252Cbottom%26s%3Dd6166f964a877fa3f4c0440731881242&blend-align=center%2Cmiddle&blend-mode=normal&s=f2b817643d89a74a3f288196f1c75c59',
-            page_title:
-              'フロントエンドで始める「API の型定義」のススメ(Nuxt×TS×aspida) - Qiita',
-            date: '2020-03-18T15:00:00.000Z',
-            type_code: 'input',
-          },
-          {
-            id: 'hogehoge',
-            category: {
-              slug: 'javascript',
-              text: 'JavaScript',
-              description:
-                'ES6, TypeScript, Test, PWA, Performance, Vue/React/Angular, webpack...',
-            },
-            url: 'https://qiita.com/mejileben/private/11f206a51861bb404e1a',
-            presentation_type: 'Web記事',
-            image_url:
-              'https://qiita-user-contents.imgix.net/https%3A%2F%2Fcdn.qiita.com%2Fassets%2Fpublic%2Farticle-ogp-background-1150d8b18a7c15795b701a55ae908f94.png?ixlib=rb-1.2.2&w=1200&mark=https%3A%2F%2Fqiita-user-contents.imgix.net%2F~text%3Fixlib%3Drb-1.2.2%26w%3D840%26h%3D380%26txt%3D%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2580%258CAPI%2520%25E3%2581%25AE%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%25E3%2580%258D%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B9%25E3%2583%25A1%2528Nuxt%25C3%2597TS%25C3%2597aspida%2529%26txt-color%3D%2523333%26txt-font%3DAvenir-Black%26txt-size%3D54%26txt-clip%3Dellipsis%26txt-align%3Dcenter%252Cmiddle%26s%3Dc4709b96a54ccb06e3331a5181dfbb88&mark-align=center%2Cmiddle&blend=https%3A%2F%2Fqiita-user-contents.imgix.net%2F~text%3Fixlib%3Drb-1.2.2%26w%3D840%26h%3D500%26txt%3D%2540mejileben%26txt-color%3D%2523333%26txt-font%3DAvenir-Black%26txt-size%3D45%26txt-align%3Dright%252Cbottom%26s%3Dd6166f964a877fa3f4c0440731881242&blend-align=center%2Cmiddle&blend-mode=normal&s=f2b817643d89a74a3f288196f1c75c59',
-            page_title:
-              'フロントエンドで始める「API の型定義」のススメ(Nuxt×TS×aspida) - Qiita',
-            date: '2020-03-18T15:00:00.000Z',
-            type_code: 'output',
-          },
-          {
-            id: 'hogehoge',
-            category: {
-              slug: 'javascript',
-              text: 'JavaScript',
-              description:
-                'ES6, TypeScript, Test, PWA, Performance, Vue/React/Angular, webpack...',
-            },
-            body:
-              '会社での実装ではNuxt.jsに対して特にこれといった例外処理は実装しておらず、都度axios等の外部通信時にはcatch実装されていなければNuxt標準のServer Errorという画面が表示されてしまう。共通のエラーハンドリングを仕込まなければと感じた。',
-            title: 'エラーハンドリング',
-            date: '2020-03-18T15:00:00.000Z',
-            type_code: 'impression',
-          },
-          {
-            id: 'hogehoge',
-            category: {
-              slug: 'javascript',
-              text: 'JavaScript',
-              description:
-                'ES6, TypeScript, Test, PWA, Performance, Vue/React/Angular, webpack...',
-            },
-            body:
-              'TypeScriptのreadonlyについて調べる。できるだけ付ける方が良い？',
-            date: '2020-03-18T15:00:00.000Z',
-            type_code: 'scheduled',
-          },
-        ],
-      },
+      learnedLogs,
     }
   },
   computed: {
@@ -388,6 +359,20 @@ $white: #fafafa;
 
   &__text {
     line-height: 1.9;
+    color: $grey;
+  }
+}
+
+.scheduled-area {
+  & + & {
+    margin-top: 16px;
+  }
+
+  padding: 12px 8px;
+  border: 2px solid $main;
+
+  &__text {
+    color: $grey;
   }
 }
 </style>
