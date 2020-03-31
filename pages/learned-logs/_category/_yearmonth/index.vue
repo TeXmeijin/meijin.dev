@@ -147,6 +147,11 @@ function formatDate (dateString: string) {
 
 export default Vue.extend({
   async asyncData () {
+    /**
+     * API
+     * learned-log?filters=category[equals]nsfU_4bOG[and]date[less_than]2020-04[and]date[greater_than]2020-03
+     * learned-category?filters=slug[equals]javascript
+     */
     const learnedLogResponse = await fetch(
       'https://meijin-dot-me.microcms.io/api/v1/learned-log',
       {
@@ -174,6 +179,11 @@ export default Vue.extend({
     }
     return {
       learnedLogs,
+    }
+  },
+  data () {
+    return {
+      learnedLogs: [] as LearnedLog[],
     }
   },
   computed: {
