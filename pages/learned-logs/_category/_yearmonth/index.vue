@@ -146,14 +146,39 @@ function formatDate (dateString: string) {
 }
 
 export default Vue.extend({
-  async asyncData () {
+  validate ({ params }) {
+    if (!/[a-z]*/.test(params.category)) {
+      return false
+    }
+    if (!/[0-9]{4}-[0-1][0-9]/.test(params.yearmonth)) {
+      return false
+    }
+    return true
+  },
+  async asyncData ({ params, error }) {
     /**
      * API
      * learned-log?filters=category[equals]nsfU_4bOG[and]date[less_than]2020-04[and]date[greater_than]2020-03
      * learned-category?filters=slug[equals]javascript
      */
+    const categoryResponse = await fetch(
+      `https://meijin-dot-me.microcms.io/api/v1/learned-category?filters=slug[equals]${params.category}`,
+      {
+        headers: {
+          'X-API-KEY': '31a6edf1-c4cd-48b3-a1c9-f5f01e80d42f',
+        },
+      }
+    )
+    const categoryJson = await categoryResponse.json()
+    if (categoryJson.contents.length <= 0) {
+      error({
+        statusCode: 404,
+      })
+      return
+    }
+    const categoryId = categoryJson.contents[0].id
     const learnedLogResponse = await fetch(
-      'https://meijin-dot-me.microcms.io/api/v1/learned-log',
+      `https://meijin-dot-me.microcms.io/api/v1/learned-log?filters=category[equals]${categoryId}[and]date[less_than]${params.yearmonth}-32[and]date[greater_than]${params.yearmonth}`,
       {
         headers: {
           'X-API-KEY': '31a6edf1-c4cd-48b3-a1c9-f5f01e80d42f',
@@ -181,9 +206,9 @@ export default Vue.extend({
       learnedLogs,
     }
   },
-  data () {
+  data: () => {
     return {
-      learnedLogs: [] as LearnedLog[],
+      learnedLogs: {} as { contents: LearnedLog[] },
     }
   },
   computed: {
