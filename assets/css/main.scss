@@ -1,13 +1,4 @@
 @import "./base/color.scss";
-@import "./base/reset.scss";
-
-body {
-  color: $body;
-}
-
-.isHide {
-  display: none;
-}
 
 $breakpoints: (
   "sp": "screen and (max-width: 768px)",

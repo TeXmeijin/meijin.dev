@@ -79,6 +79,14 @@ export default Vue.extend({
       catchCopy: 'A Curious Web-Application Engineer',
       catchCopyIndex: 0,
       showProfileArea: false,
+      skills: [] as {
+        id: string
+        icon: {
+          url: string
+        }
+        title: string
+        body: string
+      }[],
     }
   },
   computed: {
@@ -91,7 +99,17 @@ export default Vue.extend({
       })
     },
   },
-  mounted () {
+  async mounted () {
+    // 一度きりの利用なのでAPI-KEY含めベタ打ち。このKEYはGETのみの利用なので公開できる
+    const skillsResponse = await fetch(
+      'https://meijin-dot-me.microcms.io/api/v1/skills',
+      {
+        headers: {
+          'X-API-KEY': '31a6edf1-c4cd-48b3-a1c9-f5f01e80d42f',
+        },
+      }
+    )
+    this.skills = (await skillsResponse.json()).contents
     setTimeout(() => delayedAlert.call(this, this.slowAlert), 600)
   },
   methods: {
@@ -131,6 +149,7 @@ export default Vue.extend({
   max-height: 400px;
   width: 100vw;
   background: linear-gradient(to right, lighten($primary, 25%), $primary);
+  will-change: transform;
 
   animation-name: catch-area;
   animation-duration: 0.6s;
@@ -212,7 +231,7 @@ export default Vue.extend({
   &:before {
     content: '';
     position: absolute;
-    height: 150vh;
+    height: 200vh;
     border-right: 2px solid $orange-1;
     top: 0;
     transform: rotate(30deg);
@@ -277,7 +296,7 @@ export default Vue.extend({
   letter-spacing: 1px;
   white-space: pre;
 
-  transition: opacity 0.1s;
+  transition: opacity 0.15s;
   will-change: opacity;
 }
 
@@ -404,8 +423,11 @@ export default Vue.extend({
     }
   }
 
-  &__description {
-    margin-top: 16px;
+  /**
+   * スキルはmicroCMSから取得しているコンテンツなのでv-htmlで表示する
+   */
+  & ::v-deep p {
+    margin-top: 24px;
     color: $white;
     font-size: 1rem;
     line-height: 1.5;
@@ -413,6 +435,12 @@ export default Vue.extend({
     @include mq {
       font-size: 1.2rem;
     }
+  }
+
+  & ::v-deep br {
+    content: '';
+    display: block;
+    margin-top: 16px;
   }
 }
 
