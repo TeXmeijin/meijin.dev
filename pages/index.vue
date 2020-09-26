@@ -1,126 +1,63 @@
-<template lang="pug">
-main.main-area
-  section.catch-area
-    .slide-back
-    h1.large-nick-name Meijin
-  section.message-area
-    template(v-for="(message, index) in catchMessages")
-      span.message-char(
-        v-html="message"
-        :class="{ '--is-hidden': index >= catchCopyIndex }"
-      )
-  section(
-    :class="{ '--is-hidden': !showProfileArea }"
-  ).personal-area
-    .personal-inner
-      .personal-area__container.personal-area__container--src(
-        v-lazy:background-image.container="require('@/assets/img/background/background_source_green.svg')"
-      )
-        .personal-data
-          .personal-data__line
-            figure.personal-image
-              img(
-                :src="require('@/assets/img/self.png')"
-              ).personal-image__image
-            .personal-info
-              h2.personal-info__head Yusuke Saito
-              p.personal-info__description ニックネームは”名人”
-              p.personal-info__description 奈良高専を卒業後、LIFULLにてWebサイト開発と新規事業立案に取り組む。2019年3月に教育ベンチャーNoSchoolに転職し、以後同社のCTOとしてWebサイト、iOSアプリの開発を統括。
-    .personal-simple-area
-      .personal-simple-area__container
-        h2.personal-simple-area__head Related Pages
-        a(
-          href="https://twitter.com/meijin_garden"
-          target="_blank"
-          rel="nofollow"
-        ).profile-blog
-          figure.profile-blog__image
-            img(
-              :src="require('@/assets/img/blog/icon-twitter.png')"
-              alt="twitter"
-            ).profile-blog-icon
-        a(
-          href="https://github.com/texmeijin"
-          target="_blank"
-          rel="nofollow"
-        ).profile-blog
-          figure.profile-blog__image
-            img(
-              :src="require('@/assets/img/blog/icon-github.png')"
-              alt="github"
-            ).profile-blog-icon
-        a(
-          href="https://qiita.com/mejileben"
-          target="_blank"
-          rel="nofollow"
-        ).profile-blog
-          figure.profile-blog__image
-            img(
-              :src="require('@/assets/img/blog/icon-qiita.png')"
-              alt="qiita"
-            ).profile-blog-icon
-        a(
-          href="https://note.com/meijin_garden"
-          target="_blank"
-          rel="nofollow"
-        ).profile-blog
-          figure.profile-blog__image
-            img(
-              :src="require('@/assets/img/blog/icon-note.svg')"
-              alt="note"
-            ).profile-blog-icon
-  section.personal-area
-    .personal-inner.personal-inner--skill
-      .personal-area__container.personal-area__container--skill
-        h2.personal-heading Technical Skill
-        .personal-data
-          .personal-data__line
-            figure.personal-image
-              img(
-                :src="require('@/assets/img/skill/aws.png')"
-              ).personal-image__image.personal-image__image--square
-            .personal-info
-              h2.personal-info__head Infra/Network
-              p.personal-info__description AWS/GCP両方の実務経験有り
-              p.personal-info__description AWSはEC2, CloudFront, S3, ALB, CodeDeploy, IAM等を用いて、Laravelアプリケーションの自動デプロイ環境を1人で構築した実績を持つ。GCPは人工知能系のAPIの利用・活用実績、またGAEへのNuxtアプリケーションの自動デプロイを構築した経験を保有。
-        .personal-data
-          .personal-data__line
-            figure.personal-image
-              img(
-                :src="require('@/assets/img/skill/nuxt.png')"
-              ).personal-image__image.personal-image__image--square
-            .personal-info
-              h2.personal-info__head Frontend
-              p.personal-info__description jQueryは実務経験が3年以上有り、空である程度のロジックを実装できる。また、必要に応じて処理をコンポーネント単位でClassに閉じ込める等の設計も経験があり、指導も可能。
-              p.personal-info__description Nuxtアプリケーションを自社サービスにゼロイチで導入した経験を有し、TypeScriptで型安全の恩恵を受けつつ保守性の高い開発ができる。素のJS自体の知識をある程度持っているので、独力でライブラリの選定、導入、問題解決がある程度可能。
-        .personal-data
-          .personal-data__line
-            figure.personal-image
-              img(
-                :src="require('@/assets/img/skill/laravel.png')"
-              ).personal-image__image.personal-image__image--square
-            .personal-info
-              h2.personal-info__head ServerSide
-              p.personal-info__description もっとも経験があるのはLaravel。株式会社NoSchoolにて、自社サイトをゼロイチでLaravelで構築した後、フロントエンドのNuxt移行に伴ってAPI開発に移行し、iOSアプリのリリースのために共通の認証基盤を作り上げた経験を有する。また、DDDの導入について、EntityやDTO、Repository、DI、テスト駆動開発などに挑戦している。
-              p.personal-info__description また、Ruby(Sinatra)の開発経験を3年有しており、Rspecを用いたテスト実装や、moduleを活用した開発経験がある。
-        .personal-data
-          .personal-data__line
-            figure.personal-image
-              img(
-                :src="require('@/assets/img/skill/mysql.png')"
-              ).personal-image__image.personal-image__image--square
-            .personal-info
-              h2.personal-info__head Middleware
-              p.personal-info__description SQLについてはMySQLに最も経験がある。実行計画を見た上でクエリチューニングを実施したりテーブルごとにインデックスを考慮すること、実行時にトランザクションを貼るなどの基本的な対応はできる。
-              p.personal-info__description WebサーバーはNginxもApacheも経験があるが、好んで利用するのはNginxである。
-  section.personal-area
-    .personal-simple-area
-      .personal-simple-area__container
-        h2.personal-simple-area__head Contact
-        p.personal-simple-area__message 技術向上や自社の事業（オンライン家庭教師）につながる情報交換やイベントのお誘いなど常に歓迎しています。
-        p.personal-simple-area__message.personal-simple-area__message--last ご連絡は
-          a(href="https://twitter.com/meijin_garden") Twitter
-          | までお願いします。
+<template>  
+  <main class="main-area">
+    <section class="catch-area">
+      <div class="slide-back"></div>
+      <h1 class="large-nick-name">Meijin</h1>
+    </section>
+    <section class="message-area">
+      <template v-for="(message, index) in catchMessages"><span class="message-char" v-html="message" :class="{ '--is-hidden': index >= catchCopyIndex }"></span></template>
+    </section>
+    <section class="personal-area" :class="{ '--is-hidden': !showProfileArea }">
+      <div class="personal-inner">
+        <div class="personal-area__container personal-area__container--src" v-lazy:background-image.container="require('@/assets/img/background/background_source_green.svg')">
+          <div class="personal-data">
+            <div class="personal-data__line">
+              <figure class="personal-image"><img class="personal-image__image" v-lazy="require('@/assets/img/self.jpg')"/></figure>
+              <div class="personal-info">
+                <h2 class="personal-info__head">Yusuke Saito</h2>
+                <p class="personal-info__description">ニックネームは”名人”</p>
+                <p class="personal-info__description">奈良高専を卒業後、LIFULLにてWebサイト開発と新規事業立案に取り組む。2019年3月に教育ベンチャーNoSchoolに転職し、以後同社のCTOとしてWebサイト、iOSアプリの開発を統括。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="personal-simple-area">
+        <div class="personal-simple-area__container">
+          <h2 class="personal-simple-area__head">Related Pages</h2><a class="profile-blog" href="https://twitter.com/meijin_garden" target="_blank" rel="nofollow">
+            <figure class="profile-blog__image"><img class="profile-blog-icon" v-lazy="require('@/assets/img/blog/icon-twitter.png')" alt="twitter"/></figure></a><a class="profile-blog" href="https://github.com/texmeijin" target="_blank" rel="nofollow">
+            <figure class="profile-blog__image"><img class="profile-blog-icon" v-lazy="require('@/assets/img/blog/icon-github.png')" alt="github"/></figure></a><a class="profile-blog" href="https://qiita.com/mejileben" target="_blank" rel="nofollow">
+            <figure class="profile-blog__image"><img class="profile-blog-icon" v-lazy="require('@/assets/img/blog/icon-qiita.png')" alt="qiita"/></figure></a><a class="profile-blog" href="https://note.com/meijin_garden" target="_blank" rel="nofollow">
+            <figure class="profile-blog__image"><img class="profile-blog-icon" v-lazy="require('@/assets/img/blog/icon-note.svg')" alt="note"/></figure></a>
+        </div>
+      </div>
+    </section>
+    <section class="personal-area" :class="{ '--is-hidden': !showProfileArea }">
+      <div class="personal-inner personal-inner--skill">
+        <div class="personal-area__container personal-area__container--skill">
+          <h2 class="personal-heading">Technical Skill</h2>
+          <div class="personal-data" v-for="skill in skills" :key="skill.id">
+            <div class="personal-data__line">
+              <figure class="personal-image"><img class="personal-image__image personal-image__image--square" v-lazy="skill.icon.url"/></figure>
+              <div class="personal-info">
+                <h2 class="personal-info__head">{{ skill.title }}</h2>
+                <div v-html="skill.body"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="personal-area" :class="{ '--is-hidden': !showProfileArea }">
+      <div class="personal-simple-area">
+        <div class="personal-simple-area__container">
+          <h2 class="personal-simple-area__head">Contact</h2>
+          <p class="personal-simple-area__message">技術向上や自社の事業（オンライン家庭教師）につながる情報交換やイベントのお誘いなど常に歓迎しています。</p>
+          <p class="personal-simple-area__message personal-simple-area__message--last">ご連絡は<a href="https://twitter.com/meijin_garden">Twitter</a>までお願いします。</p>
+        </div>
+      </div>
+    </section>
+  </main>
 </template>
 
 <script lang="ts">
