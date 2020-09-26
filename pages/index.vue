@@ -1,22 +1,47 @@
-<template>  
+<template>
   <main class="main-area">
     <section class="catch-area">
-      <div class="slide-back"></div>
-      <h1 class="large-nick-name">Meijin</h1>
+      <div class="slide-back" />
+      <h1 class="large-nick-name">
+        Meijin
+      </h1>
     </section>
     <section class="message-area">
-      <template v-for="(message, index) in catchMessages"><span class="message-char" v-html="message" :class="{ '--is-hidden': index >= catchCopyIndex }"></span></template>
+      <template v-for="(message, index) in catchMessages">
+        <span
+          :key="index"
+          class="message-char"
+          :class="{ '--is-hidden': index >= catchCopyIndex }"
+          v-html="message"
+        />
+      </template>
     </section>
     <section class="personal-area" :class="{ '--is-hidden': !showProfileArea }">
       <div class="personal-inner">
-        <div class="personal-area__container personal-area__container--src" v-lazy:background-image.container="require('@/assets/img/background/background_source_green.svg')">
+        <div
+          v-lazy:background-image.container="
+            require('@/assets/img/background/background_source_green.svg')
+          "
+          class="personal-area__container personal-area__container--src"
+        >
           <div class="personal-data">
             <div class="personal-data__line">
-              <figure class="personal-image"><img class="personal-image__image" v-lazy="require('@/assets/img/self.jpg')"/></figure>
+              <figure class="personal-image">
+                <img
+                  v-lazy="require('@/assets/img/self.png')"
+                  class="personal-image__image"
+                >
+              </figure>
               <div class="personal-info">
-                <h2 class="personal-info__head">Yusuke Saito</h2>
-                <p class="personal-info__description">ニックネームは”名人”</p>
-                <p class="personal-info__description">奈良高専を卒業後、LIFULLにてWebサイト開発と新規事業立案に取り組む。2019年3月に教育ベンチャーNoSchoolに転職し、以後同社のCTOとしてWebサイト、iOSアプリの開発を統括。</p>
+                <h2 class="personal-info__head">
+                  Yusuke Saito
+                </h2>
+                <p class="personal-info__description">
+                  ニックネームは”名人”
+                </p>
+                <p class="personal-info__description">
+                  奈良高専を卒業後、LIFULLにてWebサイト開発と新規事業立案に取り組む。2019年3月に教育ベンチャーNoSchoolに転職し、以後同社のCTOとしてWebサイト、iOSアプリの開発を統括。
+                </p>
               </div>
             </div>
           </div>
@@ -24,24 +49,78 @@
       </div>
       <div class="personal-simple-area">
         <div class="personal-simple-area__container">
-          <h2 class="personal-simple-area__head">Related Pages</h2><a class="profile-blog" href="https://twitter.com/meijin_garden" target="_blank" rel="nofollow">
-            <figure class="profile-blog__image"><img class="profile-blog-icon" v-lazy="require('@/assets/img/blog/icon-twitter.png')" alt="twitter"/></figure></a><a class="profile-blog" href="https://github.com/texmeijin" target="_blank" rel="nofollow">
-            <figure class="profile-blog__image"><img class="profile-blog-icon" v-lazy="require('@/assets/img/blog/icon-github.png')" alt="github"/></figure></a><a class="profile-blog" href="https://qiita.com/mejileben" target="_blank" rel="nofollow">
-            <figure class="profile-blog__image"><img class="profile-blog-icon" v-lazy="require('@/assets/img/blog/icon-qiita.png')" alt="qiita"/></figure></a><a class="profile-blog" href="https://note.com/meijin_garden" target="_blank" rel="nofollow">
-            <figure class="profile-blog__image"><img class="profile-blog-icon" v-lazy="require('@/assets/img/blog/icon-note.svg')" alt="note"/></figure></a>
+          <h2 class="personal-simple-area__head">
+            Related Pages
+          </h2>
+          <a
+            class="profile-blog"
+            href="https://twitter.com/meijin_garden"
+            target="_blank"
+            rel="nofollow"
+          >
+            <figure class="profile-blog__image">
+              <img
+                v-lazy="require('@/assets/img/blog/icon-twitter.png')"
+                class="profile-blog-icon"
+                alt="twitter"
+              ></figure></a><a
+            class="profile-blog"
+            href="https://github.com/texmeijin"
+            target="_blank"
+            rel="nofollow"
+          >
+            <figure class="profile-blog__image">
+              <img
+                v-lazy="require('@/assets/img/blog/icon-github.png')"
+                class="profile-blog-icon"
+                alt="github"
+              ></figure></a><a
+            class="profile-blog"
+            href="https://qiita.com/mejileben"
+            target="_blank"
+            rel="nofollow"
+          >
+            <figure class="profile-blog__image">
+              <img
+                v-lazy="require('@/assets/img/blog/icon-qiita.png')"
+                class="profile-blog-icon"
+                alt="qiita"
+              ></figure></a><a
+            class="profile-blog"
+            href="https://note.com/meijin_garden"
+            target="_blank"
+            rel="nofollow"
+          >
+            <figure class="profile-blog__image">
+              <img
+                v-lazy="require('@/assets/img/blog/icon-note.svg')"
+                class="profile-blog-icon"
+                alt="note"
+              >
+            </figure>
+          </a>
         </div>
       </div>
     </section>
     <section class="personal-area" :class="{ '--is-hidden': !showProfileArea }">
       <div class="personal-inner personal-inner--skill">
         <div class="personal-area__container personal-area__container--skill">
-          <h2 class="personal-heading">Technical Skill</h2>
-          <div class="personal-data" v-for="skill in skills" :key="skill.id">
+          <h2 class="personal-heading">
+            Technical Skill
+          </h2>
+          <div v-for="skill in skills" :key="skill.id" class="personal-data">
             <div class="personal-data__line">
-              <figure class="personal-image"><img class="personal-image__image personal-image__image--square" v-lazy="skill.icon.url"/></figure>
+              <figure class="personal-image">
+                <img
+                  v-lazy="skill.icon.url"
+                  class="personal-image__image personal-image__image--square"
+                >
+              </figure>
               <div class="personal-info">
-                <h2 class="personal-info__head">{{ skill.title }}</h2>
-                <div v-html="skill.body"></div>
+                <h2 class="personal-info__head">
+                  {{ skill.title }}
+                </h2>
+                <div v-html="skill.body" />
               </div>
             </div>
           </div>
@@ -51,9 +130,17 @@
     <section class="personal-area" :class="{ '--is-hidden': !showProfileArea }">
       <div class="personal-simple-area">
         <div class="personal-simple-area__container">
-          <h2 class="personal-simple-area__head">Contact</h2>
-          <p class="personal-simple-area__message">技術向上や自社の事業（オンライン家庭教師）につながる情報交換やイベントのお誘いなど常に歓迎しています。</p>
-          <p class="personal-simple-area__message personal-simple-area__message--last">ご連絡は<a href="https://twitter.com/meijin_garden">Twitter</a>までお願いします。</p>
+          <h2 class="personal-simple-area__head">
+            Contact
+          </h2>
+          <p class="personal-simple-area__message">
+            技術向上や自社の事業（オンライン家庭教師）につながる情報交換やイベントのお誘いなど常に歓迎しています。
+          </p>
+          <p
+            class="personal-simple-area__message personal-simple-area__message--last"
+          >
+            ご連絡は<a href="https://twitter.com/meijin_garden">Twitter</a>までお願いします。
+          </p>
         </div>
       </div>
     </section>
@@ -178,7 +265,7 @@ export default Vue.extend({
   color: $orange-0;
   font-weight: bold;
 
-  @include mq('tb') {
+  @include mq("tb") {
     left: 20%;
   }
 
@@ -188,7 +275,7 @@ export default Vue.extend({
   }
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     height: 200vw;
     border-left: 2px solid $white;
@@ -229,7 +316,7 @@ export default Vue.extend({
   box-sizing: border-box;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     height: 200vh;
     border-right: 2px solid $orange-1;
@@ -242,7 +329,7 @@ export default Vue.extend({
     animation-timing-function: ease-in-out;
   }
 
-  @include mq('sp-only') {
+  @include mq("sp-only") {
     height: 236px;
 
     &:before {
@@ -252,7 +339,7 @@ export default Vue.extend({
     }
   }
 
-  @include mq('tb') {
+  @include mq("tb") {
     width: 60%;
     margin: 0 auto;
     padding-left: 18rem;
