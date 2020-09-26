@@ -1,102 +1,150 @@
-<template lang="pug">
-main.main-area
-  section.catch-area
-    .slide-back
-    h1.large-nick-name Meijin
-  section.message-area
-    template(v-for="(message, index) in catchMessages")
-      span.message-char(
-        v-html="message"
-        :class="{ '--is-hidden': index >= catchCopyIndex }"
-      )
-  section(
-    :class="{ '--is-hidden': !showProfileArea }"
-  ).personal-area
-    .personal-inner
-      .personal-area__container.personal-area__container--src(
-        v-lazy:background-image.container="require('@/assets/img/background/background_source_green.svg')"
-      )
-        .personal-data
-          .personal-data__line
-            figure.personal-image
-              img(
-                v-lazy="require('@/assets/img/self.jpg')"
-              ).personal-image__image
-            .personal-info
-              h2.personal-info__head Yusuke Saito
-              p.personal-info__description ニックネームは”名人”
-              p.personal-info__description 奈良高専を卒業後、LIFULLにてWebサイト開発と新規事業立案に取り組む。2019年3月に教育ベンチャーNoSchoolに転職し、以後同社のCTOとしてWebサイト、iOSアプリの開発を統括。
-    .personal-simple-area
-      .personal-simple-area__container
-        h2.personal-simple-area__head Related Pages
-        a(
-          href="https://twitter.com/meijin_garden"
-          target="_blank"
-          rel="nofollow"
-        ).profile-blog
-          figure.profile-blog__image
-            img(
-              v-lazy="require('@/assets/img/blog/icon-twitter.png')"
-              alt="twitter"
-            ).profile-blog-icon
-        a(
-          href="https://github.com/texmeijin"
-          target="_blank"
-          rel="nofollow"
-        ).profile-blog
-          figure.profile-blog__image
-            img(
-              v-lazy="require('@/assets/img/blog/icon-github.png')"
-              alt="github"
-            ).profile-blog-icon
-        a(
-          href="https://qiita.com/mejileben"
-          target="_blank"
-          rel="nofollow"
-        ).profile-blog
-          figure.profile-blog__image
-            img(
-              v-lazy="require('@/assets/img/blog/icon-qiita.png')"
-              alt="qiita"
-            ).profile-blog-icon
-        a(
-          href="https://note.com/meijin_garden"
-          target="_blank"
-          rel="nofollow"
-        ).profile-blog
-          figure.profile-blog__image
-            img(
-              v-lazy="require('@/assets/img/blog/icon-note.svg')"
-              alt="note"
-            ).profile-blog-icon
-  section(
-    :class="{ '--is-hidden': !showProfileArea }"
-  ).personal-area
-    .personal-inner.personal-inner--skill
-      .personal-area__container.personal-area__container--skill
-        h2.personal-heading Technical Skill
-        .personal-data(
-          v-for="skill in skills"
-          :key="skill.id"
-        )
-          .personal-data__line
-            figure.personal-image
-              img(
-                v-lazy="skill.icon.url"
-              ).personal-image__image.personal-image__image--square
-            .personal-info
-              h2.personal-info__head {{ skill.title }}
-              div(v-html="skill.body")
-  section(
-    :class="{ '--is-hidden': !showProfileArea }"
-  ).personal-area
-    .personal-simple-area
-      .personal-simple-area__container
-        h2.personal-simple-area__head Contact
-        p.personal-simple-area__message 技術向上や自社の事業（オンライン家庭教師）につながる情報交換やイベントのお誘いなど常に歓迎しています。
-        p.personal-simple-area__message.personal-simple-area__message--last ご連絡は
-          a(href="https://twitter.com/meijin_garden") Twitter
-          | までお願いします。
+<template>
+  <main class="main-area">
+    <section class="catch-area">
+      <div class="slide-back" />
+      <h1 class="large-nick-name">
+        Meijin
+      </h1>
+    </section>
+    <section class="message-area">
+      <template v-for="(message, index) in catchMessages">
+        <span
+          :key="index"
+          class="message-char"
+          :class="{ '--is-hidden': index >= catchCopyIndex }"
+          v-html="message"
+        />
+      </template>
+    </section>
+    <section class="personal-area" :class="{ '--is-hidden': !showProfileArea }">
+      <div class="personal-inner">
+        <div
+          v-lazy:background-image.container="
+            require('@/assets/img/background/background_source_green.svg')
+          "
+          class="personal-area__container personal-area__container--src"
+        >
+          <div class="personal-data">
+            <div class="personal-data__line">
+              <figure class="personal-image">
+                <img
+                  v-lazy="require('@/assets/img/self.png')"
+                  class="personal-image__image"
+                >
+              </figure>
+              <div class="personal-info">
+                <h2 class="personal-info__head">
+                  Yusuke Saito
+                </h2>
+                <p class="personal-info__description">
+                  ニックネームは”名人”
+                </p>
+                <p class="personal-info__description">
+                  奈良高専を卒業後、LIFULLにてWebサイト開発と新規事業立案に取り組む。2019年3月に教育ベンチャーNoSchoolに転職し、以後同社のCTOとしてWebサイト、iOSアプリの開発を統括。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="personal-simple-area">
+        <div class="personal-simple-area__container">
+          <h2 class="personal-simple-area__head">
+            Related Pages
+          </h2>
+          <a
+            class="profile-blog"
+            href="https://twitter.com/meijin_garden"
+            target="_blank"
+            rel="nofollow"
+          >
+            <figure class="profile-blog__image">
+              <img
+                v-lazy="require('@/assets/img/blog/icon-twitter.png')"
+                class="profile-blog-icon"
+                alt="twitter"
+              ></figure></a><a
+            class="profile-blog"
+            href="https://github.com/texmeijin"
+            target="_blank"
+            rel="nofollow"
+          >
+            <figure class="profile-blog__image">
+              <img
+                v-lazy="require('@/assets/img/blog/icon-github.png')"
+                class="profile-blog-icon"
+                alt="github"
+              ></figure></a><a
+            class="profile-blog"
+            href="https://qiita.com/mejileben"
+            target="_blank"
+            rel="nofollow"
+          >
+            <figure class="profile-blog__image">
+              <img
+                v-lazy="require('@/assets/img/blog/icon-qiita.png')"
+                class="profile-blog-icon"
+                alt="qiita"
+              ></figure></a><a
+            class="profile-blog"
+            href="https://note.com/meijin_garden"
+            target="_blank"
+            rel="nofollow"
+          >
+            <figure class="profile-blog__image">
+              <img
+                v-lazy="require('@/assets/img/blog/icon-note.svg')"
+                class="profile-blog-icon"
+                alt="note"
+              >
+            </figure>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="personal-area" :class="{ '--is-hidden': !showProfileArea }">
+      <div class="personal-inner personal-inner--skill">
+        <div class="personal-area__container personal-area__container--skill">
+          <h2 class="personal-heading">
+            Technical Skill
+          </h2>
+          <div v-for="skill in skills" :key="skill.id" class="personal-data">
+            <div class="personal-data__line">
+              <figure class="personal-image">
+                <img
+                  v-lazy="skill.icon.url"
+                  class="personal-image__image personal-image__image--square"
+                >
+              </figure>
+              <div class="personal-info">
+                <h2 class="personal-info__head">
+                  {{ skill.title }}
+                </h2>
+                <div v-html="skill.body" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="personal-area" :class="{ '--is-hidden': !showProfileArea }">
+      <div class="personal-simple-area">
+        <div class="personal-simple-area__container">
+          <h2 class="personal-simple-area__head">
+            Contact
+          </h2>
+          <p class="personal-simple-area__message">
+            技術向上や自社の事業（オンライン家庭教師）につながる情報交換やイベントのお誘いなど常に歓迎しています。
+          </p>
+          <p
+            class="personal-simple-area__message personal-simple-area__message--last"
+          >
+            ご連絡は<a href="https://twitter.com/meijin_garden">Twitter</a>までお願いします。
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
 </template>
 
 <script lang="ts">
@@ -217,7 +265,7 @@ export default Vue.extend({
   color: $orange-0;
   font-weight: bold;
 
-  @include mq('tb') {
+  @include mq("tb") {
     left: 20%;
   }
 
@@ -227,7 +275,7 @@ export default Vue.extend({
   }
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     height: 200vw;
     border-left: 2px solid $white;
@@ -268,7 +316,7 @@ export default Vue.extend({
   box-sizing: border-box;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     height: 200vh;
     border-right: 2px solid $orange-1;
@@ -281,7 +329,7 @@ export default Vue.extend({
     animation-timing-function: ease-in-out;
   }
 
-  @include mq('sp-only') {
+  @include mq("sp-only") {
     height: 236px;
 
     &:before {
@@ -291,7 +339,7 @@ export default Vue.extend({
     }
   }
 
-  @include mq('tb') {
+  @include mq("tb") {
     width: 60%;
     margin: 0 auto;
     padding-left: 18rem;
