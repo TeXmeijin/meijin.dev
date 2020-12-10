@@ -190,7 +190,7 @@ function clearAlert () {
 export default Vue.extend({
   data: () => {
     return {
-      catchCopy: 'A Curious Web-Application Engineer',
+      catchCopy: 'A+Progressive+Web Full-stack+Developer',
       catchCopyIndex: 0,
       showProfileArea: false,
       skills: [] as {
@@ -206,7 +206,7 @@ export default Vue.extend({
   computed: {
     catchMessages (): string[] {
       return Array.from(this.catchCopy).map((char) => {
-        if (char === ' ') {
+        if (char === '+') {
           return '<br>'
         }
         return `<span>${char}</span>`
@@ -522,10 +522,6 @@ export default Vue.extend({
   margin-left: 16px;
   padding-top: 4px;
   color: $white;
-
-  @include mq {
-    padding-top: calc(36px - 2.4rem / 2);
-  }
 
   &__head {
     font-weight: bold;

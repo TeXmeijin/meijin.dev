@@ -1,4 +1,4 @@
-const baseName = 'NoSchool Corp. CTO'
+const baseName = '株式会社NoSchool CTO'
 const baseDesc =
   'Webを中心にIT技術による価値創造を仕事としている名人（Yusuke Saito）のポートフォリオ。経歴、SNSやGithubのURL、および技術力について掲載しています'
 const baseUrl = 'https://meijin.me'
