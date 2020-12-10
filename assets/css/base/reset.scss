@@ -124,7 +124,8 @@ body {
   font-family: "Comfortaa", Roboto, "Helvetica Neue",
     "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
   font-size: 16px;
-  word-spacing: 1px;
+  letter-spacing: 1px;
+  word-spacing: 2px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
@@ -133,7 +134,7 @@ body {
   box-sizing: border-box;
   margin: 0;
   color: $body;
-    line-height: 1;
+  line-height: 1.8;
   font-size: 16px;
 }
 
