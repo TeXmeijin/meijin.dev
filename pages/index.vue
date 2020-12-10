@@ -40,7 +40,14 @@
                   ニックネームは”名人”
                 </p>
                 <p class="personal-info__description">
-                  奈良高専を卒業後、LIFULLにてWebサイト開発と新規事業立案に取り組む。2019年3月に教育ベンチャーNoSchoolに転職し、以後同社のCTOとしてWebサイト、iOSアプリの開発を統括。
+                  奈良高専を卒業後、2016年に株式会社LIFULLにてWebサイト開発と新規事業立案に取り組む。
+                </p>
+                <p class="personal-info__description">
+                  2019年に教育ベンチャーNoSchoolに転職し、以後同社のCTOとしてWebサイト、スマートフォンアプリの開発を統括。
+                </p>
+                <p class="personal-info__description">
+                  Web技術を中心にデザインも含めたカバー範囲の広いスキルセットと、
+                  要件定義からリリースまでワンストップでプロジェクトマネジメントできる点がセールスポイント。
                 </p>
               </div>
             </div>
@@ -50,7 +57,7 @@
       <div class="personal-simple-area">
         <div class="personal-simple-area__container">
           <h2 class="personal-simple-area__head">
-            Related Pages
+            Related Web Pages
           </h2>
           <a
             class="profile-blog"
@@ -63,7 +70,10 @@
                 v-lazy="require('@/assets/img/blog/icon-twitter.png')"
                 class="profile-blog-icon"
                 alt="twitter"
-              ></figure></a><a
+              >
+            </figure>
+          </a>
+          <a
             class="profile-blog"
             href="https://github.com/texmeijin"
             target="_blank"
@@ -74,7 +84,10 @@
                 v-lazy="require('@/assets/img/blog/icon-github.png')"
                 class="profile-blog-icon"
                 alt="github"
-              ></figure></a><a
+              >
+            </figure>
+          </a>
+          <a
             class="profile-blog"
             href="https://qiita.com/mejileben"
             target="_blank"
@@ -85,7 +98,24 @@
                 v-lazy="require('@/assets/img/blog/icon-qiita.png')"
                 class="profile-blog-icon"
                 alt="qiita"
-              ></figure></a><a
+              >
+            </figure>
+          </a>
+          <a
+            class="profile-blog"
+            href="https://lapras.com/public/OF7HQIA"
+            target="_blank"
+            rel="nofollow"
+          >
+            <figure class="profile-blog__image">
+              <img
+                v-lazy="require('@/assets/img/blog/lapras.svg')"
+                class="profile-blog-icon"
+                alt="LAPRAS"
+              >
+            </figure>
+          </a>
+          <a
             class="profile-blog"
             href="https://note.com/meijin_garden"
             target="_blank"
@@ -133,13 +163,12 @@
           <h2 class="personal-simple-area__head">
             Contact
           </h2>
-          <p class="personal-simple-area__message">
-            技術向上や自社の事業（オンライン家庭教師）につながる情報交換やイベントのお誘いなど常に歓迎しています。
-          </p>
           <p
             class="personal-simple-area__message personal-simple-area__message--last"
           >
-            ご連絡は<a href="https://twitter.com/meijin_garden">Twitter</a>までお願いします。
+            ご連絡は
+            <a href="https://twitter.com/meijin_garden">Twitter</a>
+            までお願いします。
           </p>
         </div>
       </div>
@@ -149,9 +178,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-
 let timeoutID
-
 function delayedAlert (slowAlert) {
   timeoutID = window.setTimeout(slowAlert, 60)
 }
@@ -202,7 +229,6 @@ export default Vue.extend({
   methods: {
     slowAlert () {
       this.catchCopyIndex++
-
       if (this.catchCopyIndex > this.catchCopy.length) {
         clearAlert()
         this.showProfileArea = true
@@ -265,7 +291,7 @@ export default Vue.extend({
   color: $orange-0;
   font-weight: bold;
 
-  @include mq("tb") {
+  @include mq('tb') {
     left: 20%;
   }
 
@@ -275,7 +301,7 @@ export default Vue.extend({
   }
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     height: 200vw;
     border-left: 2px solid $white;
@@ -316,7 +342,7 @@ export default Vue.extend({
   box-sizing: border-box;
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     height: 200vh;
     border-right: 2px solid $orange-1;
@@ -329,7 +355,7 @@ export default Vue.extend({
     animation-timing-function: ease-in-out;
   }
 
-  @include mq("sp-only") {
+  @include mq('sp-only') {
     height: 236px;
 
     &:before {
@@ -339,7 +365,7 @@ export default Vue.extend({
     }
   }
 
-  @include mq("tb") {
+  @include mq('tb') {
     width: 60%;
     margin: 0 auto;
     padding-left: 18rem;
@@ -392,7 +418,7 @@ export default Vue.extend({
   margin-top: -16px;
   margin-bottom: -32px;
 
-  padding: 48px 0;
+  padding: 60px 0;
   transition: 0.8s;
 
   &__container {
@@ -454,7 +480,7 @@ export default Vue.extend({
 
   @include mq {
     margin-left: 25%;
-    padding: 80px 0 16px;
+    padding: 64px 0 16px;
     margin-top: 56px;
     width: 80vw;
   }
@@ -467,7 +493,7 @@ export default Vue.extend({
     margin-bottom: 32px;
 
     @include mq {
-      margin-bottom: 64px;
+      margin-bottom: 80px;
     }
   }
 }
@@ -494,7 +520,7 @@ export default Vue.extend({
 
 .personal-info {
   margin-left: 16px;
-  padding-top: calc(28px - 1.8rem / 2);
+  padding-top: 4px;
   color: $white;
 
   @include mq {
@@ -517,7 +543,7 @@ export default Vue.extend({
     margin-top: 24px;
     color: $white;
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.8;
 
     @include mq {
       font-size: 1.2rem;
