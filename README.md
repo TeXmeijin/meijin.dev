@@ -1,23 +1,11 @@
-# landing_page_maker
+# meijin.me
 
-> You can make landing page easily by Nuxt.js
+以下サイトで公開しているポートフォリオサイトのソースコードです。
 
-## Build Setup
+https://meijin.me/
 
-``` bash
-# install dependencies
-$ npm install # Or yarn install
+## アーキテクチャ
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+Nuxtを使ってはいますが、ペライチなので全部１ファイルに突っ込んでシンプルにしています。
 
-# build for production and launch server
-$ npm run build
-$ npm start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
-
+スキルに関する記述は随時更新できるようにmicroCMS経由で取得可能にしています。
