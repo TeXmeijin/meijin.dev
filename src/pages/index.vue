@@ -178,6 +178,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+
 let timeoutID
 function delayedAlert (slowAlert) {
   timeoutID = window.setTimeout(slowAlert, 60)
@@ -188,7 +189,7 @@ function clearAlert () {
 }
 
 export default Vue.extend({
-  data: () => {
+  data () {
     return {
       catchCopy: 'Progressive+Web Developer',
       catchCopyIndex: 0,
