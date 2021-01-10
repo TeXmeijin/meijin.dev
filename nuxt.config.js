@@ -1,16 +1,17 @@
-const baseName = '株式会社NoSchool CTO'
+const baseName = '名人のポートフォリオ'
 const baseDesc =
-  'Webを中心にIT技術による価値創造を仕事としている名人（Yusuke Saito）のポートフォリオ。経歴、SNSやGithubのURL、および技術力について掲載しています'
+  'Web技術を中心にITによる価値創造を仕事としている名人（Yusuke Saito）のポートフォリオ。経歴、SNSやGithubのURL、およびスキルについて掲載しています'
 const baseUrl = 'https://meijin.me'
 const baseOgp = '/ogp.jpg'
 
 module.exports = {
   ssr: false,
+  srcDir: 'src',
   /*
    ** Headers of the page
    */
   head: {
-    title: `名人のポートフォリオ | ${baseName}`,
+    title: `${baseName}`,
     meta: [
       {
         charset: 'utf-8',
