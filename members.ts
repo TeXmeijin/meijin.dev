@@ -1,4 +1,4 @@
-import { Member } from '@/src/types'
+import { Member } from '@/types'
 export const members: Member[] = [
   {
     name: 'Meijin',
@@ -11,7 +11,7 @@ export const members: Member[] = [
       'https://zenn.dev/meijin/feed',
       'https://qiita.com/mejileben/feed.atom',
     ],
-    includeUrlRegex: 'qiita.com|zenn.dev',
+    includeUrlRegex: 'qiita.com|zenn.dev|note.com',
     twitterUsername: 'meijin_garden',
     githubUsername: 'TeXmeijin',
     websiteUrl: 'https://meijin.me',

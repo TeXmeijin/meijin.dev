@@ -76,6 +76,6 @@ async function getMemberFeedItems (member: Member): Promise<PostItem[]> {
     if (items) { allPostItems = [...allPostItems, ...items] }
   }
   allPostItems.sort((a, b) => b.dateMiliSeconds - a.dateMiliSeconds)
-  fs.ensureDirSync('.contents')
-  fs.writeJsonSync('.contents/posts.json', allPostItems)
+  fs.ensureDirSync('./src/.contents')
+  fs.writeJsonSync('./src/.contents/posts.json', allPostItems)
 })()

@@ -11,3 +11,6 @@ npm-debug.log
 dist
 
 .DS_Store
+
+# generated data
+/.contents
