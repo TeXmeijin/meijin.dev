@@ -57,7 +57,7 @@
       <div class="personal-simple-area">
         <div class="personal-simple-area__container">
           <h2 class="personal-simple-area__head">
-            Related Web Pages
+            Web Activities
           </h2>
           <a
             class="profile-blog"
