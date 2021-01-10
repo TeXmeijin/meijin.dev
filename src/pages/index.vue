@@ -190,7 +190,7 @@ function clearAlert () {
 export default Vue.extend({
   data: () => {
     return {
-      catchCopy: 'A+Progressive+Web Full-stack+Developer',
+      catchCopy: 'Progressive+Web Developer',
       catchCopyIndex: 0,
       showProfileArea: false,
       skills: [] as {
