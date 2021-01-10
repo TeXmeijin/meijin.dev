@@ -43,11 +43,11 @@
                   奈良高専を卒業後、2016年に株式会社LIFULLにてWebサイト開発と新規事業立案に取り組む。
                 </p>
                 <p class="personal-info__description">
-                  2019年に教育ベンチャーNoSchoolに転職し、以後同社のCTOとしてWebサイト、スマートフォンアプリの開発を統括。
+                  2019年より教育ベンチャーNoSchoolのCTOとしてWebアプリケーションおよびスマートフォンアプリの技術選定と開発を統括。
                 </p>
                 <p class="personal-info__description">
-                  Web技術を中心にデザインも含めたカバー範囲の広いスキルセットと、
-                  要件定義からリリースまでワンストップでプロジェクトマネジメントできる点がセールスポイント。
+                  Web技術を中心にデザインやSEOも含めた幅広いスキルセットを発揮しながら、
+                  要件定義からリリースまでワンストップでプロジェクトマネジメントします。
                 </p>
               </div>
             </div>
@@ -59,76 +59,113 @@
           <h2 class="personal-simple-area__head">
             Web Activities
           </h2>
-          <a
-            class="profile-blog"
-            href="https://twitter.com/meijin_garden"
-            target="_blank"
-            rel="nofollow"
-          >
-            <figure class="profile-blog__image">
-              <img
-                v-lazy="require('@/assets/img/blog/icon-twitter.png')"
-                class="profile-blog-icon"
-                alt="twitter"
+          <ul class="web-links">
+            <li class="profile-blog">
+              <a
+                class="profile-blog"
+                href="https://twitter.com/meijin_garden"
+                target="_blank"
+                rel="nofollow"
               >
-            </figure>
-          </a>
-          <a
-            class="profile-blog"
-            href="https://github.com/texmeijin"
-            target="_blank"
-            rel="nofollow"
-          >
-            <figure class="profile-blog__image">
-              <img
-                v-lazy="require('@/assets/img/blog/icon-github.png')"
-                class="profile-blog-icon"
-                alt="github"
+                <figure class="profile-blog__image">
+                  <img
+                    v-lazy="require('@/assets/img/blog/icon-twitter.png')"
+                    class="profile-blog-icon"
+                    alt="twitter"
+                  >
+                </figure>
+              </a>
+            </li>
+            <li class="profile-blog">
+              <a
+                class="profile-blog"
+                href="https://github.com/texmeijin"
+                target="_blank"
+                rel="nofollow"
               >
-            </figure>
-          </a>
-          <a
-            class="profile-blog"
-            href="https://qiita.com/mejileben"
-            target="_blank"
-            rel="nofollow"
-          >
-            <figure class="profile-blog__image">
-              <img
-                v-lazy="require('@/assets/img/blog/icon-qiita.png')"
-                class="profile-blog-icon"
-                alt="qiita"
+                <figure class="profile-blog__image">
+                  <img
+                    v-lazy="require('@/assets/img/blog/icon-github.png')"
+                    class="profile-blog-icon"
+                    alt="github"
+                  >
+                </figure>
+              </a>
+            </li>
+            <li class="profile-blog">
+              <a
+                class="profile-blog"
+                href="https://qiita.com/mejileben"
+                target="_blank"
+                rel="nofollow"
               >
-            </figure>
-          </a>
-          <a
-            class="profile-blog"
-            href="https://lapras.com/public/OF7HQIA"
-            target="_blank"
-            rel="nofollow"
-          >
-            <figure class="profile-blog__image">
-              <img
-                v-lazy="require('@/assets/img/blog/lapras.svg')"
-                class="profile-blog-icon"
-                alt="LAPRAS"
+                <figure class="profile-blog__image">
+                  <img
+                    v-lazy="require('@/assets/img/blog/icon-qiita.png')"
+                    class="profile-blog-icon"
+                    alt="qiita"
+                  >
+                </figure>
+              </a>
+            </li>
+            <li class="profile-blog">
+              <a
+                class="profile-blog"
+                href="https://lapras.com/public/OF7HQIA"
+                target="_blank"
+                rel="nofollow"
               >
-            </figure>
-          </a>
-          <a
-            class="profile-blog"
-            href="https://note.com/meijin_garden"
-            target="_blank"
-            rel="nofollow"
-          >
-            <figure class="profile-blog__image">
-              <img
-                v-lazy="require('@/assets/img/blog/icon-note.svg')"
-                class="profile-blog-icon"
-                alt="note"
+                <figure class="profile-blog__image">
+                  <img
+                    v-lazy="require('@/assets/img/blog/lapras.svg')"
+                    class="profile-blog-icon"
+                    alt="LAPRAS"
+                  >
+                </figure>
+              </a>
+            </li>
+            <li class="profile-blog">
+              <a
+                class="profile-blog"
+                href="https://note.com/meijin_garden"
+                target="_blank"
+                rel="nofollow"
               >
-            </figure>
-          </a>
+                <figure class="profile-blog__image">
+                  <img
+                    v-lazy="require('@/assets/img/blog/icon-note.svg')"
+                    class="profile-blog-icon"
+                    alt="note"
+                  >
+                </figure>
+              </a>
+            </li>
+          </ul>
+          <ul class="articles">
+            <li v-for="article in showPosts" :key="article.link" class="articles__item article">
+              <a :href="article.link" target="_blank" rel="nofollow" class="article__link link">
+                <span class="link__meta">
+                  <div class="blog">
+                    <img :src="getFaviconSrcFromURL(article.link)" :alt="article.authorName" width="24" height="24">
+                    <span class="blog__name">
+                      {{ getHostFromURL(article.link) }}
+                    </span>
+                  </div>
+                  <span class="date">
+                    {{ formatISODate(article.isoDate) }}
+                  </span>
+                </span>
+                <span class="link__name">
+                  {{ article.title }}
+                </span>
+              </a>
+            </li>
+          </ul>
+          <div v-if="showLinkCount > 0" class="load-more">
+            <button class="load-more__button" @click="showLinkCount = 0">
+              <span>LOAD MORE...</span>
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -178,6 +215,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import posts from '@/.contents/posts.json'
+import { getFaviconSrcFromHostname, getHostFromURL } from '../modules/shared'
+import { PostItem } from '~/types'
+
 let timeoutID
 function delayedAlert (slowAlert) {
   timeoutID = window.setTimeout(slowAlert, 60)
@@ -188,7 +229,7 @@ function clearAlert () {
 }
 
 export default Vue.extend({
-  data: () => {
+  data () {
     return {
       catchCopy: 'Progressive+Web Developer',
       catchCopyIndex: 0,
@@ -201,6 +242,8 @@ export default Vue.extend({
         title: string
         body: string
       }[],
+      showLinkCount: 5,
+      posts,
     }
   },
   computed: {
@@ -211,6 +254,13 @@ export default Vue.extend({
         }
         return `<span>${char}</span>`
       })
+    },
+    showPosts (): PostItem[] {
+      const showPosts = posts as PostItem[]
+      if (this.showLinkCount) {
+        return showPosts.slice(0, this.showLinkCount)
+      }
+      return showPosts
     },
   },
   async mounted () {
@@ -235,6 +285,16 @@ export default Vue.extend({
         return
       }
       delayedAlert(this.slowAlert)
+    },
+    getHostFromURL (url: string) {
+      return getHostFromURL(url)
+    },
+    getFaviconSrcFromURL (url: string) {
+      return getFaviconSrcFromHostname(getHostFromURL(url))
+    },
+    formatISODate (isoDate?: string) {
+      const date = new Date(isoDate ?? '')
+      return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
     },
   },
 })
@@ -261,7 +321,7 @@ export default Vue.extend({
   height: 100vw;
   max-height: 400px;
   width: 100vw;
-  background: linear-gradient(to right, lighten($primary, 25%), $primary);
+  background: linear-gradient(to top, lighten($primary, 25%), $primary);
   will-change: transform;
 
   animation-name: catch-area;
@@ -285,7 +345,7 @@ export default Vue.extend({
 
 .large-nick-name {
   position: absolute;
-  bottom: 20px;
+  bottom: 0;
   left: 8px;
   font-size: 6rem;
   color: $orange-0;
@@ -356,7 +416,7 @@ export default Vue.extend({
   }
 
   @include mq('sp-only') {
-    height: 236px;
+    height: 140px;
 
     &:before {
       box-sizing: border-box;
@@ -418,6 +478,10 @@ export default Vue.extend({
   margin-top: -16px;
   margin-bottom: -32px;
 
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   padding: 60px 0;
   transition: 0.8s;
 
@@ -464,7 +528,7 @@ export default Vue.extend({
   text-align: center;
   font-weight: bold;
   margin-top: 80px;
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: $white;
 
   @include mq {
@@ -520,7 +584,7 @@ export default Vue.extend({
 
 .personal-info {
   margin-left: 16px;
-  padding-top: 4px;
+  padding-top: 12px;
   color: $white;
 
   &__head {
@@ -528,8 +592,12 @@ export default Vue.extend({
     font-size: 1.8rem;
 
     @include mq {
-      font-size: 2.4rem;
+      font-size: 1.8rem;
     }
+  }
+
+  &__description {
+    font-size: .9rem;
   }
 
   /**
@@ -539,17 +607,86 @@ export default Vue.extend({
     margin-top: 24px;
     color: $white;
     font-size: 1rem;
-    line-height: 1.8;
-
-    @include mq {
-      font-size: 1.2rem;
-    }
+    line-height: 1.6;
   }
 
   & ::v-deep br {
     content: '';
     display: block;
     margin-top: 16px;
+  }
+}
+
+.web-links {
+  @include mq {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.articles {
+  margin: 16px auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.article {
+  @include mq {
+    max-width: 632px;
+  }
+  padding: 16px 8px;
+  border-top: 1px solid $grey-light4;
+  display: flex;
+
+  .link {
+    width: 100%;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+
+    &__meta {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__name {
+      margin-top: 8px;
+    }
+  }
+
+  .blog {
+    display: flex;
+    align-items: center;
+    font-size: .8rem;
+    color: $grey;
+
+    &__name {
+      margin-left: 8px;
+    }
+  }
+
+  .date {
+    font-size: .8rem;
+    color: $grey;
+  }
+}
+
+.load-more {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+
+  &__button {
+    padding: 8px;
+    border: 0;
+    border-bottom: 1px solid $grey-light4;
+    font-size: 1.2rem;
+    background: transparent;
+    color: $body;
   }
 }
 
@@ -589,11 +726,11 @@ export default Vue.extend({
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
+  padding: 0 16px;
 
   &__image {
     height: 80px;
-    width: 155px;
+    max-width: 155px;
     display: flex;
     justify-content: center;
   }

@@ -8,15 +8,17 @@
       "esnext.asynciterable",
       "dom"
     ],
-    "noImplicitThis": true,
-    "esModuleInterop": true,
-    "noImplicitAny": false,
-    "experimentalDecorators": true,
     "allowJs": true,
-    "sourceMap": true,
-    "strict": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "baseUrl": ".",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": "src",
     "paths": {
       "~/*": [
         "./*"
@@ -33,6 +35,7 @@
       "vuetify"
     ]
   },
+  "include": ["**/*.ts", "**/*.vue"],
   "exclude": [
     "node_modules"
   ]
