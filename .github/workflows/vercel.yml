@@ -1,0 +1,11 @@
+name: Trigger Vercel Build
+on:
+  schedule:
+    - cron: '30 * * * *' # Once a hour
+jobs:
+  build:
+    name: Request Vercel Webhook
+    runs-on: ubuntu-latest
+    steps:
+      - name: POST to Build Hook
+        run: curl -X POST -d {} ${{ secrets.VERCEL_HOOK }}
