@@ -1,5 +1,5 @@
 <template>
-  <main class="main-area">
+  <div class="main-area">
     <section class="catch-area">
       <div class="slide-back" />
       <h1 class="large-nick-name">
@@ -210,7 +210,7 @@
         </div>
       </div>
     </section>
-  </main>
+  </div>
 </template>
 
 <script lang="ts">

@@ -102,10 +102,13 @@ module.exports = {
       },
     ],
   ],
-  buildModules: ['@nuxt/typescript-build'],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/google-fonts'],
   styleResources: {
     scss: ['~/assets/css/main.scss'],
   },
+  css: [
+    '~/assets/css/main.scss',
+  ],
   /*
    ** Build configuration
    */
@@ -114,6 +117,10 @@ module.exports = {
      ** Run ESLint on save
      */
     extend (config, { isDev, isClient }) {
+      config.node = {
+        fs: 'empty',
+      }
+
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -123,5 +130,11 @@ module.exports = {
         })
       }
     },
+  },
+  googleFonts: {
+    families: {
+      'Russo+One': true,
+    },
+    display: 'swap',
   },
 }

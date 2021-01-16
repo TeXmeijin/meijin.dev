@@ -34,7 +34,7 @@
       "vuetify"
     ]
   },
-  "include": ["**/*.ts", "**/*.vue"],
+  "include": ["src/*.ts", "**/*.vue"],
   "exclude": [
     "node_modules"
   ]

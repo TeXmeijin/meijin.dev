@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import Parser from 'rss-parser'
-import { members } from '../../members'
-import { PostItem, Member } from '../types'
+import { members } from '../members'
+import { PostItem, Member } from '../src/types'
 export default {}
 
 type FeedItem = {
@@ -76,6 +76,6 @@ async function getMemberFeedItems (member: Member): Promise<PostItem[]> {
     if (items) { allPostItems = [...allPostItems, ...items] }
   }
   allPostItems.sort((a, b) => b.dateMiliSeconds - a.dateMiliSeconds)
-  fs.ensureDirSync('./src/.contents')
-  fs.writeJsonSync('./src/.contents/posts.json', allPostItems)
+  fs.ensureDirSync('../src/.contents')
+  fs.writeJsonSync('../src/.contents/posts.json', allPostItems)
 })()

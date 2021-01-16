@@ -1,6 +1,7 @@
-<template lang="pug">
-.wrapper
-  nuxt
+<template>
+  <main class="wrapper">
+    <nuxt />
+  </main>
 </template>
 
 <style lang="scss">
