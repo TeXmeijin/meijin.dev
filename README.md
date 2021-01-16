@@ -1,11 +1,15 @@
-# meijin.me
+# meijin.dev
 
-以下サイトで公開しているポートフォリオサイトのソースコードです。
+[Meijin.dev](https://meijin.dev) is a profile site of meijin, a web developer, who loves TypeScript, Testing, Software Architecture.
 
-https://meijin.me/
+# technique
 
-## アーキテクチャ
-
-Nuxtを使ってはいますが、ペライチなので全部１ファイルに突っ込んでシンプルにしています。
-
-スキルに関する記述は随時更新できるようにmicroCMS経由で取得可能にしています。
+- Nuxt.js
+  - TypeScript
+- Vercel
+- RSS feed
+  - my blogs are fetched from several blog's RSS feed.
+  - **see** src/builder/posts.ts
+- GitHub Actions
+  - cron deploy used GitHub Actions.
+  - **see** .github/workflows/vercel.yml
