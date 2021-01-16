@@ -14,6 +14,6 @@ export const members: Member[] = [
     includeUrlRegex: 'qiita.com|zenn.dev|note.com',
     twitterUsername: 'meijin_garden',
     githubUsername: 'TeXmeijin',
-    websiteUrl: 'https://meijin.me',
+    websiteUrl: 'https://meijin.dev',
   },
 ]

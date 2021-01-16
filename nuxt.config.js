@@ -1,11 +1,11 @@
 const baseName = '名人のポートフォリオ'
 const baseDesc =
   'Web技術を中心にITによる価値創造を仕事としている名人（Yusuke Saito）のポートフォリオ。経歴、SNSやGithubのURL、およびスキルについて掲載しています'
-const baseUrl = 'https://meijin.me'
+const baseUrl = 'https://meijin.dev'
 const baseOgp = '/ogp.jpg'
 
 module.exports = {
-  ssr: false,
+  target: 'static',
   srcDir: 'src',
   /*
    ** Headers of the page
