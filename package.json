@@ -6,9 +6,10 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "run-s build:posts build:nuxt",
+    "build": "run-s build:*",
     "build:posts": "ts-node --project tsconfig.builder.json ./src/builder/posts.ts",
-    "build:nuxt": "nuxt build",
+    "build:nuxt": "nuxt generate",
+    "build:netlify": "cp _redirects dist/.",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
