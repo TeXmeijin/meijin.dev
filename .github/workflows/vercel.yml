@@ -1,7 +1,7 @@
 name: Trigger Vercel Build
 on:
   schedule:
-    - cron: '30 * * * *' # Once a hour
+    - cron: '0 0 * * *' # Once a date
 jobs:
   build:
     name: Request Vercel Webhook
