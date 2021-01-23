@@ -235,13 +235,14 @@
 <script lang='ts'>
 import Vue from 'vue'
 import { elementScrollIntoViewPolyfill } from 'seamless-scroll-polyfill'
+import Intersect from 'vue-intersect'
 import { getFaviconSrcFromHostname, getHostFromURL } from '~/modules/shared'
 import { PostItem } from '~/types'
 import posts from '~/.contents/posts.json'
 
 export default Vue.extend({
   components: {
-    Intersect: () => import('vue-intersect'),
+    Intersect,
   },
   data () {
     return {
@@ -471,7 +472,10 @@ a {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding-left: 240px;
+  position: sticky;
+  top: 0;
+  padding: 24px 0 24px 240px;
+  background: #FFFCF5;
 }
 
 .skill-item {

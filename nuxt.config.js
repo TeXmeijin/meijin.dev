@@ -113,6 +113,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
+    transpile: ['vue-intersect'],
     /*
      ** Run ESLint on save
      */
