@@ -111,7 +111,7 @@
             <li class="profile-blog">
               <a
                 class="profile-blog"
-                href="https://lapras.com/public/OF7HQIA"
+                href="https://lapras.com/public/meijin"
                 target="_blank"
                 rel="nofollow"
               >
